@@ -1,0 +1,325 @@
+{
+    "visible": "true",
+    "collapsed": "true",
+    "cols": "3",
+    "title": "Customer Information",
+    "uk_id": "a6bdfd32",
+    "fr": {
+       "display": "Information Client"
+    },
+    "en": {
+       "display": "Customer Information"
+    },
+    "field": [
+       {
+          "visible": "true",
+          "type": "dateonly",
+          "required": "false",
+          "property": "birth_date",
+          "entity": "Counterparty",
+          "uk_id": "42c4c698",
+          "en": {
+             "display": "Birth Date",
+             "help": "Birth Date of the customer"
+          },
+          "fr": {
+             "display": "Date de Naissance",
+             "help": "Date de naissance du client"
+          }
+       },
+       {
+          "visible": "true",
+          "type": "combobox",
+          "required": "false",
+          "property": "marital_status",
+          "entity": "counterparty",
+          "autocompletionindex": "1",
+          "uk_id": "4a16f46a",
+          "en": {
+             "display": "Marital Status",
+             "help": "Marital Status of the customer"
+          },
+          "fr": {
+             "display": "État civil",
+             "help": "État civil du client"
+          }
+       },
+       {
+          "visible": "false",
+          "type": "numeric",
+          "required": "false",
+          "property": "registration_place3",
+          "entity": "Counterparty",
+          "uk_id": "6e564705",
+          "en": {
+             "display": "Number of Dependents",
+             "help": "Dependents of the customer"
+          },
+          "fr": {
+             "display": "Nombre de personnes à charge",
+             "help": "Personnes à charge du client"
+          }
+       },
+       {
+          "visible": "true",
+          "type": "numeric",
+          "required": "false",
+          "property": "kids_number",
+          "entity": "Counterparty",
+          "uk_id": "9c75165b",
+          "en": {
+             "display": "Number of children",
+             "help": "Customer kids number"
+          },
+          "fr": {
+             "display": "Nombre d'enfants",
+             "help": "Nombre d'enfants du client"
+          }
+       },
+       {
+          "visible": "true",
+          "type": "combobox",
+          "required": "true",
+          "property": "counterparty_ident_type",
+          "entity": "Counterparty",
+          "autocompletionindex": "1",
+          "uk_id": "fc29324c",
+          "en": {
+             "display": "ID Type",
+             "help": "Id Type of the customer : Driver License, National ID card..."
+          },
+          "fr": {
+             "display": "Type ID",
+             "help": "Id Type du client: Permis de conduire, carte d'identité nationale"
+          }
+       },
+       {
+          "required": "true",
+          "entity": "Counterparty",
+          "property": "registration_number",
+          "type": "textbox",
+          "visible": "true",
+          "uk_id": "7570815a",
+          "en": {
+             "display": "ID Number",
+             "help": "ID number of the customer"
+          },
+          "fr": {
+             "display": "Numéro d'identification",
+             "help": "Identifiant du client"
+          }
+       },
+       {
+          "visible": "true",
+          "type": "dateonly",
+          "required": "false",
+          "property": "registration_date",
+          "entity": "Counterparty",
+          "uk_id": "4cf0ac28",
+          "en": {
+             "display": "Registration Date",
+             "help": "Registration date"
+          },
+          "fr": {
+             "display": "Date d'enregistrement",
+             "help": "Date d'enregistrement"
+          }
+       },
+       {
+          "visible": "true",
+          "type": "dateonly",
+          "required": "false",
+          "property": "ident_expiry_date",
+          "entity": "Counterparty",
+          "uk_id": "792c378c",
+          "en": {
+             "display": "Id Expiry Date",
+             "help": "Id expiry date"
+          },
+          "fr": {
+             "display": "Id Date d'expiration",
+             "help": "Date d'expiration"
+          }
+       },
+       {
+          "visible": "true",
+          "type": "combobox",
+          "required": "true",
+          "property": "country_registration_id",
+          "entity": "Counterparty",
+          "child": "registration_place",
+          "autocompletionindex": "1",
+          "uk_id": "5f3fa7cc",
+          "en": {
+             "display": "Issue Place",
+             "help": "Unique reference of the country of registration"
+          },
+          "fr": {
+             "display": "Pays d'enregistrement",
+             "help": "Référence unique du pays d'enregistrement"
+          }
+       },
+       {
+          "visible": "false",
+          "type": "connectedcombo",
+          "required": "false",
+          "property": "registration_place",
+          "parent": "country_registration_id",
+          "entity": "Counterparty",
+          "uk_id": "b003eeae",
+          "en": {
+             "display": "Registration Place",
+             "help": "Registration place of ID card"
+          },
+          "fr": {
+             "display": "Lieu d'émission",
+             "help": "Lieu d'émission de la CIN"
+          }
+       },
+       {
+          "visible": "true",
+          "type": "combobox",
+          "required": "true",
+          "property": "country_nationality_id",
+          "entity": "Counterparty",
+          "autocompletionindex": "1",
+          "uk_id": "70fee91e",
+          "en": {
+             "display": "Country of Nationality",
+             "help": "Unique reference of the country of nationality"
+          },
+          "fr": {
+             "display": "Nationalité",
+             "help": "Référence unique du pays de nationalité"
+          }
+       },
+       {
+          "visible": "true",
+          "type": "combobox",
+          "required": "false",
+          "property": "country_risk_id",
+          "entity": "Counterparty",
+          "autocompletionindex": "4",
+          "uk_id": "6f7cc2eb",
+          "en": {
+             "display": "Country of risk",
+             "help": "Unique reference of the country of risk"
+          },
+          "fr": {
+             "display": "Pays de risque",
+             "help": "Référence unique pour le pays de risque"
+          }
+       },
+       {
+          "visible": "true",
+          "type": "combobox",
+          "required": "true",
+          "property": "country_residence_id",
+          "entity": "Counterparty",
+          "autocompletionindex": "1",
+          "uk_id": "7cc041c0",
+          "en": {
+             "display": "Country of residence",
+             "help": "Unique reference of the country of residence"
+          },
+          "fr": {
+             "display": "Pays de résidence",
+             "help": "Référence unique du pays de résidence"
+          }
+       },
+       {
+          "entity": "Counterparty",
+          "property": "group",
+          "visible": "true",
+          "type": "checkbox",
+          "uk_id": "960e41ef",
+          "en": {
+             "display": "VIP",
+             "help": "to indicate if the counterparty is a VIP"
+          },
+          "fr": {
+             "display": "VIP",
+             "help": "Pour indiquer si la contrepartie est une personalité importante"
+          }
+       },
+       {
+          "required": "false",
+          "entity": "Counterparty",
+          "property": "counterparty_ident2",
+          "type": "textbox",
+          "visible": "false",
+          "uk_id": "a2c2bafc",
+          "en": {
+             "display": "Residence Visa No.",
+             "help": "Residence Visa number of the customer"
+          },
+          "fr": {
+             "display": "Numéro de visa de résidence",
+             "help": "Numéro de visa de résidence du client"
+          }
+       },
+       {
+          "visible": "false",
+          "type": "dateonly",
+          "required": "false",
+          "property": "ident_issuance_date2",
+          "entity": "Counterparty",
+          "uk_id": "02762c60",
+          "en": {
+             "display": "Residence Start Date",
+             "help": "Residence start date"
+          },
+          "fr": {
+             "display": "Date d'émission",
+             "help": "Date d'émission de la résidence"
+          }
+       },
+       {
+          "visible": "false",
+          "type": "dateonly",
+          "required": "false",
+          "property": "ident_expiry_date3",
+          "entity": "Counterparty",
+          "uk_id": "7b1df157",
+          "en": {
+             "display": "Expiry Date",
+             "help": "Residence visa expiry date"
+          },
+          "fr": {
+             "display": "Date d'expiration",
+             "help": "Date d'expiration du Visa de résidence"
+          }
+       },
+       {
+          "entity": "Counterparty",
+          "property": "watchlist",
+          "visible": "false",
+          "type": "checkbox",
+          "uk_id": "0c15d585",
+          "en": {
+             "display": "Black List",
+             "help": "to indicate if the counterparty is blacklisted or not"
+          },
+          "fr": {
+             "display": "Liste noire",
+             "help": "Pour indiquer si la contrepartie est dans la liste de surveillance ou non"
+          }
+       },
+       {
+          "required": "true",
+          "entity": "Counterparty",
+          "property": "counterparty_ident",
+          "type": "textbox",
+          "visible": "false",
+          "uk_id": "cebe7c3e",
+          "en": {
+             "display": "ID Number",
+             "help": "ID number of the customer"
+          },
+          "fr": {
+             "display": "Identifiant",
+             "help": "Identifiant du client"
+          }
+       }
+    ]
+ }

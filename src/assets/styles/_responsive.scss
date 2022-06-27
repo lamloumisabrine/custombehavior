@@ -1,0 +1,248 @@
+
+/********** RESPONSIVE **********/
+
+
+// X-Small devices (portrait phones, less than 576px)
+//@include media-breakpoint-down(sm) { }
+
+
+
+// Small devices (landscape phones, less than 768px)
+@include media-breakpoint-down(md) {
+	.header__right{
+		.environment, .apps{
+			display: none !important;
+		}
+
+		.search{
+			.input-group{
+				display: none;
+			}
+
+			.img_search{
+				display: block;
+			}
+			.btn-close{
+				display: block;
+				margin-left: auto !important;
+				margin-right: 0.5rem;
+			}
+		}
+	}
+
+	.search-block {
+		display: block;
+		position: absolute;
+	    width: 100%;
+	    z-index: 10;
+	    left: 0;
+	    top: 0;
+	    transition: 0.5s;
+	    background-color: $white;
+	    input{
+	    	padding:0.8rem;
+	    	width: 100%;
+	    	box-shadow: $shadow-bottom-big;
+	    }
+	}
+
+	.row > *{
+		padding-right: 0;
+	}
+	.ruleset{
+		.page-content__right{
+			.action-bar{
+				.action-bar__right{
+					//margin-top: 1rem !important;
+			        button{
+			          margin-left: 0rem !important;
+			        }
+			    }
+			}
+		}
+	}
+
+}
+
+// (landscape phones, more than 768px)
+@include media-breakpoint-up(md){
+	.header__right{
+		.search{
+			margin: 0 0.7rem;
+		}
+	}
+}
+
+// Medium devices (tablets, less than 992px)
+@include media-breakpoint-down(lg) {
+
+  .header__left{
+		.path{
+			width: 10rem;
+			.nav-link{
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+		}
+	}
+
+	// SLIDE IN/OUT SIDEBAR MENU
+	.sidebar{
+ 		.sidebar--close{
+			display: block;
+		}
+	}
+	.header{
+		.header__left{
+			&.header__left--slide {
+				@include transform(translateX(0));
+			}
+		}
+	}
+	.page-content{
+		&.page-content--slide {
+			@include transform(translateX(0));
+		}
+	}
+
+	// RESULT SEARCH SECTION
+	.result-search-section{
+		.grid-container{
+			display: block;
+			grid-template-columns: none;
+      .btn-white{
+        margin-top: 0.5rem;
+      }
+		}
+		.tab-content{
+			// .tab-content__header{
+
+			// }
+			.tab-content__body{
+				.container{
+					grid-template-columns:25% 75% !important;
+					margin: 0;
+				}
+			}
+		}
+	}
+
+}
+
+
+// (More than 992px)
+@include media-breakpoint-up(lg) {
+
+	// SLIDE IN/OUT SIDEBAR MENU
+	 .page-content{
+		&.page-content--slide {
+			width: calc(100% - #{$side-menu-w});
+		}
+	}
+	// RESULT SEARCH SECTION
+	.result-search-section{
+		.grid-container{
+			grid-template-areas: "search search search" "filter filter filter" "sidebar main main";
+
+		}
+	}
+}
+
+
+// Large devices (desktops, less than 1200px)
+// @include media-breakpoint-down(xl) {
+
+//  }
+
+ // X-Large devices (large desktops, more than 1200px)
+//  @include media-breakpoint-up(xl) {
+
+//  }
+
+// X-Large devices (large desktops, less than 1400px)
+@include media-breakpoint-down(xxl) {
+  html{
+    font-size: 12px;
+  }
+  .full-section {
+      min-height: calc(100vh - 42px);
+  }
+  // .modal-vocabulary-body{
+  //   .type-content{
+  //     max-height: 8rem !important;
+  //   }
+  // }
+  // List of policy
+  .result-search-section{
+    .content-left{
+      .tab-content{
+        max-height: calc(100vh - 12rem);
+      }
+    }
+    .content-right{
+      .content__body{
+        max-height: calc(100vh - 8.1rem);
+      }
+    }
+  }
+  // SIMULATION
+  .simulation{
+    .simulation__content{
+      height: calc(100vh - 7.5rem);
+    }
+  }
+  // Ruleset
+  .ruleset-section{
+    .content__right{
+      .card__body {
+        .condition-condition{
+          min-height: 12.5rem;
+        }
+        .condition-action{
+          .condition-action__content{
+            min-height: 12.5rem;
+          }
+        }
+      }
+    }
+  }
+ }
+
+
+// X-Large devices (large desktops, more than 1400px)
+@include media-breakpoint-up(xxl) {
+  .result-search-section{
+    .content-left{
+      .tab-content{
+        max-height: calc(100vh - 12rem);
+      }
+    }
+    .content-right{
+      .content__body{
+        max-height: calc(100vh - 8rem);
+      }
+    }
+  }
+  // SIMULATION
+  .simulation{
+    .simulation__content{
+      height: calc(100vh - 7.5rem);
+    }
+  }
+  // Ruleset
+  .ruleset-section{
+    .content__right{
+      .card__body {
+        .condition-condition{
+          min-height: 20rem;
+        }
+        .condition-action{
+          .condition-action__content{
+            min-height: 20rem;
+          }
+        }
+      }
+    }
+  }
+}

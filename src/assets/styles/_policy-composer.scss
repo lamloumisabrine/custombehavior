@@ -1,0 +1,1104 @@
+
+/*********** POLICY-COMPOSER STYLE **********/
+
+.policy-composer-section {
+  padding: 1rem;
+
+    /***** ACTION BAR *****/
+    .action-bar{
+      padding: 0 0 0.5rem 0;
+      position: relative;
+      &.action-bar__top{
+        border-bottom: 1px solid rgba($gray-300 , 0.3);
+      }
+      //Action-bar left
+      .action-bar__left{
+        @include flex(row);
+        align-items: center;
+        .divider{
+          background: $gray-300;
+          height: 20px;
+          width: 1px;
+          margin: 0 0.2rem;
+        }
+        .btn{
+          &:hover{
+            border-radius: 5px;
+            background: rgba($semi-dark, 0.2);
+          }
+        }
+      }
+      //Action-bar middle
+      .action-bar__middle{
+        @include flex(row);
+        align-items: center;
+        position: absolute;
+        left: 44%;
+        .draft-name{
+          .input-group{
+            margin-left: 0.5rem;
+          }
+        }
+      }
+      //Action-bar right
+      .action-bar__right{
+        .actions{
+          //padding: 0 0.2rem;
+          @include flex(row);
+          align-items: center;
+          .btn{
+            padding: 0 0.2rem;
+            font-size: 1.5rem;
+            line-height: 1;
+            &:hover{
+              color: $gray-600;
+            }
+          }
+        }
+      }
+    }
+  // POLICY COMPOSER CONTENT
+  .policy-composer-content{
+    display: flex;
+    padding-top: 0.5rem;
+    /***** CONTENT RIGHT *****/
+    .content__right {
+      width: 100%;
+      //min-height: calc(100vh - 130px);
+      //padding-left: 1rem;
+      @include flex(column);
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      .info-text{
+        position: absolute;
+        top: 40%;
+        font-style: italic;
+        color: $gray-300;
+        font-size: 1.3rem;
+        background: transparent;
+      }
+      //DIAGRAM WORKFLOW
+      .action-bar-graph {
+        position: absolute;
+        z-index: 2000;
+        display: flex;
+        align-items: center;
+        top: 0;
+        left: 0;
+      }
+      .diagram {
+        display: flex;
+        min-height: calc(100vh - 180px);
+        width: 100%;
+        //border: 1px solid rgba($gray-300 , 0.2);
+        border-radius: 5px;
+        .diagram__workflow{
+          cursor: default !important;
+          z-index: 0;
+          .diagram__nodes-layer{
+            // z-index: 0;
+            .node-workflow{
+              position: relative;
+              .node{
+                box-shadow: none;
+                position: relative;
+                max-width: 18rem;
+                &.node--active{
+                  background: $gray-900;
+                  border-color: transparent;
+                  .node__icon{
+                    border-color: $gray-900;
+                  }
+                  .main-label{
+                    .input__text{
+                      color: $white !important;
+                    }
+                  }
+                  .mini-label{
+                    .form-select{
+                      color: $white !important;
+                    }
+                  }
+                }
+                .node__icon{
+                  padding: 1.1rem;
+                }
+                .node--actions{
+                  position: absolute;
+                  left: 4rem;
+                  top: -4rem;
+                  visibility: hidden;
+                  padding: 1rem;
+                  .btn{
+                    box-shadow: $shadow;
+                    margin-right: .5rem;
+                    &:focus{
+                      box-shadow: $shadow !important;
+                    }
+                  }
+                  .dropdown-menu{
+                    transform: translate(0rem, 2.5rem) !important;
+                    .dropdown-item{
+                      padding: 0 3rem 0 1rem;
+                      &:hover{
+                        background: transparent;
+                      }
+                      .nav-link{
+                        color: $gray-900;
+                        &:hover{
+                          color: $gray-600;
+                        }
+                        .nav-link__icon{
+                          margin-right: 1rem;
+                        }
+                      }
+                    }
+                  }
+                }
+                &:hover{
+                  .node--actions{
+                    visibility: visible;
+                  }
+                }
+                .node__label{
+                  .main-label{
+                    background: transparent;
+                    .input__text{
+                      color: $yellow;
+                      border-color: transparent;
+                      background: transparent;
+                      cursor: text;
+                      text-overflow: ellipsis;
+                    }
+                  }
+                  .mini-label{
+                    .select-group__select{
+                      position: relative;
+                      max-width: 7rem;
+                      .form-select{
+                        color: $gray-300;
+                        border-color: transparent;
+                        padding: 0 0.7rem;
+                        cursor: pointer;
+                        background-size: 8px 8px;
+                        background-color: transparent;
+                        background-position: right 1.3rem center;
+                        &:focus{
+                          box-shadow: none;
+                        }
+                      }
+                    }
+                  }
+                }
+                .input-group,
+                .select-group{
+                  padding: 0;
+                  background: transparent;
+                }
+              }
+              .ports{
+                position: absolute;
+                top: 1.8rem;
+                left: -0.3rem;
+              }
+              .nodes{
+                position: absolute;
+                top: 0;
+                left: 0;
+              }
+            }
+          }
+          .diagram__links-layer{
+            .graph-studio-label{
+              background: $gray-300;
+              // opacity: 1;
+              display: none;
+              &:hover{
+                color: $white;
+                border: 1px solid rgba($gray-300 , 0.2);
+                &:before{
+                  display: none;
+                }
+                svg{
+                  display: block;
+                }
+              }
+              &:before{
+                font-family: $brm-font-family;
+                content: '\e908';
+                font-size: 0.8rem;
+                color: $white;
+              }
+              svg{
+                display: none;
+              }
+            }
+          }
+        }
+        .graph-studio-link{
+          stroke: $gray-600;
+          &.hovered{
+            stroke: $secondary;
+            stroke-dasharray: 10, 2;
+            animation: dash 1s linear infinite;
+          }
+        }
+        .default-link{
+          cursor: default;
+          @keyframes dash {
+            from {
+              stroke-dashoffset: 24;
+            }
+            to {
+              stroke-dashoffset: 0;
+            }
+          }
+        }
+      }
+      .link-container{
+        #pointer{
+          background: $red !important;
+        }
+      }
+    }
+  }
+
+  //POLICY COMPOSER FOOTER
+  .footer{
+      padding: 1rem 4rem;
+      @include flex(row);
+      align-items: center;
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      .footer__left{
+        @include flex(row);
+      }
+      .footer__right{
+        @include flex(row);
+        align-items: center;
+        .btn-white{
+          box-shadow: $shadow;
+          margin-right: 0.3rem;
+        }
+        .btn-group{
+          box-shadow: $shadow;
+          border: 1px solid rgba($gray-300 , 0.2);
+          border-radius: 5px;
+          margin-left: 1rem;
+          .btn{
+            border-radius: 0;
+            border: 2px solid transparent;
+            &:hover{
+              color: $primary;
+            }
+            &:active,
+            &.active,
+            &:focus{
+              border-bottom-color: $primary;
+            }
+          }
+          .zoom-label{
+            color: $gray-300;
+            font-size: 0.9rem;
+            padding: 0.6rem 1rem;
+            cursor: default;
+          }
+          .divider{
+            border-left: 1px solid rgba($gray-300 , 0.3);
+            margin: 0.5rem 0;
+          }
+        }
+      }
+    }
+}
+
+
+//MODAL EDIT POLICY
+.modal-policy-composer__header{
+  width: 100%;
+  border-bottom: 1px solid rgba($gray-300 , 0.3);
+  padding-bottom: 0.5rem;
+  .title{
+    .icon{
+      margin: 0 1rem;
+    }
+    .name{
+      font-family: $font-family-primary-semibold;
+      font-size: 1.2rem;
+    }
+  }
+}
+.modal-policy-composer__body{
+  padding: 0 2rem;
+  .input-group{
+    padding: 0 4rem 2rem;
+  }
+  .form-label{
+    font-family: $font-family-primary-semibold;
+    font-size: 0.9rem;
+    color: $gray-600;
+  }
+  .input__text{
+    border-radius: 5px;
+    padding-right: 3.5rem;
+  }
+  .textarea-name{
+    .input__text{
+      resize: none;
+    }
+  }
+  .autocomplete-vocab{
+    position: relative;
+    padding: 0 4rem 2rem;
+    .btn{
+      position: absolute;
+      top: 3.1rem;
+      right: 5rem;
+      // height: 20px;
+      // width: 20px;
+      // font-size: 0.8rem;
+      height: 20px;
+      width: 20px;
+      line-height: 1;
+      font-size: 0.7rem;
+    }
+    .input__text{
+      font-style: italic;
+    }
+  }
+}
+.modal-policy-composer__footer{
+  text-align: center;
+  padding: 2rem;
+  .btn{
+    margin-left: 1rem;
+    padding: 0.5rem 3rem;
+  }
+  .btn-light{
+    border-color: rgba($gray-300 , 0.3);
+  }
+}
+
+/***** MODAL VOCABULARY *****/
+.modal-content{
+  .modal-vocabulary-header{
+    border-bottom: 1px solid rgba($gray-300 , 0.3);
+    text-align: left;
+    width: 100%;
+    padding: 0 1rem 0.5rem 1rem;
+    @include flex(row);
+    justify-content: flex-start;
+    align-items: baseline;
+    cursor: default;
+    .title{
+      font-family: $font-family-primary-semibold;
+      font-size: 1.1rem;
+      margin-right: 1rem;
+      margin-bottom: 0;
+    }
+    .title-small{
+      font-style: italic;
+      font-size: 1rem;
+      color: $gray-500;
+    }
+  }
+  .modal-vocabulary-body{
+    padding: 0 3rem;
+    height: 30rem;
+    overflow-y: auto;
+    .modal-radio{
+      .form-check{
+        padding: 0;
+        .btnradiogroup{
+          padding: 0 0 1rem 0;
+          position: relative;
+          width: 100%;
+          @include flex(row);
+          justify-content: center;
+          &:before{
+            content: 'or';
+            position: absolute;
+            top: 0.1rem;
+            left: 29%;
+            background: $white;
+            border-radius: 100%;
+            padding: 0.4rem 0.6rem;
+          }
+          &:after{
+            content: 'or';
+            position: absolute;
+            top: 0.1rem;
+            right: 32%;
+            background: $white;
+            border-radius: 100%;
+            padding: 0.4rem 0.6rem;
+          }
+          .option{
+            padding: 0.5rem 5rem;
+            // width: 100%;
+          }
+        }
+      }
+    }
+    .input-group{
+      padding-bottom: 1.5rem;
+      .input__text{
+        resize: none;
+      }
+    }
+    .form-label{
+      font-family: $font-family-primary-semibold;
+    }
+    .select-group{
+      .form-select{
+        color: $gray-900;
+      }
+    }
+    .type-content{
+      margin-top: 1rem;
+      // max-height: 25rem;
+      // overflow-y: auto;
+      .input-group{
+        padding: 0;
+      }
+      //table
+      .type-table{
+        @include flex(row);
+        justify-content: flex-start;
+        padding-bottom: 0.5rem;
+        .input-group{
+          padding: 0 1rem;
+          .input__text{
+            background: $gray-100;
+            border-color: rgba($gray-300 , 0.3);
+            min-width: 27rem;
+            &::-webkit-input-placeholder{
+              font-style: italic;
+            }
+            &:-ms-input-placeholder{
+              font-style: italic;
+            }
+            &:-moz-placeholder{
+              font-style: italic;
+            }
+            &::placeholder{
+              font-style: italic;
+            }
+            &:focus{
+              box-shadow: none;
+            }
+          }
+        }
+        .select-group{
+          width: 8rem;
+          .select-group__label{
+            display: none;
+          }
+          .select-group__select{
+            padding: 0;
+          }
+        }
+        .input-right{
+          @include flex(row);
+          align-items: center;
+        }
+      }
+      //default value
+      .type-default-value{
+        .input__text{
+          background: $gray-100;
+          border-color: rgba($gray-300 , 0.3);
+          &::-webkit-input-placeholder{
+            font-style: italic;
+          }
+          &:-ms-input-placeholder{
+            font-style: italic;
+          }
+          &:-moz-placeholder{
+            font-style: italic;
+          }
+          &::placeholder{
+            font-style: italic;
+          }
+          &:focus{
+            box-shadow: none;
+          }
+        }
+      }
+      //range
+      .type-range{
+        @include flex(row);
+        align-items: center;
+        justify-content: flex-start;
+        padding-bottom: 0.5rem;
+        .input-group{
+          padding-right: 1rem;
+          .input__text{
+            background: $gray-100;
+            border-color: rgba($gray-300 , 0.3);
+            min-width: 36rem;
+            &::-webkit-input-placeholder{
+              font-style: italic;
+            }
+            &:-ms-input-placeholder{
+              font-style: italic;
+            }
+            &:-moz-placeholder{
+              font-style: italic;
+            }
+            &::placeholder{
+              font-style: italic;
+            }
+            &:focus{
+              box-shadow: none;
+            }
+          }
+        }
+      }
+      // add button
+      .btn-add-type{
+        height: 14px;
+        width: 14px;
+        font-size: 0.5rem;
+        display: block;
+      }
+      // delete button
+      .btn-delete-type{
+        color: $red;
+        font-size: 1.2rem;
+        padding: 0
+      }
+    }
+  }
+  .modal-action-buttons{
+    padding: 2rem;
+    text-align: center;
+    .btn{
+      margin: 0 0.5rem;
+      padding: 0.5rem 6rem;
+    }
+    .btn-light{
+      border-color: rgba($gray-300 , 0.3);
+    }
+  }
+  .modal-body{
+    padding: 0;
+  }
+}
+/***** MODAL PUBLISH *****/
+//header
+.header-publish{
+  @include flex(row);
+  justify-content: flex-start;
+  align-items: baseline;
+  width: 100%;
+  border-bottom: 1px solid rgba($gray-300 , 0.5);
+  padding: 1rem;
+  position: relative;
+  .title{
+    font-size: 1.5rem;
+    font-family: $font-family-primary-semibold;
+    padding-right: 1rem;
+  }
+  .action-bar{
+    position: absolute;
+    top: -2.2rem;
+    right: 0;
+    .btn{
+      color: $gray-300;
+      &:hover{
+        color: $gray-900;
+      }
+    }
+  }
+}
+.small-title{
+  .sub-title{
+    font-size: 1.1rem;
+    font-style: italic;
+    color: $gray-600;
+    .sub-sub-title{
+      font-size: 1.1rem;
+      color: $gray-600;
+      font-style: normal
+    }
+  }
+}
+//body
+.modal-publish__body{
+  height: 30vh;
+  .verification{
+    @include flex(column);
+    text-align: center;
+    color: $gray-900;
+    padding: 0 5rem;
+    font-size: 1rem;
+    .verification__text{
+      font-family: $font-family-primary-semibold;
+      color: $secondary;
+      font-size: 1.5rem;
+    }
+    .verification__value{
+      padding: 0.5rem 0 2rem 0;
+    }
+    .progress{
+      background: rgba($secondary , 0.2);
+      border-radius: 1rem;
+      height: 1.4rem;
+      .progress-bar{
+        background: $secondary;
+        border-radius: 1rem;
+      }
+    }
+    .modal-action{
+      padding: 2rem 1rem;
+      .btn-cancel{
+        border-color: rgba($gray-300 , 0.5);
+        .btn{
+          padding: 0.5rem 3rem;
+        }
+      }
+    }
+  }
+
+  .modal-content{
+    @include flex(column);
+    justify-content: flex-start;
+    align-items: center;
+    padding-bottom: 1rem;
+    .title{
+      font-family: $font-family-primary-bold;
+      font-size: 1.6rem;
+      color: $secondary;
+      padding: 1rem 5rem;
+      width: 65%;
+      text-align: center;
+      line-height: 3rem;
+    }
+    .small-title{
+      padding:1rem;
+    }
+    .modal-action{
+      @include flex(row);
+      justify-content: center;
+      width: 100%;
+      padding: 3rem 1rem;
+      .btn{
+        padding: 0.5rem 4rem;
+        margin: 0 1rem;
+      }
+    }
+
+  }
+}
+
+
+/***** MODAL DEPLOYMENT *****/
+.header-deployment{
+  @include flex(row);
+  justify-content: flex-start;
+  align-items: baseline;
+  width: 100%;
+  border-bottom: 1px solid rgba($gray-300 , 0.5);
+  padding: 1rem;
+  .title{
+    font-size: 1.5rem;
+    font-family: $font-family-primary-semibold;
+    padding-right: 1rem;
+  }
+  .sub-title{
+    font-size: 1.1rem;
+    font-style: italic;
+    color: $gray-600;
+  }
+  .sub-sub-title{
+    font-size: 1.1rem;
+    color: $gray-600;
+  }
+}
+.wizard-deployment{
+  .scrollbar::-webkit-scrollbar{
+    background: $light;
+  }
+  .stepwizard{
+    //wizard row
+    .stepwizard__row{
+      border-bottom: none;
+      counter-reset: wizard;
+      text-align: center;
+      .stepwizard__step{
+        list-style: none;
+        position: relative;
+        &::before {
+          border-top: 1px solid rgba($secondary , 0.3);
+          content: "";
+          left: 11rem;
+          position: absolute;
+          right: -11rem;
+          top: 0;
+        }
+        &:last-child {
+          border: 0;
+          margin: 0;
+          padding: 0;
+          &::before {
+            border: 0 none;
+          }
+        }
+
+      .stepwizard__link{
+        color: $semi-dark !important;
+        font-family: $font-family-primary-bold;
+        font-size: 0.9rem !important;
+        &:before{
+          content: "";
+          width: 100%;
+          height: 2px;
+          position: absolute;
+          left: 11rem !important;
+          top: 0;
+        }
+        &:after{
+          counter-increment: wizard;
+          content: counter(wizard);
+          width: 1.5rem;
+          height: 1.5rem;
+          border-radius: 50%;
+          background: $white !important;
+          border:1px solid  $secondary;
+          color: $semi-dark;
+          text-align: center;
+          position: absolute;
+          top: -9px;
+          left: 11rem;
+        }
+        &.isActive{
+          color: $semi-dark !important;
+          &:before{
+            background: $secondary;
+          }
+          :after{
+            counter-increment: wizard;
+            content: counter(wizard);
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            background: $secondary !important;
+            color: $white;
+          }
+        }
+      }
+    }
+  }
+
+          //wizard actions
+          .stepwizard__action{
+            justify-content: center;
+            padding: 0;
+            .btn-outline-dark{
+                color: $semi-dark;
+                font-family: $font-family-primary;
+                border-color: transparent;
+                padding: 0.5rem 1rem;
+                font-size: 1rem;
+                &:hover{
+                    background: transparent;
+                    border-color: transparent;
+                    color: $gray-600;
+                }
+            }
+            .btn-primary{
+                padding: 0.5rem 2rem;
+                border-radius: 5px;
+                box-shadow: $shadow;
+                font-size: 1rem;
+            }
+          }
+  }
+
+        .step1{
+          //actionbar
+          .action-bar{
+              padding: 1rem 0.5rem;
+              .action-bar__left{
+                  color: $gray-900;
+                  font-family: $font-family-primary-semibold;
+                  font-size: 1.2rem;
+              }
+              .action-bar__right{
+                  color: $gray-300;
+                  font-size: 0.9rem;
+              }
+          }
+          //list group
+          .list-group{
+              box-shadow: none;
+              margin-bottom: 1rem;
+              max-height: 15rem;
+              min-height: 15rem;
+              .list-group-item{
+                  border: none;
+                  border-radius: 3px;
+                  background: rgba($secondary, 0.1);
+                  margin: 0.2rem 0;
+                  padding: 0.5rem 1rem;
+                  &:hover{
+                      .list-group__title{
+                          color: $gray-900 !important;
+                          font-weight: 600 !important;
+                      }
+                  }
+                  .list-group-item__left{
+                      .badge{
+                          border-radius: 3px;
+                          padding: 0.3rem 0.1rem;
+                          font-size: 1.2rem;
+                          width: 4rem;
+                          font-family: $font-family-primary-semibold;
+                          &:hover{
+                              background: $cyan;
+                          }
+                      }
+                      .list-group__content{
+                          .list-group__title{
+                              color: $semi-dark;
+                              font-style: italic;
+                              font-family: $font-family-primary;
+                          }
+                      }
+                  }
+              }
+          }
+          //btn add
+          .btn-add-environment{
+              width: 100%;
+          }
+
+          //buttons
+          .modal-buttons{
+              padding: 1rem 0;
+              @include flex(row);
+              justify-content: center;
+              .btn-white{
+                  color: $semi-dark;
+                  font-family: $font-family-primary;
+                  &:hover{
+                      background: transparent;
+                      border-color: transparent;
+                      color: $gray-600;
+                  }
+              }
+              .btn-primary{
+                  padding: 0.5rem 2rem;
+                  border-radius: 5px;
+                  box-shadow: $shadow;
+              }
+          }
+        }
+
+}
+
+
+
+
+//WIZARD STEP 1
+.deployment-step1{
+  padding-bottom: 1rem !important;
+  .content{
+      border: 1px solid rgba($gray-300 , 0.5);
+      border-radius: 7px;
+      padding: 0;
+      //action bar
+      .action-bar{
+          padding: 0.5rem 1rem;
+          .action-bar__left{
+              .input-group{
+                  padding: 0;
+                  position: relative;
+                  &:after{
+                      font-family: $brm-font-family;
+                      content: '\e95c';
+                      position: absolute;
+                      top: 0.2rem;
+                      color: rgba($gray-300,0.5);
+                      font-size: 0.9rem;
+                  }
+                  .input__text{
+                      border-color: transparent;
+                      background: transparent;
+                      border-radius: 0;
+                      padding: 0 0.5rem 0 1.5rem;
+                      font-family: $font-family-primary;
+                      &::placeholder{
+                          font-style: italic;
+                      }
+                      &:focus{
+                          box-shadow: none;
+                          border-bottom-color: rgba($gray-300 , 0.5) ;
+                      }
+                  }
+              }
+          }
+          .action-bar__right{
+            .items-num{
+              color: $gray-600;
+              font-size: 0.9rem;
+            }
+          }
+      }
+      //list group
+      .list-group{
+          margin: 0.5rem 1rem 1rem 2.5rem;
+          box-shadow: none;
+          .list-group-item{
+              background: transparent;
+              border: none;
+              box-shadow: none;
+              padding: 0.3rem 1rem;
+              .badge{
+                background: $secondary;
+                color: $white;
+                max-width: 8rem !important;
+              }
+              .badge-locked{
+                  position: relative;
+                  &:after{
+                      font-family: $brm-font-family;
+                      content: '\e941';
+                      position: absolute;
+                      right: -0.8rem;
+                      top: 0.9rem;
+                      font-size: 0.8rem;
+                      color: $semi-dark;
+                      background: #E4EAF2;
+                      padding: 0.3rem;
+                      border-radius: 50%;
+                      border: 2px solid $white;
+                      line-height: 0.7rem;
+                  }
+              }
+          }
+      }
+  }
+}
+
+
+//WIZARD STEP 2
+.deployment-step2{
+  .badges-list{
+    @include flex(row);
+    justify-content: flex-start;
+    .badge{
+      border-radius: 3px;
+     // padding: 0.5rem 0.1rem;
+      font-size: 1.2rem;
+      width: 7rem;
+      margin-right: 0.5rem;
+      background: $light;
+      border: 1px solid rgba($gray-300 , 0.1);
+    }
+    .badge--selected{
+      color: $white;
+      background: $secondary;
+      border-color: $secondary;
+    }
+  }
+
+  .identification{
+    padding: 2rem;
+    .input-group{
+      padding: 0.5rem 0;
+      .input__text{
+        border-radius: 7px;
+        border-color: rgba($semi-dark , 0.3);
+        &::placeholder{
+          font-style: italic;
+        }
+      }
+    }
+    .input-link{
+      position: relative;
+      &:after{
+        font-family: $brm-font-family;
+        content: '\e93f';
+        color: $secondary;
+        position: absolute;
+        top: 1.2rem;
+        left: 1rem;
+      }
+      .input__text{
+        background: transparent;
+        padding-left: 3rem;
+        background: rgba($secondary , 0.1);
+      }
+    }
+
+    .form-check{
+      @include flex(row);
+      justify-content: flex-start;
+      align-items: center;
+    }
+  }
+}
+
+
+//WIZARD STEP 3
+.deployment-step3{
+  padding: 4rem 2rem;
+  //actionbar
+  .action-bar{
+    padding: 1rem 0.5rem;
+    .action-bar__left{
+      .items-num{
+        color: $gray-300;
+        font-size: 0.9rem;
+      }
+    }
+  }
+  //list group
+  .list-group{
+      box-shadow: none;
+      margin-bottom: 1rem;
+      max-height: 25rem;
+      .list-group-item{
+          border: none;
+          border-radius: 3px;
+          background: rgba($secondary, 0.1);
+          margin: 0.2rem 0;
+          padding: 0.5rem 1rem;
+          width: 90% ;
+          &:hover{
+              .list-group__title{
+                  color: $gray-900 !important;
+                  font-weight: 600 !important;
+              }
+          }
+          .list-group-item__left{
+              .badge{
+                  border-radius: 3px;
+                  padding: 0.3rem 0.1rem;
+                  font-size: 1.2rem;
+                  width: 4rem;
+                  font-family: $font-family-primary-semibold;
+                  &:hover{
+                      background: $cyan;
+                  }
+              }
+              .list-group__content{
+                  .list-group__title{
+                      color: $semi-dark;
+                      font-style: italic;
+                      font-family: $font-family-primary;
+                  }
+              }
+          }
+      }
+  }
+  //btn add
+  .btn-add-environment{
+      width: 100%;
+  }
+}

@@ -1,0 +1,128 @@
+
+/***** ASIDE LIST STYLE ******/
+
+.aside-list{
+  background: $white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20%;
+  padding: 1rem;
+  height: calc(100vh - 3.5rem);
+  box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+  /**header**/
+  .aside-list__header{
+    cursor: default;
+    padding: 0 0.5rem 0.5rem 0.5rem;
+    @include flex(row);
+    align-items: center;
+    border-bottom: 1px solid rgba($gray-300,0.5);
+    width: 100%;
+    .title{
+      font-family: $font-family-primary-semibold;
+      font-size: 1rem;
+      @include flex(row);
+      align-items: center;
+      .icon{
+        margin-right: 0.8rem;
+        font-size: 1.2rem;
+      }
+      .btn-transparent{
+        color: rgba($gray-900,0.5);
+        &:hover,
+        &:active,
+        &.active{
+          color: $primary;
+        }
+      }
+      .icon-pin-solid{
+        color: $primary;
+      }
+    }
+    .btn-exit{
+      position: unset;
+      font-size: 1.2rem;
+      color: $icon-color;
+      padding: 0;
+      &:hover{
+        color: $gray-300;
+      }
+      .btn__icon{
+        margin: 0;
+      }
+    }
+  }
+  /**body**/
+  .aside-list__body{
+    //Action bar filter
+    .action-bar{
+      padding: 1rem 0;
+      @include flex(row);
+      justify-content: flex-end;
+      .dropdown{
+        .btn{
+          &:after{
+            display: inline-block;
+            margin-left: 0.3rem;
+            vertical-align: middle;
+            content: "";
+            border-top: 0.3rem solid;
+            border-right: 0.3rem solid transparent;
+            border-bottom: 0;
+            border-left: 0.3rem solid transparent;
+          }
+        }
+      }
+      .btn{
+        color: $gray-300;
+        &:hover{
+          color: $gray-900;
+        }
+      }
+    }
+    //List group
+    .list-group{
+      box-shadow: none;
+      height: calc(100vh - 12rem);
+      .list-group-item{
+        border: none;
+        align-items: center;
+        &:hover{
+          background: transparent;
+          .list-group__title{
+            color: $gray-600;
+          }
+          .actions{
+            visibility: visible;
+          }
+        }
+      }
+      .list-group__icon{
+          font-size: 1.5rem;
+      }
+      .list-group__content{
+        padding: 0 1rem;
+        .list-group__title{
+          font-family: $font-family-primary;
+          font-size: 1.2rem;
+        }
+        .list-group__description{
+          font-style: italic;
+          font-size: 0.9rem;
+        }
+      }
+      .list-group__actions{
+          .actions{
+              visibility: hidden;
+              .btn-transparent{
+                  color: $semi-dark;
+                  font-size: 1.5rem;
+                  &:hover{
+                      color: $gray-900;
+                  }
+              }
+          }
+      }
+    }
+  }
+}

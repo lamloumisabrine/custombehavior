@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'assets/configuration/configuration';
+
+@import '../node_modules/acp-ui-component/styles/scss/globals/reset';
+
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
+
+@import '../node_modules/acp-ui-component/styles/styles.scss';
+
+@import 'assets/styles/styles';

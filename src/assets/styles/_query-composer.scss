@@ -1,0 +1,304 @@
+
+/*********** QUERY-COMPOSER STYLE **********/
+
+.query-composer-section{
+  padding: 1rem;
+  /********** ACTION BAR **********/
+  .action-bar {
+    padding: 0 0 1rem 0;
+    //Action-bar left
+    .action-bar__left{
+      .btn-list{
+        padding: 0.2rem 0.8rem;
+        &:hover{
+          border-radius: 5px;
+          background: rgba($semi-dark, 0.2);
+        }
+      }
+    }
+    //Action-bar middle
+    .action-bar__middle{
+      @include flex(row);
+      align-items: center;
+      position: absolute;
+      left: 45%;
+      .query-name{
+        .query-name__title{
+          @include flex(row);
+          align-items: baseline;
+          font-size: 1.3rem;
+          position: relative;
+          &:hover{
+            .input-group{
+              .input__text{
+                background: $white;
+                border: 1px dashed $silver;
+                box-shadow: none;
+              }
+            }
+          }
+          .input-group{
+            padding: 0;
+            margin-left: 0.2rem;
+            .form-label {
+              display: none;
+            }
+            .input__text{
+              background: transparent;
+              border-color: transparent;
+              font-size: 1.3rem;
+              padding: 0rem 0.1rem;
+              cursor: pointer;
+              position: relative;
+              width: 12rem;
+              text-transform: capitalize;
+              &:focus{
+                background: $white;
+                border: 1px dashed $silver;
+                box-shadow: none;
+              }
+            }
+          }
+        }
+      }
+      // .dropdown {
+      //   .btn {
+      //     font-size: 1.2rem;
+      //   }
+      //   .dropdown-item {
+      //     &.active {
+      //       font-weight: bold;
+      //     }
+      //   }
+      // }
+    }
+    //Action-bar right
+    .action-bar__right{
+      .btn-icon-only{
+        padding: 0 0.2rem;
+        font-size: 1.4rem;
+        &:hover {
+          color: $gray-600;
+        }
+      }
+      .divider{
+        border-right: 1px solid rgba($gray-300, 0.3);
+        margin: 0.3rem;
+        padding: 0 0.4rem;
+      }
+    }
+  }
+
+  /********** CONTENT **********/
+  .query-section__content{
+    display: flex;
+
+    /**** CONTENT RIGHT ****/
+    .content__right{
+      width: 100%;
+      margin-left: 1rem;
+      background: $white;
+      position: relative;
+      //Action bar global
+      .action-bar{
+        &.action-bar__global{
+          justify-content: flex-end;
+          position: absolute;
+          right: 1rem;
+          top: 0.8rem;
+          z-index: 1;
+          .btn-group{
+            padding: 0 0.2rem;
+            .btn{
+              height: 25px;
+              width: 25px;
+              line-height: 1;
+              border: none;
+              margin-right: 0.2rem;
+              font-size: 0.7rem;
+              color: $semi-dark;
+              &:hover{
+                color: $gray-900;
+              }
+            }
+          }
+          .btn-options{
+            font-size: 1.2rem !important;
+            color: $semi-dark;
+            &:hover{
+              color: $gray-900;
+            }
+          }
+        }
+      }
+
+      //Query tabs
+      .tabs{
+        position: relative;
+        ////// nav-tab //////
+        .nav-tabs{
+          background: transparent;
+          border-bottom-color: rgba($gray-300 , 0.2);
+          padding: 1rem 1rem 0 1rem;
+          margin: 0 1rem;
+          .nav-link{
+            font-size: 1rem;
+            color: $gray-300;
+            font-family: $font-family-primary;
+            border: none;
+            position: relative;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            &.active{
+              font-family: $font-family-primary-semibold;
+              color: $gray-900;
+              &:before{
+                content: '';
+                background: $primary;
+                width: 3rem;
+                height: 2px;
+                position: absolute;
+                bottom: 0;
+                left: 0.8rem;
+              }
+            }
+            .btn__icon{
+              margin-right: 0.5rem;
+            }
+          }
+        }
+        ////// Content //////
+        .tab-pane{
+          min-height: 40rem;
+          padding: 0;
+          //Tab design editor
+          .tab-editor{
+            .action-bar{
+              .action-bar__left{
+                border-radius: 15px;
+                padding: 0;
+                .btn-operation{
+                  padding: 0.3rem 1rem;
+                  border-radius: 15px;
+                }
+              }
+              .action-bar__right{
+                .btn{
+                  color: $semi-dark;
+                  &:hover{
+                    color: $gray-900;
+                  }
+                }
+              }
+            }
+            //tab content top
+            .tab-content__top{
+              min-height: 20rem;
+              padding: 1rem 2rem;
+              .action-bar__left{
+                background:$light;
+                box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 4px 0px inset;
+              }
+            }
+            //tab content middle
+            .tab-content__middle{
+              padding: 1rem 2rem 2rem;
+              background: #E0E5F5;
+              position: relative;
+              /* btn collapse */
+              .btn-joint{
+                .btn{
+                  border-radius: 15px;
+                  padding: 0.1rem 1rem;
+                  color: $primary;
+                  border-color: rgba($gray-300 , 0.5);
+                  font-size: 1.5rem;
+                  position: absolute;
+                  top: -1.5rem;
+                  left: 2rem;
+                  &:after{
+                    display: inline-block;
+                    vertical-align: middle;
+                    content: "";
+                    border-top: 0.3rem solid;
+                    border-right: 0.3rem solid transparent;
+                    border-bottom: 0;
+                    border-left: 0.3rem solid transparent;
+                    color: $gray-300;
+                  }
+                }
+              }
+              /* Collapse content */
+              .select-group{
+                max-width: 11rem;
+                padding: 0;
+                .select-group__select{
+                  position: relative;
+                  &:before{
+                    font-family: $brm-font-family;
+                    content: '\e908';
+                    position: absolute;
+                    top: 1rem;
+                    right: 4rem;
+                    font-size: 0.8rem;
+                    color: $semi-dark;
+                    cursor: pointer;
+                  }
+                  .form-select{
+                    background: transparent;
+                    border-color: transparent;
+                    color: $primary;
+                    font-family: $font-family-primary-bold;
+                    font-size: 1rem;
+                    cursor: pointer;
+                    &:focus{
+                      box-shadow: none;
+                    }
+                  }
+                }
+              }
+              //Predicate
+              .predicate{
+                .input__text {
+                  max-width: 10rem !important;
+                  cursor: pointer;
+                }
+              }
+            }
+            //tab content-bottom
+            .tab-content__bottom{
+              padding: 2rem;
+              min-height: 20rem;
+              .action-bar__left{
+                .btn-operation{
+                  margin-right: 0.5rem;
+                }
+              }
+              //content
+              .content{
+                padding: 1rem;
+                .message-info{
+                  color: rgba($gray-300 , 0.7);
+                  font-style: italic;
+                  font-size: 1rem;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      //Footer
+      .footer{
+        padding: 1rem;
+        @include flex(row);
+        align-items: center;
+        justify-content: flex-start;
+        position: absolute;
+        left: 0rem;
+        bottom: 0;
+        //width: 100%;
+      }
+    }
+  }
+}

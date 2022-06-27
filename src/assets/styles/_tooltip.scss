@@ -1,0 +1,20 @@
+.title-tooltip {
+    display: inline;
+    position: relative;
+}
+
+.title-tooltip {
+    position: relative;
+}
+
+.title-tooltip:hover:after {
+    background: $primary;
+    color: #fff;
+    content: attr(title);
+    position: absolute;
+    left: calc(100% + 0.5rem);
+    padding: 0.3 rem 1rem;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    top: 0.4rem;
+}

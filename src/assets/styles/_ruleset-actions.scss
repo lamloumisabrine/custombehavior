@@ -1,0 +1,473 @@
+
+/*********** RULESET ACTIONS STYLE **********/
+
+/******** Set vocabulary ********/
+.action-vocabulary{
+  width: fit-content;
+  .vocabulary-autocomplete{
+    border-radius: 20px;
+    margin: 1rem;
+    background: $gray-100;
+    @include flex(row);
+    justify-content: flex-start;
+    position: relative;
+    &:hover{
+      &:before,
+      .btn-delete{
+        opacity: 1;
+      }
+    }
+    &:before{
+      opacity: 0;
+      font-family: $brm-font-family;
+      content: '\e92d';
+      position: absolute;
+      left: -1rem;
+      top: 0.5rem;
+      color: $gray-300;
+      cursor: pointer;
+    }
+    .autocomplete{
+      .input__text{
+        padding: 0.5rem 1rem;
+        background: transparent;
+        border-color: transparent;
+        cursor: pointer;
+        width: 12rem;
+        &:focus{
+          box-shadow: none;
+        }
+      }
+      .icon{
+        margin-left: 1.5rem;
+      }
+    }
+    .autocomplete-left{
+      margin-right: 2.5rem;
+      position: relative;
+      &:after{
+        font-family: $brm-font-family;
+        content: '\e90a';
+        position: absolute;
+        color: $primary;
+        right: -2.5rem;
+        top: 0;
+        background: rgba($gray-300 , 0.3);
+        padding: 0.5rem 0.7rem;
+        border-radius: 50%;
+      }
+    }
+    .btn-delete{
+      opacity: 0;
+      color: $red;
+      position: absolute;
+      top: 0;
+      right: -2.5rem;
+      font-size: 1.3rem;
+    }
+  }
+}
+/******** Accounting Entries ********/
+.action-entries{
+  padding: 0 2rem;
+  position: relative;
+  width: fit-content;
+  &.status{
+    .action-content{
+      &:first-child{
+        &:before{
+          background: $red;
+        }
+      }
+      .action-title{
+        &:before{
+          background: $red;
+        }
+      }
+    }
+
+    .btn-status{
+      background: $red;
+      border-color: $red;
+      &:hover{
+        background: $danger-bg-color-pressed !important;
+        border-color: $danger-bg-color-pressed !important;
+      }
+    }
+  }
+  &:hover{
+    &:before{
+      font-family: $brm-font-family;
+      content: '\e92d';
+      position: absolute;
+      left: -0.5rem;
+      top: 25%;
+      cursor: pointer;
+      color: $gray-300;
+    }
+    .btn-delete-all{
+      opacity: 1;
+    }
+  }
+  .action-content{
+    padding-bottom: 1.5rem;
+    padding-left: 1rem;
+    &:first-child{
+      position: relative;
+      &:before{
+        content: "";
+        background: $gray-300;
+        height: 100%;
+        width: 1px;
+        position: absolute;
+        top: 0.6rem;
+        left: 0;
+      }
+      .btn-status{
+        border-radius: 20px;
+        font-size: 0.8rem;
+        height: 1.5rem;
+        width: 2.5rem;
+        position: absolute;
+        top: 50%;
+        left: -1.2rem;
+        padding: 0;
+        line-height: 1.5rem;
+        &:hover{
+          background: $semi-dark;
+          border-color: $semi-dark;
+        }
+      }
+    }
+    .action-title{
+      position: relative;
+      &:before{
+        content: "";
+        background:  $gray-300;
+        height: 1px;
+        width: 6px;
+        position: absolute;
+        bottom: 0.8rem;
+        left: -1rem;
+      }
+      .title{
+        color: $gray-500;
+        font-family: $font-family-primary-semibold;
+        font-size: 1rem;
+        margin-right: 1rem;
+      }
+      .btn{
+        height: 15px;
+        width: 15px;
+        font-size: 0.6rem;
+      }
+    }
+    .entries-autocomplete{
+      border-radius: 20px;
+      margin: 1rem 2rem;
+      background: $gray-100;
+      @include flex(row);
+      justify-content: flex-start;
+      position: relative;
+      &:hover{
+        &:before,
+        .btn-delete{
+          opacity: 1;
+        }
+      }
+      &:before{
+        opacity: 0;
+        font-family: $brm-font-family;
+        content: '\e92d';
+        position: absolute;
+        left: -1rem;
+        top: 0.5rem;
+        color: $gray-300;
+        cursor: pointer;
+      }
+      .autocomplete{
+        .input__text{
+          padding: 0.5rem 1rem;
+          background: transparent;
+          border-color: transparent;
+          cursor: pointer;
+          width: 15rem;
+          &:focus{
+            box-shadow: none;
+          }
+
+        }
+      }
+      .btn-delete{
+        opacity: 0;
+        color: $red;
+        position: absolute;
+        top: 0;
+        right: -2.5rem;
+        font-size: 1.3rem;
+      }
+    }
+  }
+  .btn-delete-all{
+    opacity: 0;
+    color: $red;
+    position: absolute;
+    top: 40%;
+    right: -2rem;
+    font-size: 1.5rem;
+  }
+}
+/******** Table ********/
+.action-tables{
+  .table-autocomplete{
+    margin: 1rem;
+    @include flex(row);
+    justify-content: flex-start;
+    position: relative;
+    width: fit-content;
+    &:hover{
+      &:before,
+      .btn-delete{
+        opacity: 1;
+      }
+    }
+    &:before{
+      opacity: 0;
+      font-family: $brm-font-family;
+      content: '\e92d';
+      position: absolute;
+      left: -1rem;
+      top: 0.5rem;
+      color: $gray-300;
+      cursor: pointer;
+    }
+    .autocomplete{
+      .input__text{
+        padding: 0.5rem 1rem;
+        background: transparent;
+        border-color: transparent;
+        border-radius: 20px;
+        cursor: pointer;
+        background: $gray-100;
+        width: 15rem;
+        &:focus{
+          box-shadow: none;
+        }
+
+      }
+    }
+    .btn-delete{
+      opacity: 0;
+      color: $red;
+      position: absolute;
+      top: 0;
+      right: -2.5rem;
+      font-size: 1.3rem;
+    }
+  }
+  .input__text{
+    width: 20rem;
+    border-color: transparent;
+    border-radius: 3px;
+    &:focus{
+      box-shadow: none;
+    }
+  }
+  .table-cells{
+    @include flex(row);
+    justify-content: flex-start;
+    max-width: 80vw;
+    overflow-y: auto;
+    margin-left: 1rem;
+    &.scrollbar{
+      &::-webkit-scrollbar{
+        height: 0.5rem;
+      }
+    }
+    .table-block{
+      margin-right: 0.5rem;
+      // column
+      .cell-column{
+        .input__text{
+          background: rgba($secondary , 0.2);
+          &::-webkit-input-placeholder{
+            color: $gray-900;
+          }
+          &::-moz-placeholder{
+            color: $gray-900;
+          }
+          &:-ms-input-placeholder{
+            color: $gray-900;
+          }
+          &:-moz-placeholder{
+            color: $gray-900;
+          }
+        }
+      }
+      // row
+      .cell-row{
+        .input__text{
+          background: rgba($gray-300 , 0.1);
+          &::-webkit-input-placeholder{
+            color: $gray-500;
+            font-style: italic;
+          }
+          &::-moz-placeholder{
+            color: $gray-500;
+            font-style: italic;
+          }
+          &:-ms-input-placeholder{
+            color: $gray-500;
+            font-style: italic;
+          }
+          &:-moz-placeholder{
+            color: $gray-500;
+            font-style: italic;
+          }
+        }
+      }
+    }
+  }
+  // btn add row
+  .btn-add-row{
+    background: $gray-300;
+    color: $white;
+    height: 15px;
+    width: 15px;
+    font-size: 0.6rem;
+    margin-left: 1rem;
+    &:hover{
+      background: $gray-600;
+    }
+  }
+}
+/******** Message ********/
+.action-message{
+  position: relative;
+  width: fit-content;
+  @include flex(row);
+  padding: 0 1.5rem;
+  &:before{
+    font-family: $brm-font-family;
+    content: '\e92d';
+    position: absolute;
+    top: 0.5rem;
+    left: 0;
+    cursor: pointer;
+    opacity: 0;
+  }
+  &:hover{
+    &:before,
+    .btn-delete{
+      opacity: 1;
+    }
+  }
+  .message-autocomplete{
+    position: relative;
+    .autocomplete{
+      position: relative;
+      &:before{
+        font-family: $brm-font-family;
+        content: '\e990';
+        position: absolute;
+        left: 1.5rem;
+      }
+      .input__text{
+        width: 50rem;
+        padding: 0.5rem 3rem 0.5rem 3.5rem;
+        background: $gray-100;
+        border-color: transparent;
+        border-radius: 20px;
+        cursor: pointer;
+        &:focus{
+          box-shadow: none;
+        }
+
+      }
+    }
+    .message-status{
+      position: absolute;
+      top: 0;
+      right: 0;
+      .btn-message{
+        color: $primary;
+        border-radius: 50%;
+        background: rgba($gray-300 , 0.3);
+        padding: 0.5rem 0.8rem;
+      }
+      .dropdown-item{
+        &:hover{
+          background-color: transparent;
+        }
+        .nav-link{
+          padding: 0.8rem 1rem;
+        }
+      }
+    }
+  }
+  .dropdown-toggle{
+    &:after{
+      display: none;
+    }
+  }
+  .btn-delete{
+    color: $red;
+    font-size: 1.3rem;
+    opacity: 0;
+  }
+}
+/******** Pricing ********/
+.action-pricing{
+  width: fit-content;
+  padding: 0 1.5rem;
+  .pricing-autocomplete{
+    border-radius: 20px;
+    background: $gray-100;
+    @include flex(row);
+    justify-content: flex-start;
+    position: relative;
+    &:hover{
+      &:before,
+      .btn-delete{
+        opacity: 1;
+      }
+    }
+    &:before{
+      opacity: 0;
+      font-family: $brm-font-family;
+      content: '\e92d';
+      position: absolute;
+      left: -1.5rem;
+      top: 0.5rem;
+      color: $gray-300;
+      cursor: pointer;
+    }
+    &:after{
+      font-family: $brm-font-family;
+      content: '\e992';
+      position: absolute;
+      left: 1.2rem;
+      top: 0.5rem;
+    }
+    .autocomplete{
+      .input__text{
+        padding: 0.5rem 0 0.5rem 3rem;
+        background: transparent;
+        border-color: transparent;
+        cursor: pointer;
+        &:focus{
+          box-shadow: none;
+        }
+
+      }
+    }
+    .btn-delete{
+      opacity: 0;
+      color: $red;
+      position: absolute;
+      top: 0;
+      right: -2.5rem;
+      font-size: 1.3rem;
+    }
+  }
+}

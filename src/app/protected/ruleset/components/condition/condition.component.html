@@ -1,0 +1,23 @@
+
+
+
+<div *ngFor="let condition of condition.conditions;let conditionIndex = index">
+
+  <acp-logical-operator-interval 
+  [logicialOperator]="condition.logicalOperator" [isCheckedAndOr]="getLogicialOperator(conditionIndex)"
+   (isCheckedAndOrChange)="setLogicialOperator($event,conditionIndex)" cdkDropList>
+    <div *ngFor="let compare of condition.compares;let compareIndex = index" cdkDrag>
+        <acp-ui-predicat    
+          [leftSideItem]="getSelectedItem(compare.leftHandSide)" [rightSideItem]="getSelectedItem(compare.rightHandSide)" [operatorItem]="getOperator(compare.operator)" [notOperator]="compare.notOperator"
+          [listOfRightSideItems]="(['screenJson'])" [listOfLeftSideItems]="(['screenJson'])" [listOfOperators]="operators" 
+          (deletePredicate)="deletePredicate(conditionIndex,compareIndex)"
+          (leftSideItemChange)="setItem($event,compareIndex,conditionIndex,'left')"
+          (rightSideItemChange)="setItem($event,compareIndex,conditionIndex,'right')"
+          (operatorItemChange)="setItem($event,compareIndex,conditionIndex,'middle')"
+          (notOperatorChange)="getNotOperator(compareIndex,conditionIndex)"
+          (valueChange)="getInputChanges($event,compareIndex,conditionIndex)"
+         ></acp-ui-predicat>
+</div>
+<app-condition [condition]="condition"></app-condition>
+</acp-logical-operator-interval>
+</div>

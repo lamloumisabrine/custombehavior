@@ -1,0 +1,316 @@
+/*********** MAIN STYLE ***********/
+
+body {
+    height: 100vh;
+    overflow-x: hidden !important;
+}
+.header{
+    position: sticky;
+    top: 0;
+    box-shadow: rgb(0 0 0 / 10%) 0px 1px 3px;
+    .header__right{
+      align-items: baseline;
+      //SEARCH
+      .search{
+        position: relative;
+        .input-group{
+          position: relative;
+          &:before{
+            font-family: $brm-font-family;
+            content: '\e970';
+            font-size: 0.9rem;
+            color: $gray-300;
+            position: absolute;
+            top: 0.2rem;
+            left: 0.2rem;
+          }
+          .input__text{
+            border-radius: 0;
+            &:focus{
+              box-shadow: none;
+            }
+          }
+        }
+        .shortcut{
+          position: absolute;
+          bottom: 0.7rem;
+          right: 0.2rem;
+          padding: 0;
+          color: $gray-300;
+          .icon{
+            font-size: 0.6rem;
+          }
+        }
+      }
+      //QUICK INPUT
+      .quickInput{
+        .circle{
+          padding: 0;
+        }
+      }
+    }
+
+}
+ul{
+  padding: 0;
+}
+.policy{
+	.nav-link__icon, .icon{
+		color: $policy-color;
+	}
+}
+.ruleset{
+	.nav-link__icon, .icon{
+		color: $ruleset-color;
+	}
+}
+.query{
+	.nav-link__icon, .icon{
+		color: $query-color;
+	}
+}
+.expression{
+	.nav-link__icon, .icon{
+		color: $expression-color;
+	}
+}
+.dataflow{
+	.nav-link__icon, .icon{
+		color: $dataflow-color;
+	}
+}
+.delete{
+	.nav-link{
+		color: $red !important;
+	}
+}
+
+.action-bar{
+    @include flex(row);
+    justify-content: flex-end;
+    color: $black;
+}
+
+.page-content__left{
+    background: $black;
+}
+
+//global css
+.section__title {
+  color: $gray-900;
+  font-size: 2.5rem;
+  font-family: $font-family-primary-semibold;
+}
+
+.section__second-title {
+    color: $gray-900;
+    font-size: 1.2rem;
+    font-style: italic;
+}
+
+.full-center-section {
+    // position: absolute;
+    // top: 50%;
+    // left: 50%;
+    // transform: translate(50%, 50%);
+
+    @include flex(column);
+    justify-content: center;
+    align-items: center;
+    //min-height: calc(100vh - 49px);
+    height: -webkit-calc(100vh - 42px);
+    height: -moz-calc(100vh - 42px);
+    height: calc(100vh - 42px);
+
+    .section__text{
+      color:$gray-300;
+    }
+}
+
+.full-section{
+  min-height: calc(100vh - 49px);
+}
+//SCROLLBAR
+.scrollbar {
+  overflow: auto;
+    &::-webkit-scrollbar{
+        width: 0.4rem;
+    }
+    &::-webkit-scrollbar-thumb{
+        background-color: rgba($semi-dark,0.4);
+        border-radius: 20px;
+    }
+}
+
+
+  //SHORTCUT
+  .shortcut{
+    color: $gray-600;
+    font-size: 0.9rem;
+    padding: 0 1rem;
+    .shortcut__key{
+      background: $gray-100;
+      border: 2px solid $keys-border-color;
+      padding: $keys-padding;
+      border-radius: 2px;
+      color: rgba($gray-900 , 0.3);
+    }
+    .shortcut__label{
+      color: $gray-600;
+      padding: 0 1rem;
+    }
+  }
+
+  .btn{
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .circle{
+    padding: 0;
+  }
+
+
+
+  // input
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active  {
+    box-shadow: 0 0 0 30px white inset !important;
+  }
+
+  // badge
+  .badge{
+    .btn{
+      padding: 0;
+      color: $gray-600;
+      font-size: 0.7rem;
+      line-height: 1;
+      &:hover{
+        color: $black;
+      }
+    }
+  }
+
+  .select-group{
+    padding: 0;
+  }
+
+  // Modal
+  .modal-content{
+    .modal-header{
+      .btn-close{
+        top: 2.5rem;
+        right: 2.5rem;
+      }
+    }
+  }
+
+  // Draft name
+  .draft-name{
+    @include flex(row);
+    align-items: center;
+    font-size: 1.3rem;
+    position: relative;
+    &:hover{
+      .input-group{
+        .input__text{
+          background: $white;
+          border: 1px dashed $silver;
+          border-right: none;
+          box-shadow: none;
+          font-weight: 500;
+        }
+      }
+      .btn-more{
+        opacity: 1;
+      }
+      .btn-delete{
+        opacity: 1;
+      }
+    }
+    .btn-more{
+      border-radius: 0 5px 5px 0;
+      background: $silver;
+      opacity: 0;
+      padding: 0.4rem 0.6rem;
+    }
+    .btn-delete{
+      opacity: 0;
+      font-size: 1.5rem;
+      padding: 0 1rem;
+      &:hover{
+        color: $red;
+      }
+    }
+    .input-group{
+      .input__text{
+        background: transparent;
+        border-color: transparent;
+        font-size: 1.3rem;
+        padding: 0.2rem;
+        cursor: pointer;
+        position: relative;
+        width: 15rem;
+        &:focus{
+          background: $white;
+          border: 1px dashed $silver;
+          box-shadow: none;
+        }
+      }
+      .input__helper{
+        display: none;
+      }
+    }
+    /****COLLAPSE****/
+    .list-versions{
+      position: absolute;
+      z-index: 1000;
+      border-radius: 5px;
+      min-width: 25rem;
+      inset: 0px auto auto 0px;
+      margin: 0px;
+      transform: translate(1.5rem, 3rem);
+      >.card{
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 1px;
+        .nav-link{
+          padding-right: 0;
+        }
+        .card-item{
+          .item-name{
+            @include flex(row);
+            align-items: center;
+            &:hover{
+              .btn-actions{
+                .btn{
+                  display: inline-block;
+                }
+              }
+            }
+
+            .btn-actions{
+              .btn-add-draft{
+                @include circle(16px);
+                font-size: 0.6rem;
+                text-align: center;
+                padding: 0;
+                vertical-align: middle;
+                margin-right: 0.5rem;
+                line-height: 1rem;
+                display: none;
+              }
+              .btn{
+                display: none;
+                &:hover{
+                  color: $gray-300;
+                }
+                &:after{
+                  display: none !important;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }

@@ -1,0 +1,40 @@
+/********** ACTION BAR STYLE **********/
+
+.action-bar {
+    @include flex(row);
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 1rem;
+    .action-bar__left {
+        .undo-button {
+            @include circle(2rem);
+            padding: 0;
+        }
+    }
+    .action-bar__right {
+        @include flex(row);
+        .more-button {
+            background: $semi-dark;
+            border-color: $semi-dark;
+            padding: 0.3rem;
+            &:hover {
+                background: $gray-300;
+                border-color: $semi-dark;
+            }
+            .dropdown-menu {
+                .dropdown-item {
+                    .nav-link {
+                        font-size: 0.8rem;
+                    }
+                }
+            }
+        }
+        button {
+            margin-left: 0.5rem;
+        }
+    }
+}
+
+.dropdown-toggle::after {
+    display: none;
+}

@@ -1,0 +1,39 @@
+<!-- Label Host -->
+<ng-template #labelLayer></ng-template>
+<svg class="link-container">
+  <!-- Link -->
+  <g [id]="model.id">
+    <defs>
+      <marker id="pointer" markerWidth="30" markerHeight="18" refX="30" refY="9" markerUnits="userSpaceOnUse">
+        <ellipse cx="22" cy="9" rx="13" ry="11" fill="#848CA1"/>
+        <polyline points="16,4 21,8 16,12" style="fill:none;stroke:white;stroke-width:2"/>
+      </marker>
+    </defs>
+
+    <path class="graph-studio-link" stroke-width="2" [attr.stroke]="
+        (model.selectSelected() | async) || (model.selectHovered() | async)
+          ? 'rgba(101, 186, 255, 0.7)'
+          : '#B3B3B3'" [attr.d]="model.selectPath() | async" [ngClass]="{ hovered: model.selectHovered() | async }"
+      (mouseleave)="model.setHovered(false); onHover()" (mouseenter)="model.setHovered(); onHover()"
+      marker-end="url(#pointer)"></path>
+    <path class="default-link" (mouseleave)="model.setHovered(false); onHover()"
+      (mouseenter)="model.setHovered(); onHover()" [attr.stroke-width]="20" [attr.stroke]="
+        (model.selectSelected() | async) || (model.selectHovered() | async)
+          ? 'rgba(101, 186, 255, 0.7)'
+          : '#B3B3B3'
+      " [attr.stroke-linecap]="'round'" [attr.data-linkid]="model.id"
+      [attr.stroke-opacity]="(model.selectHovered() | async) ? '0.1' : '0'" [attr.d]="model.selectPath() | async"
+      (mouseleave)="model.setHovered(false); onHover()" (mouseenter)="model.setHovered(); onHover()"></path>
+  </g>
+
+  <!-- Points -->
+  <g *ngFor="let point of model.getPoints(); trackBy: trackByPoints" [id]="point.id">
+    <!-- <circle fill="currentColor" [attr.cx]="point.selectX() | async" [attr.cy]="point.selectY() | async" r="5"
+      class="graph-studio-point" [ngClass]="{ hovered: point.selectHovered() | async }" /> -->
+    <circle [attr.data-type]="point.type" [attr.data-id]="point.id" [attr.data-parent-id]="model.id"
+      (mouseleave)="point.setHovered(false); model.setHovered(false)"
+      (mouseenter)="point.setHovered(); model.setHovered()" [attr.cx]="point.selectX() | async"
+      [attr.cy]="point.selectY() | async" r="15" [attr.opacity]="0"
+      [ngClass]="{ selected: point.selectSelected() | async }" />
+  </g>
+</svg>

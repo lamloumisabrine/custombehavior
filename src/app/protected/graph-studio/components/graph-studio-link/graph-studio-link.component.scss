@@ -1,0 +1,26 @@
+:host {
+  position: absolute;
+}
+
+.link-container {
+  position: relative;
+  fill: none;
+  overflow: visible;
+  pointer-events: all;
+  position: relative;
+
+  .graph-studio-link {
+    transition: stroke 300ms ease-in-out;
+  }
+}
+.graph-studio-point {
+  color: lightgray;
+  overflow: visible;
+  pointer-events: all;
+}
+
+polyline {
+  fill: none;
+  stroke: #9BA0AB;
+  stroke-width: 2;
+}

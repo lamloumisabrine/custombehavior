@@ -1,0 +1,51 @@
+<div (dblclick)="$event.stopPropagation()" class="node-workflow default-node" [ngClass]="{selected: model.selectSelected() | async,hovered: model.selectHovered() | async}"
+(mouseover)="model.setHovered()" (mouseout)="model.setHovered(false)">
+  <div class="node ruleset">
+      <i class="node__icon icon-ruleset"></i>
+      <ng-container *ngIf="model.selectExtras() | async as extras">
+        <div class="node__label">
+          <acp-ui-input class="form-control main-label" [(value)]="extras.display" bindLabel="extras.display"></acp-ui-input>
+        </div>
+      </ng-container>
+  </div>
+  choose an action 
+  <acp-ui-select class="mini-label" [options]="outputTypes"  bindValue="value" bindLabel="label"></acp-ui-select>
+
+
+  
+  <div class="condition-content">
+    <ng-container *ngIf="selectedRule.when; then conditionContainer; else emptyCondition;"></ng-container>
+    <ng-template #conditionContainer>
+      <acp-logical-operator-interval *ngIf="selectedRule.when?.logicalOperator" 
+      [isCheckedAndOr]="getLogicialOperator()" [logicialOperator]="selectedRule?.when?.logicalOperator!"  (isCheckedAndOrChange)="setLogicialOperator($event)"
+      cdkDropList>
+      <div *ngFor="let compare of selectedRule?.when?.compares; let compareIndex = index" cdkDrag>
+        <acp-ui-predicat [leftSideItem]="getSelectedItem(compare.leftHandSide)" [rightSideItem]="getSelectedItem(compare.rightHandSide)" [operatorItem]="getOperator(compare.operator)"
+         
+          [listOfRightSideItems]="['screenJson.field']" [listOfLeftSideItems]="['screenJson.field']" [listOfOperators]="operators"
+          (deletePredicate)="deletePredicate(compareIndex)"
+          (leftSideItemChange)="setItem($event,compareIndex,'left')"
+          (rightSideItemChange)="setItem($event,compareIndex,'right')"
+          (operatorItemChange)="setItem($event,compareIndex,'middle')"
+           (valueChange)="getInputChanges($event,compareIndex)"
+          (clickOrigin)="setPredicateClickOrigin($event)"
+          ></acp-ui-predicat>
+      </div>
+      </acp-logical-operator-interval>
+    </ng-template>
+    <ng-template #emptyCondition>
+      <div class="condition-choice">
+        Choose new condition
+        <span class="tag" (click)="addFirstCondition('and')">AND</span>
+         or <span class="tag" (click)="addFirstCondition('or')">OR</span>
+         to begin
+      </div>
+    </ng-template>
+    </div>
+
+
+  <ng-template #popContent>  </ng-template>
+  <div class="ports">
+  <ng-template #portsLayer></ng-template>
+  </div>
+</div>
