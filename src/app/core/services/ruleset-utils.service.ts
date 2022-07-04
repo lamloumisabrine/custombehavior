@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Rule } from 'src/app/models/ruleset/rule.model';
-import { Ruleset } from 'src/app/models/ruleset/ruleset.model';
-import { Condition } from 'src/app/models/condition.model';
+import {Injectable} from '@angular/core';
+import {Rule} from 'src/app/models/ruleset/rule.model';
+import {Ruleset} from 'src/app/models/ruleset/ruleset.model';
+import {Condition} from 'src/app/models/condition.model';
+import { Component } from 'src/app/models/component.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,19 +15,20 @@ export class RulesetUtilsService {
   conditionBeforeUpdate: Condition = new Condition();
   rulesetState: 'saved' | 'notSaved' | undefined;
   
-  getSelectedItem(item: any, screen: any) {
-    if (item) {
-      if (item.name) {
-        return item;
+
+  getSelectedItem(componentId: any, screenJson: any) {
+    if (componentId) {
+      if (componentId.type) {
+        return componentId;
       }
-      else if (item.source === "value") {
-        return { name: item.value, value: item.value, id: item.id }
+      else if (componentId.source === "value") {
+        return { name: componentId.value, value: componentId.value, id: componentId.id }
       }
       else {
-        for (const field of screen) {
-          if (field.en.display == item.name) {
-            item = field;
-            return item;
+        for (const field of screenJson) {
+          if (field.en.display == componentId) {
+            componentId.name = field.en.display;
+            return field.en.display;
           }
         }
       }
@@ -40,4 +42,6 @@ export class RulesetUtilsService {
       return true;
     }
   }
+
+ 
 }

@@ -1,87 +1,46 @@
+
 <section class="full-section home-section">
   <!----------- ACTION BAR ----------->
-<div class="home-content">
-  <div class="action-bar action-bar__top">  
-<acp-ui-sidebar [topItems]="topItems" [sidebarStatus]="true" [logoPath]="'assets/icons/menu.svg'"></acp-ui-sidebar> 
-  </div>
-  </div>
-  
   <div class="action-bar action-bar__top">
+    <!-- ACTIONS LEFT -->
     <div class="action-bar__left">
-      
-
-      <!--div
-      *ngFor="let node of nodesLibrary"
-      class="node-drag"
-      draggable="true"
-      [attr.data-type]="node.name"
-      (dragstart)="onBlockDrag($event)"
-      [ngStyle]="{ 'background-color': node.color }">
-      {{ node.name }}
-    </div-->
+      <acp-ui-button [icon]="'icon-arrow-left'" [style]="'btn-icon-only'" [title]="'Return'"></acp-ui-button>
+      <div class="divider"></div>
     </div>
+    <div class="action-bar__middle">
+    <acp-ui-sidebar [topItems]="topItems" [sidebarStatus]="true" [logoPath]="'assets/icons/menu.svg'"></acp-ui-sidebar>   
+          </div>
+          <div class="action-bar__right">
+            <div class="actions">
+              <acp-ui-button [icon]="'icon-shield'" [style]="'btn-icon-only'" title="Validation"></acp-ui-button>
+              <acp-ui-button [icon]="'icon-duplicate'" [style]="'btn-icon-only'" title="Duplicate" ></acp-ui-button>
+              <acp-ui-button [icon]="'icon-fullscreen'" [style]="'btn-icon-only'" title="Fullscreen"></acp-ui-button>
+            </div>
+            <acp-ui-button [icon]="'icon-save'" [label]="'Save'" [style]="'btn-secondary'" title="Save" ></acp-ui-button>
+            <acp-ui-button [icon]="'icon-public'" [label]="'Publish'" [style]="'btn-primary'" title="Publish"
+             ></acp-ui-button>
+             <div class="forArray2"  >
+              <table>
+                
+                <tr *ngFor="let field of fields"   
+                draggable="true"
+                [attr.data-type]="field"
+                (dragstart)="onBlockDrag($event)" >
+                  <td>{{field.en.display}}</td>
+                  <td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          </div>
+          <div class="policy-composer-content">
+            <!------------ TOOLBAR LEFT ------------>
+            <!------------ PAGE CONTENT RIGHT ------------>
+            <div class="content__right">
+              <acp-ui-diagram class="diagram" [model]="diagramModel" (drop)="onBlockDropped($event)"
+              (dragover)="$event.preventDefault()">  
+            </acp-ui-diagram>
+            </div>
+          </div>
+        </section>
     
-
-    <div class="forArray2"  >
-      <table>
-        <tr *ngFor="let field of screenJson.field"   
-        draggable="true"
-        [attr.data-type]="field"
-        (dragstart)="onBlockDrag($event)" >
-          <td>{{field.en.display}}</td>
-          <td>
-        </tr>
-      </table>
-    </div>
-    
-
-    <div class="action-bar__right">      
-  <div class="home-content">
-  </div>
-  <div class="content__left">
-  <div class="board">
-   
-  <div class="board-wrapper">
-
-    </div>
-    </div>
-    </div>
-  
-
-  <acp-ui-dropdown [dropdownObject]="addCondition" title="Add" (selectedItem)="addFirstCondition($event)"></acp-ui-dropdown> 
-
-<div class="content__right">
-  <acp-ui-diagram class="diagram" [model]="diagramModel" (drop)="onBlockDropped($event)"
-  (dragover)="$event.preventDefault()" >
-</acp-ui-diagram>
-<div class="condition-content">
-  <ng-container *ngIf="selectedRule.when; then conditionContainer; else emptyCondition;"></ng-container>
-  <ng-template #conditionContainer>
-    <acp-logical-operator-interval *ngIf="selectedRule.when?.logicalOperator" 
-    [isCheckedAndOr]="getLogicialOperator()" [logicialOperator]="selectedRule?.when?.logicalOperator!" [actionList]="intervalActions" (isCheckedAndOrChange)="setLogicialOperator($event)"
-    cdkDropList>
-    <div *ngFor="let compare of selectedRule?.when?.compares; let compareIndex = index" >
-<acp-ui-predicat [leftSideItem]="getSelectedItem(compare.leftHandSide)" [rightSideItem]="getSelectedItem(compare.rightHandSide)" [operatorItem]="getOperator(compare.operator)"
-[listOfRightSideItems]="['screenJson.field']" [listOfLeftSideItems]="['screenJson.field']" [listOfOperators]="operators"
-(deletePredicate)="deletePredicate(compareIndex)"
-(leftSideItemChange)="setItem($event,compareIndex,'left')"
-(rightSideItemChange)="setItem($event,compareIndex,'right')"
-(operatorItemChange)="setItem($event,compareIndex,'middle')"
- (valueChange)="getInputChanges($event,compareIndex)"
-(clickOrigin)="setPredicateClickOrigin($event)" >
-</acp-ui-predicat>
-</div>
-</acp-logical-operator-interval>
-</ng-template>
-<ng-template #emptyCondition>
-
-</ng-template>
-</div>
-  </div>  
-      <acp-ui-button [icon]="'icon-save'" [label]="'Save'" [style]="'btn-secondary'" title="Save" ></acp-ui-button>
-      <acp-ui-button [icon]="'icon-public'" [label]="'Publish'" [style]="'btn-primary'" title="Publish"></acp-ui-button>
-   
-  </div>
-  </div>
-
-</section>

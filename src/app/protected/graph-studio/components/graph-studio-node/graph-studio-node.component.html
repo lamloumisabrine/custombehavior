@@ -21,8 +21,7 @@
       cdkDropList>
       <div *ngFor="let compare of selectedRule?.when?.compares; let compareIndex = index" cdkDrag>
         <acp-ui-predicat [leftSideItem]="getSelectedItem(compare.leftHandSide)" [rightSideItem]="getSelectedItem(compare.rightHandSide)" [operatorItem]="getOperator(compare.operator)"
-         
-          [listOfRightSideItems]="['screenJson.field']" [listOfLeftSideItems]="['screenJson.field']" [listOfOperators]="operators"
+          [listOfRightSideItems]="['screenJson']" [listOfLeftSideItems]="['screenJson']" [listOfOperators]="operators"
           (deletePredicate)="deletePredicate(compareIndex)"
           (leftSideItemChange)="setItem($event,compareIndex,'left')"
           (rightSideItemChange)="setItem($event,compareIndex,'right')"
@@ -34,12 +33,7 @@
       </acp-logical-operator-interval>
     </ng-template>
     <ng-template #emptyCondition>
-      <div class="condition-choice">
-        Choose new condition
-        <span class="tag" (click)="addFirstCondition('and')">AND</span>
-         or <span class="tag" (click)="addFirstCondition('or')">OR</span>
-         to begin
-      </div>
+      <acp-ui-dropdown [dropdownObject]="addCondition" title="Add" (selectedItem)="addFirstCondition($event)"></acp-ui-dropdown>
     </ng-template>
     </div>
 

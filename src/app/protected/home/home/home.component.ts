@@ -75,17 +75,25 @@ onBlockDrag(e: DragEvent) {
   }
 }
 
-fields: any = [];
-screenJson : any
 
+screenJson : any
   ngOnInit(){}
 
+  get fields() : any{
+    return this._fields
+  }
+  set fields(fields :any){
+    this._fields = fields;
+  }
+  _fields :any;
   private getScreen() {
     this.httpClient.get("/assets/data.json").subscribe((screen: any) => {
       this.screenJson = screen;
+      this.fields = this.screenJson.field
     });
   }
 
+  
 createNode(type: string) {
   const nodeData = this.getScreen;
   if (nodeData) {
@@ -131,7 +139,7 @@ createNode(type: string) {
   }
 
   getSelectedItem(selectedItem: any) {
-    return this.rulesetUtilsService.getSelectedItem(selectedItem, this['screenJson']);
+    return this.rulesetUtilsService.getSelectedItem(selectedItem, this.screenJson);
   }
   deletePredicate(compareIndex: number) {
     if (this.selectedRule!.when!.compares!.length == 1) {
