@@ -16,19 +16,20 @@ export class RulesetUtilsService {
   rulesetState: 'saved' | 'notSaved' | undefined;
   
 
-  getSelectedItem(componentId: any, screenJson: any) {
-    if (componentId) {
-      if (componentId.type) {
-        return componentId;
+  getSelectedItem(item: any, fields: any) {
+    if (item) {
+      if (item.name) {
+        return item;
       }
-      else if (componentId.source === "value") {
-        return { name: componentId.value, value: componentId.value, id: componentId.id }
+      else if (item.source === "value") {
+        return { name: item.value, value: item.value, id: item.id }
       }
       else {
-        for (const field of screenJson) {
-          if (field.en.display == componentId) {
-            componentId.name = field.en.display;
-            return field.en.display;
+        for (const field of fields) {
+          if (field.id == item.id)
+           {
+            item = field;
+            return item;
           }
         }
       }

@@ -11,8 +11,6 @@
   choose an action 
   <acp-ui-select class="mini-label" [options]="outputTypes"  bindValue="value" bindLabel="label"></acp-ui-select>
 
-
-  
   <div class="condition-content">
     <ng-container *ngIf="selectedRule.when; then conditionContainer; else emptyCondition;"></ng-container>
     <ng-template #conditionContainer>
@@ -21,14 +19,13 @@
       cdkDropList>
       <div *ngFor="let compare of selectedRule?.when?.compares; let compareIndex = index" cdkDrag>
         <acp-ui-predicat [leftSideItem]="getSelectedItem(compare.leftHandSide)" [rightSideItem]="getSelectedItem(compare.rightHandSide)" [operatorItem]="getOperator(compare.operator)"
-          [listOfRightSideItems]="['screenJson']" [listOfLeftSideItems]="['screenJson']" [listOfOperators]="operators"
+          [listOfRightSideItems]="field" [listOfLeftSideItems]="field" [listOfOperators]="operators"
           (deletePredicate)="deletePredicate(compareIndex)"
           (leftSideItemChange)="setItem($event,compareIndex,'left')"
           (rightSideItemChange)="setItem($event,compareIndex,'right')"
           (operatorItemChange)="setItem($event,compareIndex,'middle')"
            (valueChange)="getInputChanges($event,compareIndex)"
-          (clickOrigin)="setPredicateClickOrigin($event)"
-          ></acp-ui-predicat>
+          (clickOrigin)="setPredicateClickOrigin($event)"> </acp-ui-predicat>
       </div>
       </acp-logical-operator-interval>
     </ng-template>

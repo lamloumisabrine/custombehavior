@@ -89,7 +89,8 @@ screenJson : any
   private getScreen() {
     this.httpClient.get("/assets/data.json").subscribe((screen: any) => {
       this.screenJson = screen;
-      this.fields = this.screenJson.field
+      this.fields = this.screenJson.field;
+      
     });
   }
 

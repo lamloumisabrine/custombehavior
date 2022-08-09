@@ -11,10 +11,10 @@ import { DefaultNodeComponent, MODEL, DiagramComponent, EngineService, AlertServ
 import { GraphService } from 'src/app/core/services/graph.service';
 import { GraphStudioNodeModel, NodeStatus } from '../../models/graph-studio-node.model';
 import { Rule } from 'src/app/models/ruleset/rule.model';
-import { STRING_OPERATORS } from 'src/app/shared/constants/operators.constant';
+import { STRING_OPERATORS ,LIST_FIELDS} from 'src/app/shared/constants/operators.constant';
 import { RulesetUtilsService } from 'src/app/core/services/ruleset-utils.service';
 import { UtilsService } from 'src/app/core/services/utils.service';
-import { ACTIONS_INTERVAL, policyTypes, positions, staticActions, staticValues } from 'src/app/shared/constants/static-values.constants';
+import {  positions, staticActions, staticValues } from 'src/app/shared/constants/static-values.constants';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Compare } from 'src/app/models/compare.model';
 import { Condition } from 'src/app/models/condition.model';
@@ -36,6 +36,7 @@ export class GraphStudioNodeComponent extends DefaultNodeComponent {
   ruleSnapshots: Rule[] = [];
   clickPredicateOrigin: boolean = true;
   operators = STRING_OPERATORS;
+  field = LIST_FIELDS;
   selectedRule = new Rule();
 
   constructor( private router :Router,

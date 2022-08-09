@@ -15,6 +15,11 @@ export const STRING_OPERATORS = [
     { name: 'not between', value: 'not between' },
 ];
 
+export const LIST_FIELDS = [
+    { name: 'BIRTH DATE', value: 'BIRTH DATE' },
+    { name: 'NAME', value: 'NAME' },
+    { name: 'AGE', value: 'AGE' },
+]
 
 export const BOOLEAN_OPERATORS = [
     { name: 'equals', value: 'equals' },

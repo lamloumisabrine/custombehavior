@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { STRING_OPERATORS } from 'src/app/shared/constants/operators.constant';
+import { STRING_OPERATORS,LIST_FIELDS } from 'src/app/shared/constants/operators.constant';
 import { staticValues } from 'src/app/shared/constants/static-values.constants';
 
 @Injectable({
@@ -162,6 +162,18 @@ export class UtilsService {
       }
     } else {
       return operator
+    }
+  }
+
+  getField(field: any) {
+    if (field) {
+      for (const listfiled of LIST_FIELDS) {
+        if (listfiled.value === field) {
+          return listfiled;
+        }
+      }
+    } else {
+      return field
     }
   }
 }

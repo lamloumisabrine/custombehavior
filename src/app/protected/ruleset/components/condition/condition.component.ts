@@ -6,7 +6,7 @@ import { Compare } from 'src/app/models/compare.model';
 import { Condition } from 'src/app/models//condition.model';
 import { HandSide } from 'src/app/models/hand-side.model';
 import { Vocabulary } from 'src/app/models/vocabulary/vocabulary.model';
-import { STRING_OPERATORS } from 'src/app/shared/constants/operators.constant';
+import { STRING_OPERATORS ,LIST_FIELDS} from 'src/app/shared/constants/operators.constant';
 import { ACTIONS_INTERVAL, positions, staticActions, staticValues } from 'src/app/shared/constants/static-values.constants';
 
 @Component({
@@ -18,14 +18,13 @@ export class ConditionComponent {
   [x: string]: any;
 
   @Input() condition?: any;
-
   intervalActions = ACTIONS_INTERVAL;
   operators = STRING_OPERATORS;
+  field = LIST_FIELDS;
+  list = this['fields'];
+
   clickPredicateOrigin: boolean = true;
   constructor( private utilsService: UtilsService, private rulesetUtilsService: RulesetUtilsService) { }
-
-
-
 
 
   deletePredicate(conditionIndex: any, compareIndex: number) {
