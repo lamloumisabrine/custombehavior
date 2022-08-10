@@ -16,16 +16,15 @@
               <acp-ui-button [icon]="'icon-duplicate'" [style]="'btn-icon-only'" title="Duplicate" ></acp-ui-button>
               <acp-ui-button [icon]="'icon-fullscreen'" [style]="'btn-icon-only'" title="Fullscreen"></acp-ui-button>
             </div>
-            <acp-ui-button [icon]="'icon-save'" [label]="'Save'" [style]="'btn-secondary'" title="Save" ></acp-ui-button>
-            <acp-ui-button [icon]="'icon-public'" [label]="'Publish'" [style]="'btn-primary'" title="Publish"
-             ></acp-ui-button>
+            <acp-ui-button [icon]="'icon-save'" [label]="'Save'" [style]="'btn-secondary'" title="Save" (acpUiclick)="saveCustomBehavior()"></acp-ui-button>
+            
              <div class="forArray2"  >
               <table>
                 
                 <tr *ngFor="let field of fields"   
                 draggable="true"
                 [attr.data-type]="field"
-                (dragstart)="onBlockDrag($event)" >
+                (dragstart)="onBlockDrag($event,field)" >
                   <td>{{field.en.display}}</td>
                   <td>
                 </tr>

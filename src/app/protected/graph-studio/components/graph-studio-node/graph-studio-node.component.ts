@@ -19,6 +19,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Compare } from 'src/app/models/compare.model';
 import { Condition } from 'src/app/models/condition.model';
 import { HandSide } from 'src/app/models/hand-side.model';
+import { deepCopy } from 'src/app/core/services/deep-copy';
 
 
 
@@ -295,6 +296,12 @@ export class GraphStudioNodeComponent extends DefaultNodeComponent {
       this.selectedRule.when!.logicalOperator = staticValues.AND
       return false;
     }
+  }
+  setConditionBeforeUpdate() {
+    this.rulesetUtilsService.conditionBeforeUpdate = deepCopy(this.selectedRule.when!);
+  }
+  resetConditions() {
+    this.rulesetUtilsService.selectedRule!.when! = deepCopy(this.rulesetUtilsService.conditionBeforeUpdate)
   }
 
     

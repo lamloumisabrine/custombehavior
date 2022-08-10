@@ -15,6 +15,7 @@ import { HandSide } from 'src/app/models/hand-side.model';
 import { STRING_OPERATORS } from 'src/app/shared/constants/operators.constant';
 import { Condition } from 'src/app/models/condition.model';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { GraphStudioNodeModel } from '../../graph-studio/models/graph-studio-node.model';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -41,6 +42,7 @@ export class HomeComponent implements  AfterViewInit, OnDestroy,OnInit {
 
   @ViewChild(DiagramComponent, { static: true })
   diagram?: DiagramComponent;
+
  constructor( 
   private graphService: GraphService, 
   private httpClient: HttpClient,
@@ -67,8 +69,9 @@ ngOnDestroy(): void {
   });
 }
 
-
-onBlockDrag(e: DragEvent) {
+field :any
+onBlockDrag(e: DragEvent,field :any) {
+  this.field = field;
   const type = (e.target as HTMLElement).getAttribute('data-type');
   if (e.dataTransfer && type) {
     e.dataTransfer.setData('type', type);
@@ -97,14 +100,16 @@ screenJson : any
   
 createNode(type: string) {
   const nodeData = this.getScreen;
-  if (nodeData) {
-    const node = new NodeModel();
+    const node = new GraphStudioNodeModel({
+      extras: {
+        id: this.field.uk_id,
+        title: this.field.en.display,
+        description: '',
+      },
+    });
     const port = new PortModel();
     node.addPort(port);
-    node.setExtras(nodeData);
     return node;
-  }
-  return null;
 }
 
  onBlockDropped(e: DragEvent) {
@@ -251,5 +256,9 @@ createNode(type: string) {
       { title: 'Add condition', icon: '', divider: false, dropdownItemStyle: '', action: staticActions.ADD_CONDITION },
     ],
     button: { icon: 'icon-add', style: 'btn-icon-only btn-outline-primary circle' }
+  }
+
+  saveCustomBehavior(){
+    this.diagramModel
   }
 }

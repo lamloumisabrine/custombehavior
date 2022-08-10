@@ -4,7 +4,7 @@
       <i class="node__icon icon-ruleset"></i>
       <ng-container *ngIf="model.selectExtras() | async as extras">
         <div class="node__label">
-          <acp-ui-input class="form-control main-label" [(value)]="extras.display" bindLabel="extras.display"></acp-ui-input>
+          <acp-ui-input class="form-control main-label" [(value)]="extras.title" bindLabel="extras.title"></acp-ui-input>
         </div>
       </ng-container>
   </div>
