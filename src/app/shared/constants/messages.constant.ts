@@ -1,0 +1,65 @@
+export const messages = { 
+    POLICY_NAME_EXIST : "Policy name already exists",
+    POLICY_NAME_EMPTY : "Policy name can't be empty",
+    RULESET_NAME_EXIST : "Ruleset name already exists",
+    SAME_POLICY_NAME : "Same policy name as the one selected",
+    SAME_RULESET_NAME : "Same ruleset name as the one selected",
+    EXISTING_POLICY_NAME : "Existing policy name",
+    EXISTING_RULESET_NAME : "Existing ruleset name",
+    EXISTING_RULE_NAME : "Existing rule name",
+    EXISTING_QUERY_NAME : "Existing query name",
+    EXISTING_DATAFLOW_NAME : "Existing dataflow name",
+
+    SUCCESS_POLICY_CREATED : "Policy successfully created",
+    SUCCESS_POLICY_DELETE : "Policy successfully deleted",
+    SUCCESS_POLICY_DUPLICATED : "Policy successfully duplicated",
+    SUCCESS_POLICY_UPDATE : "Policy successfully updated",
+    SUCCESS_POLICY_PUBLISH : "Policy successfully published",
+    ERROR_POLICY_UPDATE : "Error : you can not update this policy !",
+    ERROR_POLICY_DELETE : "Error : you can not delete this policy !",
+    ERROR_POLICY_PUBLISH : "Error : you can not publish this policy !",
+    ERROR_EXISTING_POLICY_NAME : "Existing policy name",
+    ERROR_EMPTY_POLICY_NAME : "Error : Policy name can not be empty",
+    ERROR_POLICY_NAME_CHARACTERS_ERROR : "Error : Only alphabets, numbers and following characters are allowed in policy name: _ - space",
+
+
+    SUCCESS_TRIGGERING_CREATED : "Triggering context successfully created",
+    SUCCESS_TRIGGERING_DELETE : "Triggering context successfully deleted",
+    SUCCESS_TRIGGERING_DUPLICATED : "Triggering context successfully duplicated",
+    SUCCESS_TRIGGERING_UPDATE : "Triggering context successfully updated",
+    SUCCESS_TRIGGERING_PUBLISH : "Triggering context successfully published",
+    ERROR_TRIGGERING_UPDATE : "Error : you can not update this triggering context !",
+    ERROR_TRIGGERING_DELETE : "Error : you can not delete this triggering context !",
+    ERROR_TRIGGERING_PUBLISH : "Error : you can not publish this triggering context !",
+    ERROR_EXISTING_TRIGGERING_NAME : "Existing triggering context name",
+
+
+    CHARACTERS_ERROR :"Only alphabets, numbers and following characters are allowed: _ - space",
+
+    SUCCESS_RULESET_DELETE : "Ruleset successfully deleted",
+    SUCCESS_RULESET_DUPLICATED : "Ruleset successfully duplicated",
+    ERROR_RULESET_DELETE : "Error : you can not delete this ruleset !",
+    ERROR_EMPTY_RULESET_NAME : "Error : Ruleset name can not be empty",
+    SUCCESS_RULE_DELETE : "Rule successfully deleted",
+    SUCCESS_RULE_DUPLICATED : "Rule successfully duplicated",
+    ERROR_RULE_DELETE : "Error : you can not delete this rule !",
+    ERROR_RULESET_NAME_CHARACTERS_ERROR : "Error : Only alphabets, numbers and following characters are allowed in ruleset name: _ - space",
+
+    SUCCESS_VOCABULARY_DELETE : "Vocabulary successfully deleted",
+    SUCCESS_VOCABULARY_DUPLICATED : "Vocabulary successfully duplicated",
+    ERROR_VOCABULARY_DELETE : "Error : you can not delete this vocabulary !",
+    EXISTING_VOCABULARY_NAME : "Existing vocabulary name",
+    EMPTY_VOCABULARY_NAME : "Vocabulary name must be added",
+    EMPTY_RANGE_VALUE : "Be sure to fill in all the range fields",
+    EMPTY_TABLE_VALUE : "Be sure to fill in all the table fields",
+    ERROR_UPDATE_VOCABULARY : "Error : you can not edit vocabulary simultaneously!",
+    ERROR_USED_VOCABULARY : "Error : you can not delete already vocabulary!",
+    ERROR_VOCABULARY: "Error : vocabulary name can't be empty or duplicated !",
+    ERROR_VOCABULARY_NAME_CHARACTERS_ERROR : "Error : Only alphabets, numbers and following characters are allowed in vocabulary name: _ - space",
+    WARNING_NO_CHANGE_DETECTED : "No change detected",
+
+    ERROR_DUPLICATE_RULESET_NAMES : "Duplicated ruleset names",
+    FAILURE_RESPONSE : "Http failure response",
+
+    ERROR_CALL_IT: "Error : call your IT team"
+    } as const;

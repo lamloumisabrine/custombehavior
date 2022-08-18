@@ -4,39 +4,30 @@
       <i class="node__icon icon-ruleset"></i>
       <ng-container *ngIf="model.selectExtras() | async as extras">
         <div class="node__label">
-          <acp-ui-input class="form-control main-label" [(value)]="extras.title" bindLabel="extras.title"></acp-ui-input>
+          <acp-ui-input class="form-control main-label" [(value)]="extras.display" bindLabel="extras.display"></acp-ui-input>
         </div>
       </ng-container>
   </div>
-  choose an action 
-  <acp-ui-select class="mini-label" [options]="outputTypes"  bindValue="value" bindLabel="label"></acp-ui-select>
-
-  <div class="condition-content">
-    <ng-container *ngIf="selectedRule.when; then conditionContainer; else emptyCondition;"></ng-container>
-    <ng-template #conditionContainer>
-      <acp-logical-operator-interval *ngIf="selectedRule.when?.logicalOperator" 
-      [isCheckedAndOr]="getLogicialOperator()" [logicialOperator]="selectedRule?.when?.logicalOperator!"  (isCheckedAndOrChange)="setLogicialOperator($event)"
-      cdkDropList>
-      <div *ngFor="let compare of selectedRule?.when?.compares; let compareIndex = index" cdkDrag>
-        <acp-ui-predicat [leftSideItem]="getSelectedItem(compare.leftHandSide)" [rightSideItem]="getSelectedItem(compare.rightHandSide)" [operatorItem]="getOperator(compare.operator)"
-          [listOfRightSideItems]="field" [listOfLeftSideItems]="field" [listOfOperators]="operators"
-          (deletePredicate)="deletePredicate(compareIndex)"
-          (leftSideItemChange)="setItem($event,compareIndex,'left')"
-          (rightSideItemChange)="setItem($event,compareIndex,'right')"
-          (operatorItemChange)="setItem($event,compareIndex,'middle')"
-           (valueChange)="getInputChanges($event,compareIndex)"
-          (clickOrigin)="setPredicateClickOrigin($event)"> </acp-ui-predicat>
+  <div class="condition-condition">
+    <div class="condition-add">
+      <div class="condition-add__left">
+        <acp-ui-button title="When" [label]="'When'" [style]="'btn-primary pill'"></acp-ui-button>
       </div>
-      </acp-logical-operator-interval>
-    </ng-template>
-    <ng-template #emptyCondition>
-      <acp-ui-dropdown [dropdownObject]="addCondition" title="Add" (selectedItem)="addFirstCondition($event)"></acp-ui-dropdown>
-    </ng-template>
+      <div class="condition-add__right">
+      </div>
+      </div>
+      <div class="ports" [ngClass]="{'disable-port': status == true}">
+        <ng-template #portsLayer></ng-template>
+      </div>
+      <div class="condition-content">
+        <app-condition-composer [vocabularyList]="vocabularyList"></app-condition-composer>
+      </div>
     </div>
+      <hr>
+      <acp-ui-button title="Then" [label]="'Then'" [style]="'btn-secondary pill'"></acp-ui-button>
+      Choose an action
+      <acp-ui-select class="mini-label" [items]="outputTypes"  bindValue="value" bindLabel="label"></acp-ui-select>
 
+    </div>
+  
 
-  <ng-template #popContent>  </ng-template>
-  <div class="ports">
-  <ng-template #portsLayer></ng-template>
-  </div>
-</div>

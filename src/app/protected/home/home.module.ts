@@ -39,8 +39,7 @@ const DEFAULTS: ComponentProviderOptions[] = [
     DragDropModule,
     BrowserModule,
     HttpClientModule,
-    GraphModule.withComponents(DEFAULTS)
- 
+    GraphModule.withComponents(DEFAULTS),
   ]
 })
 export class HomeModule { }

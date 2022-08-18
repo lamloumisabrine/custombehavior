@@ -1,8 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   Inject,
+  Input,
   IterableDiffers,
+  OnInit,
+  Output,
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
@@ -14,31 +18,40 @@ import { Rule } from 'src/app/models/ruleset/rule.model';
 import { STRING_OPERATORS ,LIST_FIELDS} from 'src/app/shared/constants/operators.constant';
 import { RulesetUtilsService } from 'src/app/core/services/ruleset-utils.service';
 import { UtilsService } from 'src/app/core/services/utils.service';
-import {  positions, staticActions, staticValues } from 'src/app/shared/constants/static-values.constants';
+import {  ACTIONS_INTERVAL, positions, staticActions, staticValues } from 'src/app/shared/constants/static-values.constants';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Compare } from 'src/app/models/compare.model';
 import { Condition } from 'src/app/models/condition.model';
 import { HandSide } from 'src/app/models/hand-side.model';
-import { deepCopy } from 'src/app/core/services/deep-copy';
-
-
-
+import { VocabularyService } from 'src/app/core/services/vocabulary.service';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'graph-studio-node',
   templateUrl: './graph-studio-node.component.html',
   styleUrls: ['./graph-studio-node.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GraphStudioNodeComponent extends DefaultNodeComponent {
+export class GraphStudioNodeComponent extends DefaultNodeComponent implements OnInit {
   [x: string]: any;
+  vocabularyList :any= [
+    // {name:'test' ,value:'est' ,id:'test', type:'test'}
+   ]
+
+  @Input() selectedRule = new Rule();
+
+  @Input() status: boolean = false;
+
+  @Output() selectedRuleChange = new EventEmitter()
+
+  clickPredicateOrigin: boolean = true;
+
+  operators = STRING_OPERATORS;
+
   @ViewChild('portsLayer', { read: ViewContainerRef, static: true })
   portsLayers!: ViewContainerRef;
 
   ruleSnapshots: Rule[] = [];
-  clickPredicateOrigin: boolean = true;
-  operators = STRING_OPERATORS;
   field = LIST_FIELDS;
-  selectedRule = new Rule();
 
   constructor( private router :Router,
     @Inject(MODEL) public override model: GraphStudioNodeModel,
@@ -47,15 +60,20 @@ export class GraphStudioNodeComponent extends DefaultNodeComponent {
     iterableDiffers: IterableDiffers,
     private graphService: GraphService,
     private rulesetUtilsService: RulesetUtilsService, 
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    vocabularyService: VocabularyService,
+    private httpClient: HttpClient,
     ) {
     super(model, engine, diagram, iterableDiffers);
+    this.getScreen();
+
 
     model.selectExtras().subscribe((extras: any) => {
       if (extras.color) {
 
       }
     });
+    
 
     model.selectSelected().subscribe((selected: boolean) => {
       if (selected) {
@@ -63,8 +81,6 @@ export class GraphStudioNodeComponent extends DefaultNodeComponent {
       }
       this.updateLinksState(selected);
     });
-
-
 
     // model.selectStatus()?.subscribe((status) => {
     //   this.boxShadow$.next(this.createStatusShadow(status));
@@ -84,6 +100,22 @@ export class GraphStudioNodeComponent extends DefaultNodeComponent {
     });
   }
 
+
+  get fields() : any{
+    return this._fields
+  }
+  set fields(fields :any){
+    this._fields = fields;
+  }
+  _fields :any;
+
+  private getScreen() {
+    this.httpClient.get("/assets/data.json").subscribe((screen: any) => {
+      this.fields = screen.field;
+      this.getVocabularies()
+      
+    });
+  }
   calculateStatus() {
     let numOfLinks = 0;
     const infiniteLoop = false;
@@ -103,6 +135,13 @@ export class GraphStudioNodeComponent extends DefaultNodeComponent {
 
     return NodeStatus.DEFAULT;
   }
+  addNode = {
+    dropdownItems: [
+      { title: 'Add ruleset', icon: 'icon-ruleset', divider: false }
+    ],
+    button: { icon: 'icon-add', style: 'btn-white circle dropdown-toggle-split', title: "Add new ruleset" }
+  }
+
 
   createStatusShadow(status: NodeStatus) {
     switch (status) {
@@ -208,24 +247,19 @@ export class GraphStudioNodeComponent extends DefaultNodeComponent {
   getOperator(operator: any) {
     return this.utilsService.getOperator(operator);
   }
+  get intervalActions() {
+    return this.status == false ? ACTIONS_INTERVAL : [];
+  }
 
   setItem(object: any, compareIndex: number, position: string) {
     if (this.selectedRule && this.selectedRule?.when && this.selectedRule?.when?.compares) {
       if (position === positions.LEFT) {
         this.selectedRule.when.compares[compareIndex].leftHandSide = new HandSide();
-        this.selectedRule.when.compares[compareIndex].leftHandSide = {
-          id: object.id,
-          source: object.source,
-          value: object.id
-        }
+       
       }
       else if (position === positions.RIGHT) {
         this.selectedRule.when.compares[compareIndex].rightHandSide = new HandSide();
-        this.selectedRule.when.compares[compareIndex].rightHandSide = {
-          id: object.id,
-          source: object.source,
-          value: object.id
-        }
+       
       } else if (position === positions.MIDDLE) {
         this.selectedRule.when.compares[compareIndex].operator = object.value;
       }
@@ -297,13 +331,39 @@ export class GraphStudioNodeComponent extends DefaultNodeComponent {
       return false;
     }
   }
-  setConditionBeforeUpdate() {
-    this.rulesetUtilsService.conditionBeforeUpdate = deepCopy(this.selectedRule.when!);
+  getSelectedIntervalAction(actionObject: any, condition: Condition) {
+    this.rulesetUtilsService.getSelectedIntervalAction(actionObject, condition);
   }
-  resetConditions() {
-    this.rulesetUtilsService.selectedRule!.when! = deepCopy(this.rulesetUtilsService.conditionBeforeUpdate)
+  getRightVocabularyList(compare: Compare): any[] {
+    if (this.selectedRule?.when?.compares) {
+      if (compare.leftHandSide?.source === staticValues.INPUT) {
+        let vocabulary = this.vocabularyList.find((vocabulary: { id: string | undefined; }) => vocabulary.id === compare.leftHandSide?.id);
+        return this['vocabularyService'].getVocabulariesByType(this.vocabularyList, vocabulary?.type!)
+      } else {
+        return this.vocabularyList;
+      }
+    } else {
+      return this.vocabularyList;
+    }
   }
+  getOperators(compare: Compare): any[] {
+    // return this.utilsService.getOperators(compare, this.vocabularyList)
+    return []
+  }
+  getNotOperator(compareIndex: number) {
+    return this.selectedRule.when!.compares![compareIndex].notOperator = !this.selectedRule.when!.compares![compareIndex].notOperator;
+  }
+vocabulary:any;
+  getVocabularies()
+    {
+this.fields.forEach((field: any) => {
+  let vocab = {name : "",value:"",id:'',type:""};
 
+  vocab.name  = field.en.display;
+  vocab.value = field.en.display;
+  this.vocabularyList.push(vocab);
+});
+    }
     
 }
 

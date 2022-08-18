@@ -16,12 +16,23 @@ import { STRING_OPERATORS } from 'src/app/shared/constants/operators.constant';
 import { Condition } from 'src/app/models/condition.model';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { GraphStudioNodeModel } from '../../graph-studio/models/graph-studio-node.model';
+import { Custombehavior } from 'src/app/models/custom-behavior.model';
+import { Output, EventEmitter, HostListener } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { GraphStudioPortModel } from '../../graph-studio/models/graph-studio-port.model';
+import { VocabularyService } from 'src/app/core/services/vocabulary.service';
+import { Vocabulary } from 'src/app/models/vocabulary/vocabulary.model';
+import { DataType } from 'src/app/models/data-type.enum';
+
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements  AfterViewInit, OnDestroy,OnInit {
+
+  isHiddenToolbar = true;
   [x: string]: any;
 
   diagramModel: DiagramModel;
@@ -31,6 +42,7 @@ export class HomeComponent implements  AfterViewInit, OnDestroy,OnInit {
   clickPredicateOrigin: boolean = true;
   operators = STRING_OPERATORS;
   selectedRule = new Rule();
+  
 
   topItems: MenuItem[] = [
     { label: 'Consumer ',  isActive: false, value: "" , }, 
@@ -39,16 +51,19 @@ export class HomeComponent implements  AfterViewInit, OnDestroy,OnInit {
     { label: 'Retail Application', isActive: false, value: "" },
     { label: 'Retail Islamic', isActive: false, value: "" },
   ];
+  
 
   @ViewChild(DiagramComponent, { static: true })
   diagram?: DiagramComponent;
-
+  custom : Custombehavior = new Custombehavior();
  constructor( 
   private graphService: GraphService, 
   private httpClient: HttpClient,
   private rulesetUtilsService: RulesetUtilsService, 
-  private utilsService: UtilsService,)
+  private utilsService: UtilsService,
+  private vocabularyService : VocabularyService)
 {
+  this.updateSelectedRuleset();
  this.diagramModel = new DiagramModel();
  this.getScreen();
  
@@ -58,6 +73,8 @@ zoomLevel : number = 100;
  firstAccess: boolean = true;
 modalDuplicatePolicyTemplateRef!: TemplateRef<any>;
 intervalActions = ACTIONS_INTERVAL;
+
+nodesLibrary = [ { color: '#85E3FF', name: 'default' }, ];
 
 ngAfterViewInit() {
   this.diagram?.zoomToFit();
@@ -69,16 +86,11 @@ ngOnDestroy(): void {
   });
 }
 
+onBlockDrag(e: DragEvent) 
+{ const type = (e.target as HTMLElement).getAttribute('data-type');
+ if (e.dataTransfer && type) { e.dataTransfer.setData('type', type); } }
+
 field :any
-onBlockDrag(e: DragEvent,field :any) {
-  this.field = field;
-  const type = (e.target as HTMLElement).getAttribute('data-type');
-  if (e.dataTransfer && type) {
-    e.dataTransfer.setData('type', type);
-  }
-}
-
-
 screenJson : any
   ngOnInit(){}
 
@@ -89,6 +101,7 @@ screenJson : any
     this._fields = fields;
   }
   _fields :any;
+
   private getScreen() {
     this.httpClient.get("/assets/data.json").subscribe((screen: any) => {
       this.screenJson = screen;
@@ -96,44 +109,31 @@ screenJson : any
       
     });
   }
+  zoomInOrOut(inOrOut: 'in' | 'out') {
 
-  
-createNode(type: string) {
-  const nodeData = this.getScreen;
-    const node = new GraphStudioNodeModel({
-      extras: {
-        id: this.field.uk_id,
-        title: this.field.en.display,
-        description: '',
-      },
-    });
-    const port = new PortModel();
-    node.addPort(port);
-    return node;
-}
-
- onBlockDropped(e: DragEvent) {
-    if (e.dataTransfer) {
-      const nodeType = e.dataTransfer.getData('type');
-      const node = this.createNode(nodeType);
-      const canvasManager = this.diagram?.diagramEngine.getCanvasManager();
-      if (canvasManager) {
-        const droppedPoint = canvasManager.getZoomAwareRelativePoint(e);
-        const width = node?.getWidth() ?? 1;
-        const height = node?.getHeight() ?? 1;
-        const coords = {
-          x: droppedPoint.x - width / 2,
-          y: droppedPoint.y - height / 2,
-        };
-
-        if (node) {
-          node.setCoords(coords);
-          this.diagramModel.addNode(node);
-          
-        }
-      }
+    if (inOrOut === 'in') {
+      this.zoomLevel = this.zoomLevel + 10;
+      this.diagramModel.setZoomLevel(this.zoomLevel)
+    }
+    else if (inOrOut === 'out') {
+      this.zoomLevel = this.zoomLevel - 10;
+      this.diagramModel.setZoomLevel(this.zoomLevel)
     }
   }
+  
+
+ 
+     createNode(type: string){
+    const nodeData = this.nodesLibrary.find((nodeLib) => nodeLib.name === type); 
+    if (nodeData) { const node = new NodeModel();
+       const port = new PortModel(); 
+       node.addPort(port); 
+       node.setExtras(nodeData);
+
+    return node; }
+    
+    return null; }
+
    /**
    * * Set the left or right hand side of a comparison to the selected object
    * @param {any} object - any
@@ -161,29 +161,6 @@ createNode(type: string) {
 
   getOperator(operator: any) {
     return this.utilsService.getOperator(operator);
-  }
-
-  setItem(object: any, compareIndex: number, position: string) {
-    if (this.selectedRule && this.selectedRule?.when && this.selectedRule?.when?.compares) {
-      if (position === positions.LEFT) {
-        this.selectedRule.when.compares[compareIndex].leftHandSide = new HandSide();
-        this.selectedRule.when.compares[compareIndex].leftHandSide = {
-          id: object.id,
-          source: object.source,
-          value: object.id
-        }
-      }
-      else if (position === positions.RIGHT) {
-        this.selectedRule.when.compares[compareIndex].rightHandSide = new HandSide();
-        this.selectedRule.when.compares[compareIndex].rightHandSide = {
-          id: object.id,
-          source: object.source,
-          value: object.id
-        }
-      } else if (position === positions.MIDDLE) {
-        this.selectedRule.when.compares[compareIndex].operator = object.value;
-      }
-    }
   }
 
   get selectedRuleset() {
@@ -260,5 +237,55 @@ createNode(type: string) {
 
   saveCustomBehavior(){
     this.diagramModel
+  }
+
+  updateSelectedRuleset() {
+    this.graphService.selectedNode.subscribe(newNode => {
+      let condition = new Condition();
+      condition.compares = [];
+      let compare = new Compare();
+      compare.leftHandSide
+      condition.compares.push(compare);
+      this.custom.conditions.push(condition);
+      newNode
+    });
+  }
+  
+  get vocabularyList(): Vocabulary[] {
+    let inputs = [];
+    let outputs = [];
+    let locals = [];
+    [inputs, outputs, locals] = this.vocabularyService.bindVocabulariesBySource( this.screenJson.field);
+    return this.vocabularyService.bindVocabulariesByTypes([DataType.DATE, DataType.BOOLEAN, DataType.NUMBER, DataType.RANGE, DataType.TEXT],[...inputs, ...locals]);
+  }
+  getRightVocabularyList(compare: Compare): any[] {
+    if (compare.leftHandSide?.source === staticValues.INPUT) {
+      let vocabulary = this.vocabularyList.find(vocabulary => vocabulary.id === compare.leftHandSide?.id);
+      return this.vocabularyService.getVocabulariesByType(this.vocabularyList, vocabulary?.type!)
+    } else {
+      return this.vocabularyList;
+    }
+  }
+  
+  addNode() {
+    //#region create node
+    const node = new GraphStudioNodeModel({
+    });
+    const canvasManager = this.diagram?.diagramEngine.getCanvasManager();
+    if (canvasManager) {
+      const coords = {
+        x: 584,
+        y: 89
+      };
+      const port = new GraphStudioPortModel({
+        direction: 'out'
+      });
+      node.addPort(port);
+      if (node) {
+        node.setCoords(coords);
+        this.diagramModel.addNode(node);
+      }
+    }
+    //#endregion
   }
 }

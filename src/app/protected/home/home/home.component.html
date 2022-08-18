@@ -1,45 +1,59 @@
+<section class="full-section policy-composer-section">
+<div class="policy-composer-content">
+        <!------------ TOOLBAR LEFT ------------>
+        <div class="content__left" [ngClass]="{'content__left__hidden': isHiddenToolbar}">
+          <acp-ui-button [icon]="'icon-triggering'" [style]="'btn-triggering btn-icon-only'" ></acp-ui-button>
+          <app-toolbar class="tool-bar"  [(hideShowToolbar)]="isHiddenToolbar"  [itemType]="'policy'" (action)="addNode()"  ></app-toolbar>
+        </div>
+        <!------------ PAGE CONTENT RIGHT ------------>
+        <div class="content__right">
+          <acp-ui-button title="Save" [icon]="'icon-save'" [label]="'Save'" [style]="'btn-primary'" (acpUiclick)="saveCustomBehavior()"></acp-ui-button>        
 
-<section class="full-section home-section">
-  <!----------- ACTION BAR ----------->
-  <div class="action-bar action-bar__top">
-    <!-- ACTIONS LEFT -->
-    <div class="action-bar__left">
-      <acp-ui-button [icon]="'icon-arrow-left'" [style]="'btn-icon-only'" [title]="'Return'"></acp-ui-button>
-      <div class="divider"></div>
+          <acp-ui-diagram class="diagram" [model]="diagramModel"></acp-ui-diagram>
+          <div body>
+            <div  class="action-bar">
+              <div class="btn-group">
+                <acp-ui-button title="Undo" [icon]="'icon-back'" [style]="'btn-icon-only btn-light circle'" ></acp-ui-button>
+                <acp-ui-button title="Redo" [icon]="'icon-next'" [style]="'btn-icon-only btn-light circle'"></acp-ui-button>
+              </div>
+            </div>
+          </div>
+      <div class="footer">
+        <div class="footer__left">
+          <div class="shortcut">
+            <span class="shortcut__key">Ctrl</span>
+            <span>+</span>
+            <span class="shortcut__key">z</span>
+          </div>
+          <div class="shortcut">
+            <span class="shortcut__key">Shift</span>
+            <span>+</span>
+            <span class="shortcut__key">Ctrl</span>
+            <span>+</span>
+            <span class="shortcut__key">z</span>
+          </div>
+        </div>
+        <div class="footer__right">
+     
+          <div class="btn-group">
+            <acp-ui-button [icon]="'icon-hand'" [style]="'btn-icon-only'" title="Move"></acp-ui-button>
+            <span class="divider"></span>
+            <acp-ui-button [icon]="'icon-mouse-pointer'" [style]="'btn-icon-only'" title="Select"></acp-ui-button>
+          </div>
+          <div class="btn-group">
+            <acp-ui-button [icon]="'icon-zoom-in'" [style]="'btn-icon-only'" title="Zoom in" (acpUiclick)="zoomInOrOut('in')"></acp-ui-button>
+            <span class="divider"></span>
+            <span class="zoom-label">100%</span>
+            <span class="divider"></span>
+            <acp-ui-button [icon]="'icon-zoom-out'" [style]="'btn-icon-only'" title="Zoom out" (acpUiclick)="zoomInOrOut('out')"></acp-ui-button>
+          </div>
+        </div>
+      </div>
+      </div>
     </div>
-    <div class="action-bar__middle">
-    <acp-ui-sidebar [topItems]="topItems" [sidebarStatus]="true" [logoPath]="'assets/icons/menu.svg'"></acp-ui-sidebar>   
-          </div>
-          <div class="action-bar__right">
-            <div class="actions">
-              <acp-ui-button [icon]="'icon-shield'" [style]="'btn-icon-only'" title="Validation"></acp-ui-button>
-              <acp-ui-button [icon]="'icon-duplicate'" [style]="'btn-icon-only'" title="Duplicate" ></acp-ui-button>
-              <acp-ui-button [icon]="'icon-fullscreen'" [style]="'btn-icon-only'" title="Fullscreen"></acp-ui-button>
-            </div>
-            <acp-ui-button [icon]="'icon-save'" [label]="'Save'" [style]="'btn-secondary'" title="Save" (acpUiclick)="saveCustomBehavior()"></acp-ui-button>
-            
-             <div class="forArray2"  >
-              <table>
-                
-                <tr *ngFor="let field of fields"   
-                draggable="true"
-                [attr.data-type]="field"
-                (dragstart)="onBlockDrag($event,field)" >
-                  <td>{{field.en.display}}</td>
-                  <td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          </div>
-          <div class="policy-composer-content">
-            <!------------ TOOLBAR LEFT ------------>
-            <!------------ PAGE CONTENT RIGHT ------------>
-            <div class="content__right">
-              <acp-ui-diagram class="diagram" [model]="diagramModel" (drop)="onBlockDropped($event)"
-              (dragover)="$event.preventDefault()">  
-            </acp-ui-diagram>
-            </div>
-          </div>
-        </section>
-    
+   
+      
+
+</section>
+
+        

@@ -113,5 +113,7 @@
       }
     }
   },
-  "defaultProject": "custombehavior"
+  "cli": {
+    "analytics": false
+  }
 }

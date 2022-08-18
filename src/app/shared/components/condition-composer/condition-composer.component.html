@@ -1,0 +1,30 @@
+<ng-container *ngIf="selectedRule?.when; then conditionContainer; else emptyCondition;"></ng-container>
+<ng-template #conditionContainer>
+    <acp-logical-operator-interval *ngIf="selectedRule?.when?.logicalOperator"
+        (selectedAction)="getSelectedIntervalAction($event,selectedRule.when!)" [isCheckedAndOr]="getLogicialOperator()"
+        [logicialOperator]="selectedRule?.when?.logicalOperator!" [actionList]="intervalActions"
+        (isCheckedAndOrChange)="setLogicialOperator($event)"
+ >
+        <div *ngFor="let compare of selectedRule?.when?.compares; let compareIndex = index" >
+            <acp-ui-predicat [leftSideItem]="getSelectedItem(compare.leftHandSide)"
+                [rightSideItem]="getSelectedItem(compare.rightHandSide)" [operatorItem]="getOperator(compare.operator)"
+                [notOperator]="compare.notOperator!" [listOfRightSideItems]="getRightVocabularyList(compare)"
+                [listOfLeftSideItems]="vocabularyList" [listOfOperators]="getOperators(compare)"
+                (deletePredicate)="deletePredicate(compareIndex)"
+                (leftSideItemChange)="setItem($event,compareIndex,'left')"
+                (rightSideItemChange)="setItem($event,compareIndex,'right')"
+                (operatorItemChange)="setItem($event,compareIndex,'middle')"
+                (notOperatorChange)="getNotOperator(compareIndex)" (valueChange)="getInputChanges($event,compareIndex)"
+                (clickOrigin)="setPredicateClickOrigin($event)" ></acp-ui-predicat>
+        </div>
+        <app-condition *ngIf="condition" [condition]="condition" [items]="vocabularyList" ></app-condition>
+    </acp-logical-operator-interval>
+</ng-template>
+<ng-template #emptyCondition>
+    <div *ngIf="status !== true" class="condition-choice">
+        Choose new condition
+        <span class="tag" (click)="addFirstCondition('and')">AND</span>
+        or <span class="tag" (click)="addFirstCondition('or')">OR</span>
+        to begin
+    </div>
+</ng-template>

@@ -5,6 +5,8 @@ import { GraphStudioNodeComponent } from './components/graph-studio-node/graph-s
 import { GraphStudioLabelComponent } from './components/graph-studio-label/graph-studio-label.component';
 import { GraphStudioLinkComponent } from './components/graph-studio-link/graph-studio-link.component';
 import { GraphStudioPortComponent } from './components/graph-studio-port/graph-studio-port.component';
+import { ConditionComposerComponent } from 'src/app/shared/components/condition-composer/condition-composer.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 const GHWorkflowTheme: ComponentProviderOptions[] = [
@@ -35,13 +37,14 @@ const COMPONENTS = [
   GraphStudioPortComponent,
   GraphStudioLinkComponent,
   GraphStudioLabelComponent,
+  
+
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS],
-  imports: [CommonModule, GraphModule.withComponents(GHWorkflowTheme),AcpUiComponentModule],
-  entryComponents: [...COMPONENTS],
-  exports: [...COMPONENTS, GraphModule],
+    declarations: [...COMPONENTS],
+    imports: [SharedModule,CommonModule, GraphModule.withComponents(GHWorkflowTheme), AcpUiComponentModule],
+    exports: [...COMPONENTS, GraphModule]
 })
 export class GraphStudioTheme {
 

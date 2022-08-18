@@ -34,6 +34,7 @@ export class Vocabulary  {
 
     /* `grid` is a property of Vocabulary class. It is used to store the grid information. */
     grid: GridVocabulary | undefined;
+  id: string | undefined;
 
     constructor() {
       

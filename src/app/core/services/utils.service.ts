@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { STRING_OPERATORS,LIST_FIELDS } from 'src/app/shared/constants/operators.constant';
+import { Compare } from 'src/app/models/compare.model';
+import { DataType } from 'src/app/models/data-type.enum';
+import { Vocabulary } from 'src/app/models/vocabulary/vocabulary.model';
+import { STRING_OPERATORS,LIST_FIELDS, DECIMAL_OPERATORS, BOOLEAN_OPERATORS, DATE_OPERATORS } from 'src/app/shared/constants/operators.constant';
 import { staticValues } from 'src/app/shared/constants/static-values.constants';
 
 @Injectable({
@@ -152,6 +155,23 @@ export class UtilsService {
     }
     return resultToReturn;
   }
+  private getAppropriateOperators(id: string, vocabularyList: Vocabulary[]) {
+    let vocabulary = vocabularyList.find(vocabulary => vocabulary.id === id);
+    switch (vocabulary?.type) {
+      case DataType.NUMBER:
+        return DECIMAL_OPERATORS;
+      case DataType.TEXT:
+        return STRING_OPERATORS;
+      case DataType.BOOLEAN:
+        return BOOLEAN_OPERATORS;
+      case DataType.DATE:
+        return DATE_OPERATORS;
+      case DataType.RANGE:
+        return DATE_OPERATORS;
+      default:
+        return STRING_OPERATORS;
+    }
+  }
 
   getOperator(operator: any) {
     if (operator) {
@@ -164,6 +184,17 @@ export class UtilsService {
       return operator
     }
   }
+  getOperators(compare: Compare, vocabularyList: Vocabulary[]): any[] {
+    if (compare.leftHandSide?.source === staticValues.INPUT) {
+      return this.getAppropriateOperators(compare.leftHandSide?.id!, vocabularyList);
+    }
+    else if (compare.rightHandSide?.source === staticValues.INPUT) {
+      return this.getAppropriateOperators(compare.rightHandSide?.id!, vocabularyList);
+    }
+    else {
+      return STRING_OPERATORS;
+    }
+  }
 
   getField(field: any) {
     if (field) {
@@ -174,6 +205,37 @@ export class UtilsService {
       }
     } else {
       return field
+    }
+  }
+  checkIfUsedVocabulary(vocabulary: Vocabulary, rule: any): false | undefined {
+    if (rule) {
+      let check = undefined;
+      check = vocabulary.id ? this.recursiveSerachUsedVocabularyInWhen(vocabulary.id, rule.when) : undefined;
+      if(check !== false){
+        check = vocabulary.id ? this.serachUsedVocabularyInThen(vocabulary.id, rule.then) : undefined;
+      }
+      return check;
+    } else {
+      return;
+    }
+  }
+  recursiveSerachUsedVocabularyInWhen(id: any, currentNode: any): any {
+    for (let i = 0; i < currentNode.compares.length; i++) {
+      if (id == (currentNode.compares[i]?.leftHandSide?.id || currentNode.compares[i]?.rightHandSide?.id)) {
+        return false;
+      }
+      else if (currentNode.compares.length == i + 1) {
+        for (let j = 0; j < currentNode.conditions.length; j++) {
+          return this.recursiveSerachUsedVocabularyInWhen(id, currentNode.conditions[j]);
+        }
+      }
+    }
+  }
+  serachUsedVocabularyInThen(id: any, currentNode: any): any {
+    for (let i = 0; i < currentNode.length; i++) {
+      if (id == (currentNode[i].assert.leftHandSide?.value || currentNode[i].assert?.rightHandSide?.value)) {
+        return false;
+      }
     }
   }
 }

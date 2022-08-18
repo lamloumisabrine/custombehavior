@@ -12,6 +12,9 @@ export class HandSide {
      * Vocabulary value
      */
     source?: string;
+    
+
+    type!: 'text' | 'number' | 'boolean' | 'range' | 'table' | 'date';
 
     constructor(){
     }

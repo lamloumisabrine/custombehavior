@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RulesetComponent } from './ruleset.component';
+import { ConditionComposerComponent } from './condition-composer.component';
 
-describe('RulesetComponent', () => {
-  let component: RulesetComponent;
-  let fixture: ComponentFixture<RulesetComponent>;
+describe('ConditionComposerComponent', () => {
+  let component: ConditionComposerComponent;
+  let fixture: ComponentFixture<ConditionComposerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RulesetComponent ]
+      declarations: [ ConditionComposerComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RulesetComponent);
+    fixture = TestBed.createComponent(ConditionComposerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
