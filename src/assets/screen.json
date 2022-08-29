@@ -1,0 +1,1681 @@
+[
+     {
+        "item": "details",
+        "wfmode": "2",
+        "screenreference": "consumer",
+        "uk_id": "d64da592",
+        "en": {
+            "display": "consumer"
+        },
+        "fr": {
+            "display": "client particulier"
+        },
+        "main_data_item": {
+            "item": "consumer",
+            "visible": "true",
+            "uk_id": "1d018bc8",
+            "BeforeUpdate": {
+                "xruleid": "AfterUpdate1a5z6d1a6z51d6a5z1d65az",
+                "uk_id": "6b7c9f10"
+            },
+            "AfterInsert": {
+                "spname": "Spupdatedeviationlog",
+                "param": "%itemid%",
+                "uk_id": "9428acaf"
+            },
+            "BeforeInsert": {
+                "spname": "spDeDuplication",
+                "param": "registration_number",
+                "uk_id": "d02e7f7e"
+            },
+            "en": {
+                "display": "Details"
+            },
+            "fr": {
+                "display": "Détails"
+            },
+            "group": [
+                {
+                    "visible": "true",
+                    "collapsed": "false",
+                    "renderingcontext": "contextdetailconsumer",
+                    "uk_id": "4ca2ebef",
+                    "en": {
+                        "display": "KYC Progress"
+                    },
+                    "fr": {
+                        "display": "Progrès de KYC"
+                    },
+                    "grid": {
+                        "spname": "KYC_Progress",
+                        "export": "false",
+                        "type": "informative",
+                        "visible": "true",
+                        "param": "%itemid%",
+                        "idproperty": "step1",
+                        "uk_id": "fc7da26b",
+                        "column": [
+                            {
+                                "visible": "true",
+                                "type": "textbox",
+                                "property": "step1",
+                                "uk_id": "8eaf5cbf",
+                                "en": {
+                                    "display": "Step1"
+                                },
+                                "fr": {
+                                    "display": "Etape1"
+                                }
+                            },
+                            {
+                                "visible": "true",
+                                "type": "textbox",
+                                "property": "step2",
+                                "uk_id": "654bdaa1",
+                                "en": {
+                                    "display": "Step-2"
+                                },
+                                "fr": {
+                                    "display": "Etape-2"
+                                }
+                            },
+                            {
+                                "visible": "true",
+                                "type": "textbox",
+                                "property": "step3",
+                                "uk_id": "308ec1f0",
+                                "en": {
+                                    "display": "Step-3"
+                                },
+                                "fr": {
+                                    "display": "Etape-3"
+                                }
+                            },
+                            {
+                                "visible": "true",
+                                "type": "textbox",
+                                "property": "step4",
+                                "uk_id": "f3574fa9",
+                                "en": {
+                                    "display": "Step-4"
+                                },
+                                "fr": {
+                                    "display": "Etape-4"
+                                }
+                            },
+                            {
+                                "visible": "false",
+                                "type": "command",
+                                "action": "delete",
+                                "deleteidproperty": "step1",
+                                "uk_id": "e573475f",
+                                "en": {
+                                    "-help": "Delete"
+                                },
+                                "fr": {
+                                    "help": "Supprimer"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "visible": "true",
+                    "collapsed": "false",
+                    "cols": "3",
+                    "uk_id": "67badc76",
+                    "fr": {
+                        "display": "Identification"
+                    },
+                    "en": {
+                        "display": "Identification"
+                    },
+                    "field": [
+                        {
+                            "required": "false",
+                            "auto": "true",
+                            "entity": "counterparty",
+                            "property": "counterparty_shortname",
+                            "readonly": "true",
+                            "type": "textbox",
+                            "visible": "true",
+                            "-uk_id": "19286843",
+                            "en": {
+                                "display": "Ref.cpt",
+                                "help": "Unique shortname which identifies the counterparty"
+                            },
+                            "fr": {
+                                "display": "CIF",
+                                "help": "Référence du client"
+                            }
+                        },
+                        {
+                            "visible": "true",
+                            "type": "combobox",
+                            "renderingcontext": "contextdetailconsumer",
+                            "required": "false",
+                            "property": "counterparty_type_id",
+                            "entity": "counterparty",
+                            "defaultvalue": "67",
+                            "autocompletionindex": "1",
+                            "uk_id": "de59a620",
+                            "en": {
+                                "display": "Type of Customer",
+                                "help": "Unique reference of the counterpaty type"
+                            },
+                            "fr": {
+                                "display": "Type de la contrepartie",
+                                "help": "Référence unique du type de client"
+                            }
+                        },
+                        {
+                            "visible": "true",
+                            "type": "combobox",
+                            "required": "false",
+                            "property": "gender",
+                            "entity": "counterparty",
+                            "autocompletionindex": "1",
+                            "uk_id": "b9156570",
+                            "en": {
+                                "display": "Civility",
+                                "help": "Customer civility/title"
+                            },
+                            "fr": {
+                                "display": "Civilité",
+                                "help": "Civilité du client"
+                            }
+                        },
+                        {
+                            "required": "true",
+                            "entity": "counterparty",
+                            "property": "counterparty_name",
+                            "type": "textbox",
+                            "visible": "true",
+                            "uk_id": "c30bae73",
+                            "en": {
+                                "display": "First Name",
+                                "help": "Enter Customer Name"
+                            },
+                            "fr": {
+                                "display": "Nom",
+                                "help": "Entrer le nom du client"
+                            }
+                        },
+                        {
+                            "required": "true",
+                            "entity": "counterparty",
+                            "property": "counterparty_name2",
+                            "type": "textbox",
+                            "visible": "true",
+                            "uk_id": "004682d9",
+                            "en": {
+                                "display": "Last Name",
+                                "help": "Last Name of the client"
+                            },
+                            "fr": {
+                                "display": "Prénom",
+                                "help": "Entrer le prénom du client"
+                            }
+                        },
+                        {
+                            "visible": "true",
+                            "type": "combobox",
+                            "required": "false",
+                            "readonly": "true",
+                            "property": "status_id",
+                            "entity": "counterparty",
+                            "child": "counterparty_classification_id",
+                            "autocompletionindex": "1",
+                            "uk_id": "26268474",
+                            "en": {
+                                "display": "Status",
+                                "help": "Status of the counterparty, possible values : Prospect, Existing Customer, Other "
+                            },
+                            "fr": {
+                                "display": "Statut",
+                                "help": "Statut de la contrepartie, valeurs possibles: Prospect, un client existant, autre "
+                            }
+                        },
+                        {
+                            "visible": "true",
+                            "type": "combobox",
+                            "required": "false",
+                            "property": "counterparty_category_id",
+                            "entity": "counterparty",
+                            "autocompletionindex": "1",
+                            "uk_id": "57dc898d",
+                            "en": {
+                                "display": "Client Category",
+                                "help": "Unique reference of the counterpaty Category"
+                            },
+                            "fr": {
+                                "display": "Catégorie du Client",
+                                "help": "Référence unique de la catégorie du client"
+                            }
+                        },
+                        {
+                            "visible": "false",
+                            "type": "connectedcombo",
+                            "required": "false",
+                            "property": "counterparty_classification_id",
+                            "parent": "status_id",
+                            "entity": "counterparty",
+                            "autocompletionindex": "1",
+                            "uk_id": "dc04edd9",
+                            "en": {
+                                "display": "RLU Indicator",
+                                "help": "Classification of the customer under distress management"
+                            },
+                            "fr": {
+                                "display": "RLU Wskaźnik",
+                                "help": "Qualité du client au sein de son travail"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "visible": "true",
+                    "collapsed": "true",
+                    "cols": "3",
+                    "title": "Customer Information",
+                    "uk_id": "a6bdfd32",
+                    "fr": {
+                        "display": "Information Client"
+                    },
+                    "en": {
+                        "display": "Customer Information"
+                    },
+                    "field": [
+                        {
+                            "visible": "true",
+                            "type": "dateonly",
+                            "required": "false",
+                            "property": "birth_date",
+                            "entity": "Counterparty",
+                            "uk_id": "42c4c698",
+                            "en": {
+                                "display": "Birth Date",
+                                "help": "Birth Date of the customer"
+                            },
+                            "fr": {
+                                "display": "Date de Naissance",
+                                "help": "Date de naissance du client"
+                            }
+                        },
+                        {
+                            "visible": "true",
+                            "type": "combobox",
+                            "required": "false",
+                            "property": "marital_status",
+                            "entity": "counterparty",
+                            "autocompletionindex": "1",
+                            "uk_id": "4a16f46a",
+                            "en": {
+                                "display": "Marital Status",
+                                "help": "Marital Status of the customer"
+                            },
+                            "fr": {
+                                "display": "État civil",
+                                "help": "État civil du client"
+                            }
+                        },
+                        {
+                            "visible": "false",
+                            "type": "numeric",
+                            "required": "false",
+                            "property": "registration_place3",
+                            "entity": "Counterparty",
+                            "uk_id": "6e564705",
+                            "en": {
+                                "display": "Number of Dependents",
+                                "help": "Dependents of the customer"
+                            },
+                            "fr": {
+                                "display": "Nombre de personnes à charge",
+                                "help": "Personnes à charge du client"
+                            }
+                        },
+                        {
+                            "visible": "true",
+                            "type": "numeric",
+                            "required": "false",
+                            "property": "kids_number",
+                            "entity": "Counterparty",
+                            "uk_id": "9c75165b",
+                            "en": {
+                                "display": "Number of children",
+                                "help": "Customer kids number"
+                            },
+                            "fr": {
+                                "display": "Nombre d'enfants",
+                                "help": "Nombre d'enfants du client"
+                            }
+                        },
+                        {
+                            "visible": "true",
+                            "type": "combobox",
+                            "required": "true",
+                            "property": "counterparty_ident_type",
+                            "entity": "Counterparty",
+                            "autocompletionindex": "1",
+                            "uk_id": "fc29324c",
+                            "en": {
+                                "display": "ID Type",
+                                "help": "Id Type of the customer : Driver License, National ID card..."
+                            },
+                            "fr": {
+                                "display": "Type ID",
+                                "help": "Id Type du client: Permis de conduire, carte d'identité nationale"
+                            }
+                        },
+                        {
+                            "required": "true",
+                            "entity": "Counterparty",
+                            "property": "registration_number",
+                            "type": "textbox",
+                            "visible": "true",
+                            "uk_id": "7570815a",
+                            "en": {
+                                "display": "ID Number",
+                                "help": "ID number of the customer"
+                            },
+                            "fr": {
+                                "display": "Numéro d'identification",
+                                "help": "Identifiant du client"
+                            }
+                        },
+                        {
+                            "visible": "true",
+                            "type": "dateonly",
+                            "required": "false",
+                            "property": "registration_date",
+                            "entity": "Counterparty",
+                            "uk_id": "4cf0ac28",
+                            "en": {
+                                "display": "Registration Date",
+                                "help": "Registration date"
+                            },
+                            "fr": {
+                                "display": "Date d'enregistrement",
+                                "help": "Date d'enregistrement"
+                            }
+                        },
+                        {
+                            "visible": "true",
+                            "type": "dateonly",
+                            "required": "false",
+                            "property": "ident_expiry_date",
+                            "entity": "Counterparty",
+                            "uk_id": "792c378c",
+                            "en": {
+                                "display": "Id Expiry Date",
+                                "help": "Id expiry date"
+                            },
+                            "fr": {
+                                "display": "Id Date d'expiration",
+                                "help": "Date d'expiration"
+                            }
+                        },
+                        {
+                            "visible": "true",
+                            "type": "combobox",
+                            "required": "true",
+                            "property": "country_registration_id",
+                            "entity": "Counterparty",
+                            "child": "registration_place",
+                            "autocompletionindex": "1",
+                            "uk_id": "5f3fa7cc",
+                            "en": {
+                                "display": "Issue Place",
+                                "help": "Unique reference of the country of registration"
+                            },
+                            "fr": {
+                                "display": "Pays d'enregistrement",
+                                "help": "Référence unique du pays d'enregistrement"
+                            }
+                        },
+                        {
+                            "visible": "false",
+                            "type": "connectedcombo",
+                            "required": "false",
+                            "property": "registration_place",
+                            "parent": "country_registration_id",
+                            "entity": "Counterparty",
+                            "uk_id": "b003eeae",
+                            "en": {
+                                "display": "Registration Place",
+                                "help": "Registration place of ID card"
+                            },
+                            "fr": {
+                                "display": "Lieu d'émission",
+                                "help": "Lieu d'émission de la CIN"
+                            }
+                        },
+                        {
+                            "visible": "true",
+                            "type": "combobox",
+                            "required": "true",
+                            "property": "country_nationality_id",
+                            "entity": "Counterparty",
+                            "autocompletionindex": "1",
+                            "uk_id": "70fee91e",
+                            "en": {
+                                "display": "Country of Nationality",
+                                "help": "Unique reference of the country of nationality"
+                            },
+                            "fr": {
+                                "display": "Nationalité",
+                                "help": "Référence unique du pays de nationalité"
+                            }
+                        },
+                        {
+                            "visible": "true",
+                            "type": "combobox",
+                            "required": "false",
+                            "property": "country_risk_id",
+                            "entity": "Counterparty",
+                            "autocompletionindex": "4",
+                            "uk_id": "6f7cc2eb",
+                            "en": {
+                                "display": "Country of risk",
+                                "help": "Unique reference of the country of risk"
+                            },
+                            "fr": {
+                                "display": "Pays de risque",
+                                "help": "Référence unique pour le pays de risque"
+                            }
+                        },
+                        {
+                            "visible": "true",
+                            "type": "combobox",
+                            "required": "true",
+                            "property": "country_residence_id",
+                            "entity": "Counterparty",
+                            "autocompletionindex": "1",
+                            "uk_id": "7cc041c0",
+                            "en": {
+                                "display": "Country of residence",
+                                "help": "Unique reference of the country of residence"
+                            },
+                            "fr": {
+                                "display": "Pays de résidence",
+                                "help": "Référence unique du pays de résidence"
+                            }
+                        },
+                        {
+                            "entity": "Counterparty",
+                            "property": "group",
+                            "visible": "true",
+                            "type": "checkbox",
+                            "uk_id": "960e41ef",
+                            "en": {
+                                "display": "VIP",
+                                "help": "to indicate if the counterparty is a VIP"
+                            },
+                            "fr": {
+                                "display": "VIP",
+                                "help": "Pour indiquer si la contrepartie est une personalité importante"
+                            }
+                        },
+                        {
+                            "required": "false",
+                            "entity": "Counterparty",
+                            "property": "counterparty_ident2",
+                            "type": "textbox",
+                            "visible": "false",
+                            "uk_id": "a2c2bafc",
+                            "en": {
+                                "display": "Residence Visa No.",
+                                "help": "Residence Visa number of the customer"
+                            },
+                            "fr": {
+                                "display": "Numéro de visa de résidence",
+                                "help": "Numéro de visa de résidence du client"
+                            }
+                        },
+                        {
+                            "visible": "false",
+                            "type": "dateonly",
+                            "required": "false",
+                            "property": "ident_issuance_date2",
+                            "entity": "Counterparty",
+                            "uk_id": "02762c60",
+                            "en": {
+                                "display": "Residence Start Date",
+                                "help": "Residence start date"
+                            },
+                            "fr": {
+                                "display": "Date d'émission",
+                                "help": "Date d'émission de la résidence"
+                            }
+                        },
+                        {
+                            "visible": "false",
+                            "type": "dateonly",
+                            "required": "false",
+                            "property": "ident_expiry_date3",
+                            "entity": "Counterparty",
+                            "uk_id": "7b1df157",
+                            "en": {
+                                "display": "Expiry Date",
+                                "help": "Residence visa expiry date"
+                            },
+                            "fr": {
+                                "display": "Date d'expiration",
+                                "help": "Date d'expiration du Visa de résidence"
+                            }
+                        },
+                        {
+                            "entity": "Counterparty",
+                            "property": "watchlist",
+                            "visible": "false",
+                            "type": "checkbox",
+                            "uk_id": "0c15d585",
+                            "en": {
+                                "display": "Black List",
+                                "help": "to indicate if the counterparty is blacklisted or not"
+                            },
+                            "fr": {
+                                "display": "Liste noire",
+                                "help": "Pour indiquer si la contrepartie est dans la liste de surveillance ou non"
+                            }
+                        },
+                        {
+                            "required": "true",
+                            "entity": "Counterparty",
+                            "property": "counterparty_ident",
+                            "type": "textbox",
+                            "visible": "false",
+                            "uk_id": "cebe7c3e",
+                            "en": {
+                                "display": "ID Number",
+                                "help": "ID number of the customer"
+                            },
+                            "fr": {
+                                "display": "Identifiant",
+                                "help": "Identifiant du client"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "visible": "true",
+                    "collapsed": "false",
+                    "uk_id": "8355920a",
+                    "en": {
+                        "display": "KYC"
+                    },
+                    "fr": {
+                        "display": "KYC"
+                    },
+                    "grid": {
+                        "customcolumnswidth": "true",
+                        "param": "%itemid%",
+                        "entity": "counterparty_generic",
+                        "visible": "true",
+                        "type": "editableinline",
+                        "export": "true",
+                        "pagesize": "5",
+                        "spname": "SPGetCounterpartyKYC",
+                        "idproperty": "counterparty_generic_id",
+                        "uk_id": "fb4e5801",
+                        "column": [
+                            {
+                                "visible": "false",
+                                "type": "numeric",
+                                "property": "counterparty_generic_id",
+                                "entity": "counterparty_generic",
+                                "editable": "false",
+                                "uk_id": "ea735f1d",
+                                "en": {
+                                    "display": "ID"
+                                },
+                                "fr": {
+                                    "display": "ID"
+                                }
+                            },
+                            {
+                                "visible": "true",
+                                "type": "numeric",
+                                "property": "number_field1",
+                                "entity": "counterparty_generic",
+                                "editable": "false",
+                                "width": "5",
+                                "uk_id": "88d1843e",
+                                "en": {
+                                    "display": "Ref."
+                                },
+                                "fr": {
+                                    "display": "Réf."
+                                }
+                            },
+                            {
+                                "visible": "true",
+                                "type": "textbox",
+                                "property": "text_field2",
+                                "entity": "counterparty_generic",
+                                "editable": "false",
+                                "width": "85",
+                                "uk_id": "e57de44a",
+                                "en": {
+                                    "display": "Question"
+                                },
+                                "fr": {
+                                    "display": "Question"
+                                }
+                            },
+                            {
+                                "visible": "false",
+                                "type": "numeric",
+                                "property": "counterparty_id",
+                                "entity": "counterparty_generic",
+                                "editable": "false",
+                                "uk_id": "65a6061e",
+                                "en": {
+                                    "display": ""
+                                },
+                                "fr": {
+                                    "display": ""
+                                }
+                            },
+                            {
+                                "visible": "true",
+                                "type": "checkbox",
+                                "property": "text_field3",
+                                "entity": "counterparty_generic",
+                                "editable": "false",
+                                "width": "10",
+                                "uk_id": "e9c8013c",
+                                "en": {
+                                    "display": "Compliance"
+                                },
+                                "fr": {
+                                    "display": "Conformité"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "visible": "true",
+                    "collapsed": "false",
+                    "uk_id": "5468f3c5",
+                    "en": {
+                        "display": "PEP"
+                    },
+                    "fr": {
+                        "display": "PEP"
+                    },
+                    "grid": {
+                        "customcolumnswidth": "true",
+                        "param": "%itemid%",
+                        "entity": "counterparty_generic",
+                        "visible": "true",
+                        "type": "editableinline",
+                        "export": "true",
+                        "pagesize": "5",
+                        "spname": "SPGetCounterpartyPEP",
+                        "idproperty": "counterparty_generic_id",
+                        "uk_id": "c192395f",
+                        "column": [
+                            {
+                                "visible": "false",
+                                "type": "numeric",
+                                "property": "counterparty_generic_id",
+                                "entity": "counterparty_generic",
+                                "editable": "false",
+                                "uk_id": "b307b84f",
+                                "en": {
+                                    "display": "ID"
+                                },
+                                "fr": {
+                                    "display": "ID"
+                                }
+                            },
+                            {
+                                "visible": "true",
+                                "type": "numeric",
+                                "property": "number_field1",
+                                "entity": "counterparty_generic",
+                                "editable": "false",
+                                "width": "5",
+                                "uk_id": "d0e8c7d4",
+                                "en": {
+                                    "display": "Ref"
+                                },
+                                "fr": {
+                                    "display": "Réf."
+                                }
+                            },
+                            {
+                                "visible": "true",
+                                "type": "textbox",
+                                "property": "text_field2",
+                                "entity": "counterparty_generic",
+                                "editable": "false",
+                                "width": "85",
+                                "uk_id": "aaefdae5",
+                                "en": {
+                                    "display": "Question"
+                                },
+                                "fr": {
+                                    "display": "Question"
+                                }
+                            },
+                            {
+                                "visible": "false",
+                                "type": "numeric",
+                                "property": "counterparty_id",
+                                "entity": "counterparty_generic",
+                                "editable": "false",
+                                "uk_id": "0276dad6",
+                                "en": {
+                                    "display": ""
+                                },
+                                "fr": {
+                                    "display": ""
+                                }
+                            },
+                            {
+                                "visible": "true",
+                                "type": "checkbox",
+                                "property": "text_field3",
+                                "entity": "counterparty_generic",
+                                "editable": "false",
+                                "width": "10",
+                                "uk_id": "31a42f91",
+                                "en": {
+                                    "display": "Compliance"
+                                },
+                                "fr": {
+                                    "display": "Conformité"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "visible": "true",
+                    "collapsed": "False",
+                    "cols": "3",
+                    "uk_id": "bd4a42fe",
+                    "fr": {
+                        "display": "Information Financière et Professionnelle"
+                    },
+                    "en": {
+                        "display": "Financial and Professional Information"
+                    },
+                    "field": [
+                        {
+                            "visible": "true",
+                            "type": "additional",
+                            "required": "true",
+                            "property": "education",
+                            "uk_id": "0f319a9c",
+                            "en": {
+                                "display": "Qualification of job",
+                                "help": "Date Occupation of Job"
+                            },
+                            "fr": {
+                                "display": "Qualification du poste",
+                                "help": "Date d'occupation du poste"
+                            }
+                        },
+                        {
+                            "visible": "true",
+                            "type": "combobox",
+                            "required": "false",
+                            "property": "industry_sector_1_id",
+                            "entity": "Counterparty",
+                            "autocompletionindex": "1",
+                            "uk_id": "db417978",
+                            "en": {
+                                "display": "Sector",
+                                "help": "Unique reference of the sector in which the counterparty works on"
+                            },
+                            "fr": {
+                                "display": "Secteur",
+                                "help": "Référence unique du secteur industriel dans lequel travaille le client"
+                            }
+                        },
+                        {
+                            "required": "false",
+                            "entity": "Counterparty",
+                            "property": "employee_relation",
+                            "type": "textbox",
+                            "visible": "false",
+                            "uk_id": "f76420a9",
+                            "en": {
+                                "display": "Occupation",
+                                "help": "Unique reference of the counterparty occupation"
+                            },
+                            "fr": {
+                                "display": "Profession",
+                                "help": "Référence unique de l'occupation de la contrepartie"
+                            }
+                        },
+                        {
+                            "visible": "true",
+                            "type": "additional",
+                            "required": "false",
+                            "property": "job_cl",
+                            "uk_id": "47c6b730",
+                            "en": {
+                                "display": "Position",
+                                "help": ""
+                            },
+                            "fr": {
+                                "display": "Position",
+                                "help": ""
+                            }
+                        },
+                        {
+                            "visible": "true",
+                            "type": "popon",
+                            "required": "false",
+                            "property": "employer",
+                            "entity": "Counterparty",
+                            "displayproperty": "counterparty_name",
+                            "searchentry": "corporate, thirdparty",
+                            "uk_id": "5a440d6c",
+                            "en": {
+                                "display": "Employer",
+                                "help": "Employer name of the customer",
+                                "corporate": "Corporate",
+                                "thirdparty": "Thirdparty"
+                            },
+                            "fr": {
+                                "display": "Employeur",
+                                "help": "Nom de l'employeur du client"
+                            }
+                        },
+                        {
+                            "visible": "true",
+                            "type": "combobox",
+                            "required": "true",
+                            "property": "counterparty_ident3",
+                            "entity": "Counterparty",
+                            "autocompletionindex": "3",
+                            "uk_id": "0cab4908",
+                            "en": {
+                                "display": "Employer Category",
+                                "help": "Customer employer category name"
+                            },
+                            "fr": {
+                                "display": "Catégorie de l'Employeur",
+                                "help": "Nom de la Catégorie de l'employeur du client"
+                            }
+                        },
+                        {
+                            "visible": "true",
+                            "type": "combobox",
+                            "required": "false",
+                            "property": "customer_profile",
+                            "entity": "Counterparty",
+                            "uk_id": "60208a11",
+                            "en": {
+                                "display": "Customer Profile",
+                                "help": "Customer professional profile"
+                            },
+                            "fr": {
+                                "display": "Profil du client",
+                                "help": "Profil professionnel du client"
+                            }
+                        },
+                        {
+                            "visible": "true",
+                            "type": "combobox",
+                            "required": "false",
+                            "property": "external_reference",
+                            "entity": "Counterparty",
+                            "uk_id": "833c0ccf",
+                            "en": {
+                                "display": "Terms of Employment",
+                                "help": "Terms of Employment"
+                            },
+                            "fr": {
+                                "display": "Termes d'emploi",
+                                "help": "Termes d'emploi du client"
+                            }
+                        },
+                        {
+                            "visible": "true",
+                            "type": "numeric",
+                            "required": "false",
+                            "property": "employee",
+                            "entity": "Counterparty",
+                            "uk_id": "cee9d826",
+                            "en": {
+                                "display": "Experience (Years)",
+                                "help": "Number of years of experince"
+                            },
+                            "fr": {
+                                "display": "Expérience (Années)",
+                                "help": "Nombre d'années d'expérience"
+                            }
+                        },
+                        {
+                            "visible": "true",
+                            "type": "additional",
+                            "property": "date_occupation_job",
+                            "item": "consumer",
+                            "uk_id": "c17b86df",
+                            "en": {
+                                "display": "Date Occupation of Job",
+                                "help": "Date Occupation of Job"
+                            },
+                            "fr": {
+                                "display": "Date d'occupation du poste",
+                                "help": "Date d'occupation du poste"
+                            }
+                        },
+                        {
+                            "visible": "true",
+                            "type": "amount",
+                            "required": "false",
+                            "entity": "counterparty",
+                            "calculated": "true",
+                            "uk_id": "3373bc39",
+                            "en": {
+                                "display": "Main income",
+                                "help": "The Main income of the customer"
+                            },
+                            "fr": {
+                                "display": "Revenu Principal",
+                                "help": "Revenu Principal du client"
+                            },
+                            "field": [
+                                {
+                                    "visible": "true",
+                                    "type": "numeric",
+                                    "required": "false",
+                                    "property": "turnover",
+                                    "entity": "counterparty",
+                                    "calculated": "true",
+                                    "uk_id": "3738e693"
+                                },
+                                {
+                                    "visible": "true",
+                                    "type": "combobox",
+                                    "required": "false",
+                                    "property": "turnover_ccy_id",
+                                    "entity": "counterparty",
+                                    "autocompletionindex": "1",
+                                    "uk_id": "8534e4f2"
+                                }
+                            ]
+                        },
+                        {
+                            "visible": "true",
+                            "type": "additional",
+                            "required": "false",
+                            "property": "engagement_actuel",
+                            "uk_id": "64dd2d31",
+                            "en": {
+                                "display": "Current Installments",
+                                "help": "Current installments of the counterparty"
+                            },
+                            "fr": {
+                                "display": "Engagements actuels",
+                                "help": "Engagements actuels du contrepartie"
+                            }
+                        },
+                        {
+                            "visible": "true",
+                            "type": "amount",
+                            "required": "false",
+                            "entity": "counterparty",
+                            "calculated": "true",
+                            "uk_id": "f08c39ad",
+                            "en": {
+                                "display": "Other Incomes",
+                                "help": "Total assets of the counterparty"
+                            },
+                            "fr": {
+                                "display": "Autres revenus",
+                                "help": "Total actif de la contrepartie"
+                            },
+                            "field": [
+                                {
+                                    "visible": "true",
+                                    "type": "numeric",
+                                    "required": "false",
+                                    "property": "total_asset",
+                                    "entity": "counterparty",
+                                    "calculated": "true",
+                                    "uk_id": "e1d8c00c"
+                                },
+                                {
+                                    "visible": "true",
+                                    "type": "combobox",
+                                    "required": "false",
+                                    "property": "total_asset_ccy",
+                                    "entity": "counterparty",
+                                    "autocompletionindex": "1",
+                                    "uk_id": "859ff5de"
+                                }
+                            ]
+                        },
+                        {
+                            "visible": "true",
+                            "type": "additional",
+                            "property": "charges",
+                            "item": "consumer",
+                            "uk_id": "b33da6a6",
+                            "en": {
+                                "display": "Other outgoings",
+                                "help": "Total other outgoings of the counterparty"
+                            },
+                            "fr": {
+                                "display": "Autres dépenses",
+                                "help": "Total des autres charges du contrepartie"
+                            }
+                        },
+                        {
+                            "visible": "true",
+                            "type": "additional",
+                            "item": "consumer",
+                            "property": "capacite_remboursement",
+                            "formula": "dbo.spgetcpty_Repayment_capacity %itemid%,charges,turnover,turnover_ccy_id,total_asset,total_asset_ccy,engagement_actuel",
+                            "calculated": "true",
+                            "uk_id": "35927044",
+                            "en": {
+                                "display": "Repayment capacity",
+                                "help": "Repayment capacity of the counterparty"
+                            },
+                            "fr": {
+                                "display": "Capacité de remboursement",
+                                "help": "Capacité de remboursement du contrepartie"
+                            }
+                        },
+                        {
+                            "visible": "true",
+                            "type": "additional",
+                            "required": "false",
+                            "property": "ratio_endettement",
+                            "formula": "dbo.spgetdsrcpty %itemid%,charges,turnover,turnover_ccy_id,total_asset,total_asset_ccy,engagement_actuel",
+                            "calculated": "true",
+                            "uk_id": "726bb5f3",
+                            "en": {
+                                "display": "DSR (%)",
+                                "help": "DSR of the counterparty in %"
+                            },
+                            "fr": {
+                                "display": "DSR (%)",
+                                "help": "Ratio d'endettement du contrepartie en %"
+                            }
+                        },
+                        {
+                            "visible": "true",
+                            "type": "numeric",
+                            "required": "false",
+                            "property": "credit_amount",
+                            "entity": "Counterparty",
+                            "uk_id": "607e3ff1",
+                            "en": {
+                                "display": "Agg. Exp. in Country (Y.)",
+                                "help": "Number of years of aggregate experience in the residence country"
+                            },
+                            "fr": {
+                                "display": "AGG. Exp. dans le pays（Années）",
+                                "help": "Nombre d'années d'expérience"
+                            }
+                        },
+                        {
+                            "visible": "true",
+                            "type": "additional",
+                            "required": "false",
+                            "property": "Bonus",
+                            "uk_id": "9ad1b947",
+                            "en": {
+                                "display": "Bonus",
+                                "help": "Bonus Amount If Applicable."
+                            },
+                            "fr": {
+                                "display": "Prime",
+                                "help": "Montant du bonus si applicable"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "visible": "true",
+                    "collapsed": "False",
+                    "cols": "3",
+                    "uk_id": "67649db1",
+                    "fr": {
+                        "display": "Relation avec l'institution"
+                    },
+                    "en": {
+                        "display": "Relationship with the institution"
+                    }
+                   
+                }
+            ]
+        },
+        "field": [
+            {
+               "visible": "true",
+               "type": "dateonly",
+               "required": "false",
+               "property": "birth_date",
+               "entity": "Counterparty",
+               "uk_id": "42c4c698",
+               "en": {
+                  "display": "Birth Date",
+                  "help": "Birth Date of the customer"
+               },
+               "fr": {
+                  "display": "Date de Naissance",
+                  "help": "Date de naissance du client"
+               }
+            },
+            {
+               "visible": "true",
+               "type": "combobox",
+               "required": "false",
+               "property": "marital_status",
+               "entity": "counterparty",
+               "autocompletionindex": "1",
+               "uk_id": "4a16f46a",
+               "en": {
+                  "display": "Marital Status",
+                  "help": "Marital Status of the customer"
+               },
+               "fr": {
+                  "display": "État civil",
+                  "help": "État civil du client"
+               }
+            },
+            {
+               "visible": "false",
+               "type": "numeric",
+               "required": "false",
+               "property": "registration_place3",
+               "entity": "Counterparty",
+               "uk_id": "6e564705",
+               "en": {
+                  "display": "Number of Dependents",
+                  "help": "Dependents of the customer"
+               },
+               "fr": {
+                  "display": "Nombre de personnes à charge",
+                  "help": "Personnes à charge du client"
+               }
+            },
+            {
+               "visible": "true",
+               "type": "numeric",
+               "required": "false",
+               "property": "kids_number",
+               "entity": "Counterparty",
+               "uk_id": "9c75165b",
+               "en": {
+                  "display": "Number of children",
+                  "help": "Customer kids number"
+               },
+               "fr": {
+                  "display": "Nombre d'enfants",
+                  "help": "Nombre d'enfants du client"
+               }
+            },
+            {
+               "visible": "true",
+               "type": "combobox",
+               "required": "true",
+               "property": "counterparty_ident_type",
+               "entity": "Counterparty",
+               "autocompletionindex": "1",
+               "uk_id": "fc29324c",
+               "en": {
+                  "display": "ID Type",
+                  "help": "Id Type of the customer : Driver License, National ID card..."
+               },
+               "fr": {
+                  "display": "Type ID",
+                  "help": "Id Type du client: Permis de conduire, carte d'identité nationale"
+               }
+            },
+            {
+               "required": "true",
+               "entity": "Counterparty",
+               "property": "registration_number",
+               "type": "textbox",
+               "visible": "true",
+               "uk_id": "7570815a",
+               "en": {
+                  "display": "ID Number",
+                  "help": "ID number of the customer"
+               },
+               "fr": {
+                  "display": "Numéro d'identification",
+                  "help": "Identifiant du client"
+               }
+            },
+            {
+               "visible": "true",
+               "type": "dateonly",
+               "required": "false",
+               "property": "registration_date",
+               "entity": "Counterparty",
+               "uk_id": "4cf0ac28",
+               "en": {
+                  "display": "Registration Date",
+                  "help": "Registration date"
+               },
+               "fr": {
+                  "display": "Date d'enregistrement",
+                  "help": "Date d'enregistrement"
+               }
+            },
+            {
+               "visible": "true",
+               "type": "dateonly",
+               "required": "false",
+               "property": "ident_expiry_date",
+               "entity": "Counterparty",
+               "uk_id": "792c378c",
+               "en": {
+                  "display": "Id Expiry Date",
+                  "help": "Id expiry date"
+               },
+               "fr": {
+                  "display": "Id Date d'expiration",
+                  "help": "Date d'expiration"
+               }
+            },
+            {
+               "visible": "true",
+               "type": "combobox",
+               "required": "true",
+               "property": "country_registration_id",
+               "entity": "Counterparty",
+               "child": "registration_place",
+               "autocompletionindex": "1",
+               "uk_id": "5f3fa7cc",
+               "en": {
+                  "display": "Issue Place",
+                  "help": "Unique reference of the country of registration"
+               },
+               "fr": {
+                  "display": "Pays d'enregistrement",
+                  "help": "Référence unique du pays d'enregistrement"
+               }
+            },
+            {
+               "visible": "false",
+               "type": "connectedcombo",
+               "required": "false",
+               "property": "registration_place",
+               "parent": "country_registration_id",
+               "entity": "Counterparty",
+               "uk_id": "b003eeae",
+               "en": {
+                  "display": "Registration Place",
+                  "help": "Registration place of ID card"
+               },
+               "fr": {
+                  "display": "Lieu d'émission",
+                  "help": "Lieu d'émission de la CIN"
+               }
+            },
+            {
+               "visible": "true",
+               "type": "combobox",
+               "required": "true",
+               "property": "country_nationality_id",
+               "entity": "Counterparty",
+               "autocompletionindex": "1",
+               "uk_id": "70fee91e",
+               "en": {
+                  "display": "Country of Nationality",
+                  "help": "Unique reference of the country of nationality"
+               },
+               "fr": {
+                  "display": "Nationalité",
+                  "help": "Référence unique du pays de nationalité"
+               }
+            },
+            {
+               "visible": "true",
+               "type": "combobox",
+               "required": "false",
+               "property": "country_risk_id",
+               "entity": "Counterparty",
+               "autocompletionindex": "4",
+               "uk_id": "6f7cc2eb",
+               "en": {
+                  "display": "Country of risk",
+                  "help": "Unique reference of the country of risk"
+               },
+               "fr": {
+                  "display": "Pays de risque",
+                  "help": "Référence unique pour le pays de risque"
+               }
+            },
+            {
+               "visible": "true",
+               "type": "combobox",
+               "required": "true",
+               "property": "country_residence_id",
+               "entity": "Counterparty",
+               "autocompletionindex": "1",
+               "uk_id": "7cc041c0",
+               "en": {
+                  "display": "Country of residence",
+                  "help": "Unique reference of the country of residence"
+               },
+               "fr": {
+                  "display": "Pays de résidence",
+                  "help": "Référence unique du pays de résidence"
+               }
+            },
+            {
+               "entity": "Counterparty",
+               "property": "group",
+               "visible": "true",
+               "type": "checkbox",
+               "uk_id": "960e41ef",
+               "en": {
+                  "display": "VIP",
+                  "help": "to indicate if the counterparty is a VIP"
+               },
+               "fr": {
+                  "display": "VIP",
+                  "help": "Pour indiquer si la contrepartie est une personalité importante"
+               }
+            },
+            {
+               "required": "false",
+               "entity": "Counterparty",
+               "property": "counterparty_ident2",
+               "type": "textbox",
+               "visible": "false",
+               "uk_id": "a2c2bafc",
+               "en": {
+                  "display": "Residence Visa No.",
+                  "help": "Residence Visa number of the customer"
+               },
+               "fr": {
+                  "display": "Numéro de visa de résidence",
+                  "help": "Numéro de visa de résidence du client"
+               }
+            },
+            {
+               "visible": "false",
+               "type": "dateonly",
+               "required": "false",
+               "property": "ident_issuance_date2",
+               "entity": "Counterparty",
+               "uk_id": "02762c60",
+               "en": {
+                  "display": "Residence Start Date",
+                  "help": "Residence start date"
+               },
+               "fr": {
+                  "display": "Date d'émission",
+                  "help": "Date d'émission de la résidence"
+               }
+            },
+            {
+               "visible": "false",
+               "type": "dateonly",
+               "required": "false",
+               "property": "ident_expiry_date3",
+               "entity": "Counterparty",
+               "uk_id": "7b1df157",
+               "en": {
+                  "display": "Expiry Date",
+                  "help": "Residence visa expiry date"
+               },
+               "fr": {
+                  "display": "Date d'expiration",
+                  "help": "Date d'expiration du Visa de résidence"
+               }
+            },
+            {
+               "entity": "Counterparty",
+               "property": "watchlist",
+               "visible": "false",
+               "type": "checkbox",
+               "uk_id": "0c15d585",
+               "en": {
+                  "display": "Black List",
+                  "help": "to indicate if the counterparty is blacklisted or not"
+               },
+               "fr": {
+                  "display": "Liste noire",
+                  "help": "Pour indiquer si la contrepartie est dans la liste de surveillance ou non"
+               }
+            },
+            {
+               "required": "true",
+               "entity": "Counterparty",
+               "property": "counterparty_ident",
+               "type": "textbox",
+               "visible": "false",
+               "uk_id": "cebe7c3e",
+               "en": {
+                  "display": "ID Number",
+                  "help": "ID number of the customer"
+               },
+               "fr": {
+                  "display": "Identifiant",
+                  "help": "Identifiant du client"
+               }
+            }
+         ]
+    },
+    
+    {
+        "item": "details",
+        "wfmode": "2",
+        "screenreference": "Retail Consumer",
+        "uk_id": "d64da592",
+        "en": {
+            "display": "RetailConsumer"
+        },
+        "fr": {
+            "display": "client particulier"
+        },
+        "main_data_item": {
+            "item": "RetailConsumer",
+            "visible": "true",
+            "uk_id": "1d018bc8",
+            "BeforeUpdate": {
+                "xruleid": "AfterUpdate1a5z6d1a6z51d6a5z1d65az",
+                "uk_id": "6b7c9f10"
+            },
+            "AfterInsert": {
+                "spname": "Spupdatedeviationlog",
+                "param": "%itemid%",
+                "uk_id": "9428acaf"
+            },
+            "BeforeInsert": {
+                "spname": "spDeDuplication",
+                "param": "registration_number",
+                "uk_id": "d02e7f7e"
+            },
+            "en": {
+                "display": "RetailConsumer"
+            },
+            "fr": {
+                "display": "Détails de consommateur"
+            }
+        },
+        "field": [
+            {
+                "visible": "true",
+                "type": "combobox",
+                "required": "true",
+                "property": "internal_entity_id",
+                "entity": "Counterparty",
+                "autocompletionindex": "1",
+                "uk_id": "1ff90eb9",
+                "en": {
+                    "display": "Unit / Branch",
+                    "help": "Type defined by the bank for the internal entity which approved the transaction"
+                },
+                "fr": {
+                    "display": "Unité / Direction",
+                    "help": "Agence à laquelle est rattaché le client"
+                }
+            },
+            {
+                "visible": "true",
+                "type": "combobox",
+                "required": "false",
+                "property": "internal_segment_id",
+                "entity": "Counterparty",
+                "autocompletionindex": "1",
+                "uk_id": "c7f03524",
+                "en": {
+                    "display": "Business Unit",
+                    "help": "Type defined by the bank for the internal segment which approved the transaction"
+                },
+                "fr": {
+                    "display": "Unité d'affaires",
+                    "help": "L'unité d'affaires à laquelle le client est associé"
+                }
+            },
+            {
+                "visible": "true",
+                "type": "combobox",
+                "sharedconfig": "user_name",
+                "required": "false",
+                "property": "relationship_manager_2_id",
+                "entity": "counterparty",
+                "autocompletionindex": "4",
+                "uk_id": "5ed5aaa2",
+                "en": {
+                    "display": "Responsible Officer",
+                    "help": "Name of the Relation Officer"
+                },
+                "fr": {
+                    "display": "Agent responsable",
+                    "help": "Identifiant du responsable de la contrepartie"
+                }
+            },
+            {
+                "visible": "true",
+                "type": "combobox",
+                "sharedconfig": "user_name",
+                "required": "true",
+                "property": "relationship_manager_3_id",
+                "entity": "counterparty",
+                "autocompletionindex": "4",
+                "uk_id": "f8979007",
+                "en": {
+                    "display": "Relationship Manager",
+                    "help": "Name of the Group Relationship Manager"
+                },
+                "fr": {
+                    "display": "Chargé de Clientèle",
+                    "help": "Identifiant du chargé de clientèle"
+                }
+            },
+            {
+                "visible": "true",
+                "type": "combobox",
+                "sharedconfig": "user_name",
+                "required": "false",
+                "property": "relationship_manager_1_id",
+                "entity": "counterparty",
+                "autocompletionindex": "4",
+                "uk_id": "077a5747",
+                "en": {
+                    "display": "Collector",
+                    "help": "Name of the officer managing the collection activity"
+                },
+                "fr": {
+                    "display": "Collectionneur",
+                    "help": "Identifiant du collectionneur de la contrepartie"
+                }
+            },
+            {
+                "visible": "true",
+                "type": "dateonly",
+                "required": "false",
+                "property": "relationship_start_date",
+                "entity": "Counterparty",
+                "uk_id": "1a6b1cf5",
+                "en": {
+                    "display": "Relationship Start Date",
+                    "help": "Date of Establishment of Relationship with the institution"
+                },
+                "fr": {
+                    "display": "Date de début de la relation",
+                    "help": "Date de début de la relation"
+                }
+            },
+            {
+                "visible": "true",
+                "type": "combobox",
+                "required": "false",
+                "property": "birth_place",
+                "entity": "counterparty",
+                "uk_id": "9aeb7294",
+                "en": {
+                    "display": "Classification",
+                    "help": "Red Flag"
+                },
+                "fr": {
+                    "display": "Classification",
+                    "help": ""
+                }
+            },
+            {
+                "visible": "true",
+                "type": "combobox",
+                "required": "false",
+                "property": "scoring_template_id",
+                "entity": "counterparty",
+                "defaultvalue": "14",
+                "autocompletionindex": "4",
+                "uk_id": "05d1f6e2",
+                "en": {
+                    "display": "Scoring Template",
+                    "help": "Scoring template (financial + non financial models) that will be used for the customer"
+                },
+                "fr": {
+                    "display": "Template de Scoring",
+                    "help": "Référence unique du modèles des données qualitatives"
+                }
+            },
+            {
+                "visible": "false",
+                "type": "link",
+                "componententry": "griddeviation",
+                "mode": "popon_item",
+                "uk_id": "05e11a33",
+                "en": {
+                    "display": "Customer creation exception",
+                    "help": "Customer creation exception"
+                },
+                "fr": {
+                    "display": "Création de l'exception du client",
+                    "help": "Création de l'exception du client"
+                }
+            },
+            {
+                "visible": "true",
+                "type": "link",
+                "required": "false",
+                "mode": "popon_item",
+                "componententry": "generic_popon_item_1",
+                "uk_id": "07ee3fe3",
+                "en": {
+                    "display": "Comment",
+                    "help": "Comment",
+                    "popontitle": ""
+                },
+                "fr": {
+                    "display": "Commentaire",
+                    "help": "Commentaire",
+                    "popontitle": ""
+                }
+            }
+        ]
+        
+    }
+]

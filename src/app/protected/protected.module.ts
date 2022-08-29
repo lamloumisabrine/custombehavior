@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { GraphStudioTheme } from './graph-studio/graph-studio.module';
 import { HomeModule } from './home/home.module';
+import { FormsModule } from '@angular/forms';
+
 
 
 
@@ -11,7 +13,8 @@ import { HomeModule } from './home/home.module';
   imports: [
     HomeModule,
     SharedModule,
-    GraphStudioTheme
+    GraphStudioTheme,
+    FormsModule
     
     
   ],

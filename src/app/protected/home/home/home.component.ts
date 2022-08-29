@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MenuItem } from 'acp-ui-component/lib/modules/menu/models/menu-item';
 import { DiagramComponent, NodeModel, PortModel } from 'acp-ui-component';
 import {  Subscription, switchMap } from 'rxjs';
@@ -23,6 +23,7 @@ import { GraphStudioPortModel } from '../../graph-studio/models/graph-studio-por
 import { VocabularyService } from 'src/app/core/services/vocabulary.service';
 import { Vocabulary } from 'src/app/models/vocabulary/vocabulary.model';
 import { DataType } from 'src/app/models/data-type.enum';
+import { Port } from 'src/app/models/port.model';
 
 
 @Component({
@@ -92,6 +93,17 @@ onBlockDrag(e: DragEvent)
 
 field :any
 screenJson : any
+
+@Input()
+
+LHS:any;
+RHS:any;
+Condition:any;
+Compare:any;
+Action:any;
+CustomBehavior:any;
+
+
   ngOnInit(){}
 
   get fields() : any{
@@ -235,9 +247,6 @@ screenJson : any
     button: { icon: 'icon-add', style: 'btn-icon-only btn-outline-primary circle' }
   }
 
-  saveCustomBehavior(){
-    this.diagramModel
-  }
 
   updateSelectedRuleset() {
     this.graphService.selectedNode.subscribe(newNode => {
@@ -269,6 +278,7 @@ screenJson : any
   
   addNode() {
     //#region create node
+    let newPort = new Port();
     const node = new GraphStudioNodeModel({
     });
     const canvasManager = this.diagram?.diagramEngine.getCanvasManager();
@@ -278,7 +288,8 @@ screenJson : any
         y: 89
       };
       const port = new GraphStudioPortModel({
-        direction: 'out'
+        direction: 'out',
+      
       });
       node.addPort(port);
       if (node) {
@@ -287,5 +298,9 @@ screenJson : any
       }
     }
     //#endregion
+  }
+  
+  saveCustomBehavior(){
+    this.diagramModel
   }
 }

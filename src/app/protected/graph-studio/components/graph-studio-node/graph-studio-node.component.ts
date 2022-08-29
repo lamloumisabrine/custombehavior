@@ -1,15 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Inject,
-  Input,
-  IterableDiffers,
-  OnInit,
-  Output,
-  ViewChild,
-  ViewContainerRef
-} from '@angular/core';
+import { ChangeDetectionStrategy,Component,EventEmitter,Inject,Input,IterableDiffers,OnInit,Output,ViewChild,ViewContainerRef}from '@angular/core';
 import { Router } from '@angular/router';
 import { DefaultNodeComponent, MODEL, DiagramComponent, EngineService, AlertService } from 'acp-ui-component';
 import { GraphService } from 'src/app/core/services/graph.service';
@@ -18,13 +7,16 @@ import { Rule } from 'src/app/models/ruleset/rule.model';
 import { STRING_OPERATORS ,LIST_FIELDS} from 'src/app/shared/constants/operators.constant';
 import { RulesetUtilsService } from 'src/app/core/services/ruleset-utils.service';
 import { UtilsService } from 'src/app/core/services/utils.service';
-import {  ACTIONS_INTERVAL, positions, staticActions, staticValues } from 'src/app/shared/constants/static-values.constants';
+import { ACTIONS_INTERVAL, positions, staticActions, staticValues } from 'src/app/shared/constants/static-values.constants';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Compare } from 'src/app/models/compare.model';
 import { Condition } from 'src/app/models/condition.model';
 import { HandSide } from 'src/app/models/hand-side.model';
 import { VocabularyService } from 'src/app/core/services/vocabulary.service';
 import { HttpClient } from '@angular/common/http';
+import { CBApiService } from 'src/app/core/api-services/CB-api.service';
+import { Observable } from 'rxjs/internal/Observable';
+
 @Component({
   selector: 'graph-studio-node',
   templateUrl: './graph-studio-node.component.html',
@@ -33,9 +25,13 @@ import { HttpClient } from '@angular/common/http';
 })
 export class GraphStudioNodeComponent extends DefaultNodeComponent implements OnInit {
   [x: string]: any;
+
   vocabularyList :any= [
     // {name:'test' ,value:'est' ,id:'test', type:'test'}
-   ]
+   ];
+   actiontypelist:any=[];
+   
+
 
   @Input() selectedRule = new Rule();
 
@@ -63,34 +59,21 @@ export class GraphStudioNodeComponent extends DefaultNodeComponent implements On
     private utilsService: UtilsService,
     vocabularyService: VocabularyService,
     private httpClient: HttpClient,
+    private service:CBApiService,
+    
     ) {
     super(model, engine, diagram, iterableDiffers);
     this.getScreen();
-
-
     model.selectExtras().subscribe((extras: any) => {
       if (extras.color) {
-
       }
     });
-    
-
-    model.selectSelected().subscribe((selected: boolean) => {
+        model.selectSelected().subscribe((selected: boolean) => {
       if (selected) {
         this.graphService.selectedNode.next(this.model.getExtras())
       }
       this.updateLinksState(selected);
     });
-
-    // model.selectStatus()?.subscribe((status) => {
-    //   this.boxShadow$.next(this.createStatusShadow(status));
-
-    //   if (status === NodeStatus.ERROR) {
-    //     // iterate over all ports and links, color links as red links (254, 150, 150),
-    //     // or even better set their state to error state.
-    //   }
-    // });
-
     this.model.selectPorts().subscribe((ports: any[]) => {
       ports.forEach((port) => {
         port.selectLinks().subscribe(() => {
@@ -99,7 +82,12 @@ export class GraphStudioNodeComponent extends DefaultNodeComponent implements On
       });
     });
   }
+  override ngOnInit(): void {
+this.getactiontypelist();  }
 
+ getactiontypelist(){
+this.service.getActionTypeList().subscribe(data=>{this.actiontypelist=data});
+}
 
   get fields() : any{
     return this._fields
@@ -116,6 +104,7 @@ export class GraphStudioNodeComponent extends DefaultNodeComponent implements On
       
     });
   }
+
   calculateStatus() {
     let numOfLinks = 0;
     const infiniteLoop = false;
@@ -354,11 +343,9 @@ export class GraphStudioNodeComponent extends DefaultNodeComponent implements On
     return this.selectedRule.when!.compares![compareIndex].notOperator = !this.selectedRule.when!.compares![compareIndex].notOperator;
   }
 vocabulary:any;
-  getVocabularies()
-    {
+  getVocabularies() {
 this.fields.forEach((field: any) => {
   let vocab = {name : "",value:"",id:'',type:""};
-
   vocab.name  = field.en.display;
   vocab.value = field.en.display;
   this.vocabularyList.push(vocab);

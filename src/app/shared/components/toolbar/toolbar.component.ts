@@ -8,7 +8,7 @@ import { staticValues, toastIcons } from '../../constants/static-values.constant
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { RulesetUtilsService } from 'src/app/core/services/ruleset-utils.service';
 import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
-import { AlertService,  ModalService, ToastService } from 'acp-ui-component';
+import { AlertService,  DiagramComponent,  DiagramModel,  ModalService, ToastService } from 'acp-ui-component';
 import { UtilsService } from 'src/app/core/services/utils.service';
 import { SharedService } from 'src/app/core/services/shared.service';
 import { Alert } from 'acp-ui-component/lib/modules/alert/models/alert.model';
@@ -17,7 +17,9 @@ import { PolicyUtilsService } from 'src/app/core/services/policy-utils.service';
 import { GraphStudioNodeModel } from 'src/app/protected/graph-studio/models/graph-studio-node.model';
 import { GraphStudioPortModel } from 'src/app/protected/graph-studio/models/graph-studio-port.model';
 import { HttpClient } from '@angular/common/http';
-
+import { CBApiService } from 'src/app/core/api-services/CB-api.service';
+import { Port } from 'src/app/models/port.model';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
@@ -70,18 +72,15 @@ export class ToolbarComponent implements OnChanges {
 
   //#region const items
   itemsTabsList = ITEMS_TABS_LIST;
-
-
-
   vocabulariesOptions = VOCABULARIES_OPTIONS
   //#endregion
-
   //#region filter list
   hideShowSearchRuleInput: boolean = false;
   hideShowSearchVocabInput: boolean = false;
   searchRule: string = "";
   searchVocab: string = "";
   //#endregion
+  diagramModel: DiagramModel;
 
   /**
    * Vocabulary formular source
@@ -91,14 +90,11 @@ export class ToolbarComponent implements OnChanges {
   @ViewChild('formVocabRef', { static: false }) formVocabRef!: NgbPopover;
 
   alertConfig: Alert = new Object();
- 
+  conditionslist:any=[];
+  diagram?: DiagramComponent;
 
-
-  /**
-   * template reference of vocabulary modal
-   */
   modalVocabularyTemplateRef!: TemplateRef<any>;
-
+  http: any;
   constructor(
     private vocabularyService: VocabularyService,
     private rulesetUtilsService: RulesetUtilsService,
@@ -108,27 +104,48 @@ export class ToolbarComponent implements OnChanges {
     private alertService: AlertService,
     private modalService: ModalService,
     private httpClient: HttpClient,
-    private policyUtilsService: PolicyUtilsService) {
-
+    private policyUtilsService: PolicyUtilsService,
+    private service:CBApiService,)
+     {
       this.getScreen();
+     
+      this.diagramModel = new DiagramModel();
+
      }
+     customBehaviorID:any;
+     ngOnInit(){
+      this.getConditionsList();
+      this.getConditionsbyCustomBehavior();
+    }
+    getConditionsList(){
+      this.service.getConditionsList().subscribe(data=>{this.conditionslist=data});
+    }
+    getConditionsbyCustomBehavior(){
+    this.service.getConditionsbyCustomBehavior(this.customBehaviorID).subscribe(data=>{this.conditionslist=data});
+    }
      screenJson : any
-    ngOnInit(){}
+     field :any
+     screens:any=[];
+
      get fields() : any{
       return this._fields
     }
-    set fields(fields :any){
+     set fields(fields :any){
       this._fields = fields;
     }
     _fields :any;
-    private getScreen() {
-      this.httpClient.get("/assets/data.json").subscribe((screen: any) => {
-        this.screenJson = screen;
-        this.fields = this.screenJson.field;
-        
+      private getScreen() {
+      this.httpClient.get("/assets/screen.json").subscribe((screen:any) => {
+        this.screens = screen
+      // this.screenJson = screen;
+     // this.fields = this.screenJson.field;
+
       });
     }
-    field :any
+    components:any=[];
+    getComponentsOfScreen(index:number){
+      this.components = this.screens[index].field;
+    }
     onBlockDrag(e: DragEvent,field :any) {
       this.field = field;
       const type = (e.target as HTMLElement).getAttribute('data-type');
@@ -508,5 +525,28 @@ export class ToolbarComponent implements OnChanges {
     this.alertConfig = this.sharedService.setAlertValues(this.vocabularies[selectedVocabularyIndex], this.alertConfig, staticValues.VOCABULARY);
     this.alertService.open(this.alertConfig!);
     this.getAlertConfirmationValue(selectedVocabularyIndex, staticValues.VOCABULARY);
+  }
+  addNode() {
+    //#region create node
+    let newPort = new Port();
+    const node = new GraphStudioNodeModel({
+    });
+    const canvasManager = this.diagram?.diagramEngine.getCanvasManager();
+    if (canvasManager) {
+      const coords = {
+        x: 584,
+        y: 89
+      };
+      const port = new GraphStudioPortModel({
+        direction: 'out',
+      
+      });
+      node.addPort(port);
+      if (node) {
+        node.setCoords(coords);
+        this.diagramModel.addNode(node);
+      }
+    }
+    //#endregion
   }
 }

@@ -12,9 +12,51 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
+import { ToastOptions } from 'acp-ui-component/lib/modules/toast/models/toast-config.model';
 const appRoutes: Routes = [
   { path: 'protected/home', component: HomeComponent },
   ];
+
+
+  const customToastOptions: ToastOptions = {
+    position: {
+      horizontal: {
+        position: 'left',
+        distance: 12,
+      },
+      vertical: {
+        position: 'top',
+        distance: 12,
+        gap: 10,
+      },
+    },
+    behaviour: {
+      autoHide: 400,
+      onClick: false,
+      onMouseover: 'pauseAutoHide',
+      showDismissButton: true,
+      stacking: 4
+    },
+    animations: {
+      enabled: true,
+      show: {
+        preset: 'slide',
+        speed: 300,
+        easing: 'ease',
+      },
+      hide: {
+        preset: 'fade',
+        speed: 300,
+        easing: 'ease',
+        offset: 50,
+      },
+      shift: {
+        speed: 300,
+        easing: 'ease',
+      },
+      overlap: 150,
+    },
+  };
 
 @NgModule({
   declarations: [
@@ -31,6 +73,7 @@ const appRoutes: Routes = [
     AppRoutingModule,
     SharedModule,
     CoreModule,
+ 
   
 
     ],
