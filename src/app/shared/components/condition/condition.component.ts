@@ -87,8 +87,9 @@ export class ConditionComponent implements OnInit, DoCheck {
         id: object.id,
         icon: object.icon,
         source: object.source,
-        value: object.id
+        value: object.value
       }
+      console.log(this.condition)
     }
     else if (position === positions.RIGHT) {
       this.condition.conditions[conditionIndex].compares[compareIndex].rightHandSide = new HandSide()
@@ -98,8 +99,10 @@ export class ConditionComponent implements OnInit, DoCheck {
         source: object.source,
         value: object.id
       }
+      console.log(this.condition)
     } else if (position === positions.MIDDLE) {
       this.condition.conditions[conditionIndex].compares[compareIndex].operator = object.value;
+      console.log(this.condition)
     }
   }
 

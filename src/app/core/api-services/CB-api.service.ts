@@ -16,11 +16,12 @@ readonly CustombehaviorUrl = "https://localhost:44320/";
   @param {string} customBehaviorID
   @returns
 */
-  getActionTypeList(): Observable<any[]> {
+getActionTypeList(): Observable<any[]> {
     return this.http.get<any>(this.CustombehaviorUrl + "api/ActionType/GetActionType");
   }
-
- 
+ getActionsList():Observable<any[]>{
+  return this.http.get<any>(this.CustombehaviorUrl +"api/Action/GetAction");
+ }
   getLHS(): Observable<any[]>{
     return this.http.get<any>(this.CustombehaviorUrl+"api/LHS/GetLHSs")
   }
@@ -33,9 +34,10 @@ readonly CustombehaviorUrl = "https://localhost:44320/";
     return this.http.put(this.CustombehaviorUrl +"api/Action/UpdateAction/${ActionID}",data);
   }
 
-  getConditionsList():Observable<any[]>{
+  getConditionsList():Observable<any>{
     return this.http.get<any>(this.CustombehaviorUrl + "api/Conditions/GetConditions");
   }
+
   getConditionsbyCustomBehavior(customBehaviorID:string):Observable<{}>{
     return this.http.get<any>(this.CustombehaviorUrl +"api/Conditions/GetConditionsByCustomBehavior/{CustomBehaviorID}"+customBehaviorID);
   }
@@ -49,7 +51,7 @@ readonly CustombehaviorUrl = "https://localhost:44320/";
   }
 
   addcompare (data:any){
-  return this.http.post(this.CustombehaviorUrl +"/api/Compare/GetCompare" , data)
+  return this.http.post(this.CustombehaviorUrl +"/api/Compare/AddCompare" , data)
   }
 
   addLHS (data:any) {
@@ -58,6 +60,18 @@ readonly CustombehaviorUrl = "https://localhost:44320/";
 
   addRHS(data:any){
   return this.http.post (this.CustombehaviorUrl +"api/RHS/AddRHS" , data)
+  }
+  addActionType(data:any){
+    return this.http.post(this.CustombehaviorUrl +"/api/ActionType/AddActionType",data)
+  }
+  addComponent(data:any){
+    return this.http.post(this.CustombehaviorUrl+"/api/Component/AddComponent",data)
+  }
+  addCustomBehavior (data:any){
+    return this.http.post(this.CustombehaviorUrl+"/api/CustomBehavior/AddCustomBehavior",data)
+  }
+  addScreen(data:any){
+    return this.http.post(this.CustombehaviorUrl+"/api/CustomBehavior/AddScreen",data)
   }
 
 }

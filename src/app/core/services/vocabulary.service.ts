@@ -55,7 +55,7 @@ export class VocabularyService {
    * @returns An array of Vocabulary objects.
    */
   bindVocabulariesByTypes(types: string[], vocabularies: Vocabulary[]) {
-    let vocabularyList: Vocabulary[] = [];
+    let vocabularyList: any[] = [];
     if (vocabularies) {
       vocabularies.forEach(vocabulary => {
         types.forEach(type => {
@@ -160,7 +160,7 @@ export class VocabularyService {
         
       });
     }
-  getSideItemValue(selectedItem: any, vocabularyList: Vocabulary[]) {
+  getSideItemValue(selectedItem: any, vocabularyList: any[]) {
     if(selectedItem){
       if (selectedItem.source === staticValues.INPUT || selectedItem.source === staticValues.OUTPUT || staticValues.LOCAL) {
         let vocabulary = this._fields.getSelectedItem(selectedItem, vocabularyList);

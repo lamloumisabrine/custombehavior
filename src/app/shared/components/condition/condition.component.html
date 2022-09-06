@@ -5,7 +5,7 @@
     <div *ngFor="let compare of condition.compares;let compareIndex = index" cdkDrag>
       <acp-ui-predicat    
         [leftSideItem]="getSelectedItem(compare.leftHandSide)" [rightSideItem]="getSelectedItem(compare.rightHandSide)" [operatorItem]="getOperator(compare.operator)" [notOperator]="compare.notOperator"
-        [listOfRightSideItems]="getRightVocabularyList(compare)" [listOfLeftSideItems]="vocabularyList" [listOfOperators]="getOperators(compare)" 
+        [listOfRightSideItems]="items" [listOfLeftSideItems]="items" [listOfOperators]="getOperators(compare)" 
         (deletePredicate)="deletePredicate(conditionIndex,compareIndex)"
         (leftSideItemChange)="setItem($event,compareIndex,conditionIndex,'left')"
         (rightSideItemChange)="setItem($event,compareIndex,conditionIndex,'right')"
@@ -14,6 +14,7 @@
         (valueChange)="getInputChanges($event,compareIndex,conditionIndex)">
        <div class="left-side" leftSide>{{getSideItemValue(compare.leftHandSide)}}</div>
        <div class="right-side" rightSide>{{getSideItemValue(compare.rightHandSide)}}</div>
+
       </acp-ui-predicat>
     </div>
       <app-condition [condition]="condition" [items]="vocabularyList" ></app-condition>

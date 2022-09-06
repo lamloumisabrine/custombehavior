@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AcpUiComponentModule, ComponentProviderOptions, GraphModule } from 'acp-ui-component';
 import { GraphStudioNodeComponent } from './components/graph-studio-node/graph-studio-node.component';
@@ -44,7 +44,8 @@ const COMPONENTS = [
 @NgModule({
     declarations: [...COMPONENTS],
     imports: [SharedModule,CommonModule, GraphModule.withComponents(GHWorkflowTheme), AcpUiComponentModule],
-    exports: [...COMPONENTS, GraphModule]
+    exports: [...COMPONENTS, GraphModule],
+    schemas:[CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA]
 })
 export class GraphStudioTheme {
 

@@ -19,7 +19,7 @@ import { GraphStudioPortModel } from 'src/app/protected/graph-studio/models/grap
 import { HttpClient } from '@angular/common/http';
 import { CBApiService } from 'src/app/core/api-services/CB-api.service';
 import { Port } from 'src/app/models/port.model';
-import { Observable } from 'rxjs';
+import {ComponentsService} from 'src/app/core/services/components.service'
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
@@ -91,6 +91,10 @@ export class ToolbarComponent implements OnChanges {
 
   alertConfig: Alert = new Object();
   conditionslist:any=[];
+  conditionsListRecover:any=[]
+  actionslist:any=[];
+  conditionsbycustombehavior:any[] | undefined;
+  
   diagram?: DiagramComponent;
 
   modalVocabularyTemplateRef!: TemplateRef<any>;
@@ -105,23 +109,34 @@ export class ToolbarComponent implements OnChanges {
     private modalService: ModalService,
     private httpClient: HttpClient,
     private policyUtilsService: PolicyUtilsService,
-    private service:CBApiService,)
+    private service:CBApiService,
+    private componentService:ComponentsService )
      {
       this.getScreen();
-     
       this.diagramModel = new DiagramModel();
-
      }
      customBehaviorID:any;
      ngOnInit(){
       this.getConditionsList();
-      this.getConditionsbyCustomBehavior();
+      // this.getConditionsbyCustomBehavior();
+      this.getActionsList();
     }
     getConditionsList(){
-      this.service.getConditionsList().subscribe(data=>{this.conditionslist=data});
+      this.service.getConditionsList().subscribe(data=>{
+        console.log(data)
+        this.conditionslist=data
+      this.conditionsListRecover=data
+    });
+    }
+    getActionsList(){
+      this.service.getActionsList().subscribe(data=>{this.actionslist=data});
     }
     getConditionsbyCustomBehavior(){
-    this.service.getConditionsbyCustomBehavior(this.customBehaviorID).subscribe(data=>{this.conditionslist=data});
+    this.service.getConditionsbyCustomBehavior(this.customBehaviorID).subscribe(data=>{
+      console.log(data)
+      this.conditionslist=data
+      this.conditionsListRecover=data
+    });
     }
      screenJson : any
      field :any
@@ -137,6 +152,7 @@ export class ToolbarComponent implements OnChanges {
       private getScreen() {
       this.httpClient.get("/assets/screen.json").subscribe((screen:any) => {
         this.screens = screen
+        
       // this.screenJson = screen;
      // this.fields = this.screenJson.field;
 
@@ -145,6 +161,9 @@ export class ToolbarComponent implements OnChanges {
     components:any=[];
     getComponentsOfScreen(index:number){
       this.components = this.screens[index].field;
+      this.componentService.getComponents(this.components)
+      this.componentService.getScreen(this.screens[index])
+
     }
     onBlockDrag(e: DragEvent,field :any) {
       this.field = field;
@@ -548,5 +567,18 @@ export class ToolbarComponent implements OnChanges {
       }
     }
     //#endregion
+  }
+  searchCondition(event:any){
+    
+    let val=event.target.value
+    console.log(val)
+    if(val==""){
+      this.conditionslist=this.conditionsListRecover
+    }else if(val!=""){
+      this.conditionslist=[]
+      this.conditionslist=this.conditionsListRecover.filter((element:any)=>element.customBehaviorID?.includes(val))
+      console.log(this.conditionslist)
+    }
+    
   }
 }

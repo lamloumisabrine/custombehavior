@@ -6,5 +6,6 @@ export class LeftHandSide {
 
  type!: 'text' | 'number' | 'boolean' | 'range' | 'table' | 'date';
 
+
     
 }

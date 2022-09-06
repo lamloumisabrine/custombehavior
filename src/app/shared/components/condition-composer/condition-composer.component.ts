@@ -103,6 +103,7 @@ export class ConditionComposerComponent implements OnInit,DoCheck {
    * @param {string} position - The position of the item being added.
    */
   setItem(object: any, compareIndex: number, position: string) {
+    console.log (object)
     if (this.selectedRule && this.selectedRule?.when && this.selectedRule?.when?.compares) {
       if (position === positions.LEFT) {
         /* Checking if the type of the left hand side is not equal to the type of the object. If it is
@@ -114,20 +115,23 @@ export class ConditionComposerComponent implements OnInit,DoCheck {
         this.selectedRule.when.compares[compareIndex].leftHandSide = {
           id: object.id,
           source: object.source,
-          // value: object.id,
+          value: object.value,
           type: object.type
         }
+       
       }
       else if (position === positions.RIGHT) {
         this.selectedRule.when.compares[compareIndex].rightHandSide = new HandSide();
         this.selectedRule.when.compares[compareIndex].rightHandSide = {
           id: object.id,
           source: object.source,
-          // value: object.id,
+           value: object.value,
           type: object.type
         }
+       
       } else if (position === positions.MIDDLE) {
         this.selectedRule.when.compares[compareIndex].operator = object.value;
+      
       }
     }
   }
@@ -184,6 +188,7 @@ export class ConditionComposerComponent implements OnInit,DoCheck {
    * @param {number} compareIndex - The index of the compare in the rule.
    */
   getInputChanges(object: any, compareIndex: number) {
+    console.log(object)
     if (this.clickPredicateOrigin) {
       this.intializeHandSide(object.position, compareIndex);
       switch (object.position) {
@@ -206,6 +211,7 @@ export class ConditionComposerComponent implements OnInit,DoCheck {
         default:
           break;
       }
+      console.log(this.selectedRule)
     }
   }
 
@@ -273,7 +279,7 @@ export class ConditionComposerComponent implements OnInit,DoCheck {
   getRightVocabularyList(compare: Compare): any[] {
     if (this.selectedRule?.when?.compares) {
       if (compare.leftHandSide?.source === staticValues.INPUT) {
-        let vocabulary = this.vocabularyList.find((vocabulary: { id: string | undefined; }) => vocabulary.id === compare.leftHandSide?.id);
+        let vocabulary = this.vocabularyList.find((vocabulary:any) => vocabulary.value === compare.leftHandSide?.value);
         return this.vocabularyService.getVocabulariesByType(this.vocabularyList, vocabulary?.type!)
       } else {
         return this.vocabularyList;
@@ -284,6 +290,9 @@ export class ConditionComposerComponent implements OnInit,DoCheck {
   }
   onBlockDropped(event: DragEvent) {
    
+  }
+  getvalues(){
+    console.log(this.selectedRule)
   }
   
 }

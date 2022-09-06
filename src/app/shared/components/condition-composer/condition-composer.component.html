@@ -19,6 +19,9 @@
         </div>
         <app-condition *ngIf="condition" [condition]="condition" [items]="vocabularyList" ></app-condition>
     </acp-logical-operator-interval>
+    <div>
+        <button (click)="getvalues()"></button>
+    </div>
 </ng-template>
 <ng-template #emptyCondition>
     <div *ngIf="status !== true" class="condition-choice">

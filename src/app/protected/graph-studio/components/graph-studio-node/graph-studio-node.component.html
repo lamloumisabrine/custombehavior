@@ -26,7 +26,7 @@
       <hr>
       <acp-ui-button title="Then" [label]="'Then'" [style]="'btn-secondary pill'"></acp-ui-button>
       Choose an action
-      <acp-ui-select class="mini-label" [items]="outputTypes"  bindValue="value" bindLabel="label"></acp-ui-select>
+      <acp-ui-select class="mini-label" [items]="outputTypes"  bindValue="value" bindLabel="label" (change)="getAction($event)"></acp-ui-select>
 
     </div>
   

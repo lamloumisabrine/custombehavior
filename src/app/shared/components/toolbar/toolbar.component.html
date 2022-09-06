@@ -81,8 +81,13 @@
                 </div>
             </ng-template>
             <ng-template [ngIf]="tab.component === 'Compare'">
-              list of conditions
+              list of conditions 
+              <div>
+               <input type="text" (change)="searchCondition($event)" class="m-2 form-control" placeholder="Search by custom.." style="width: 40%;">
+              </div>
+              
               <table class="table table striped"> 
+            
               <thead>
                 <th>id</th>
                 <th>Display</th>
@@ -117,16 +122,19 @@
               list of actions
               <table class="table table striped"> 
               <thead>
-                <th>id</th>
+                <th>Id</th>
                 <th>Display</th>
-               
+                <th>Value</th>
+                <th>Action Type</th>
+                <th>conditionID</th>
                 </thead>
               <tbody>
-              <tr *ngFor="let cond of conditionslist"> 
-                <td>{{cond.conditionID}}</td>
-                <td>{{cond.conditionDisplay}}</td>
-                <td>{{cond.customBehaviorID}}</td>
-                <td>{{cond.parentID}}</td>
+              <tr *ngFor="let act of actionslist"> 
+                <td>{{act.actionID}}</td>
+                <td>{{act.actionDisplay}}</td>
+                <td>{{act.value}}</td>
+                <td>{{act.actionTypeID}}</td>
+                <td>{{act.conditionID}}</td>
                 <td>  
                   <button class="btn btn outline-primary me-2 mb-1 "
                   data-bs-toggle="modal" data-bs-target="#staticBackdrop" >

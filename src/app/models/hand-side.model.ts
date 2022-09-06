@@ -14,8 +14,12 @@ export class HandSide {
     source?: string;
     
 
-    type!: 'text' | 'number' | 'boolean' | 'range' | 'table' | 'date';
+    type?: 'text' | 'number' | 'boolean' | 'range' | 'table' | 'date';
 
-    constructor(){
+    constructor(handSide?:any){
+        {
+            this.id=handSide?.id
+            this.value=handSide?.value
+        }
     }
 }

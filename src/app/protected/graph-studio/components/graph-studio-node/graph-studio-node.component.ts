@@ -16,7 +16,7 @@ import { VocabularyService } from 'src/app/core/services/vocabulary.service';
 import { HttpClient } from '@angular/common/http';
 import { CBApiService } from 'src/app/core/api-services/CB-api.service';
 import { Observable } from 'rxjs/internal/Observable';
-
+import {ComponentsService} from 'src/app/core/services/components.service'
 @Component({
   selector: 'graph-studio-node',
   templateUrl: './graph-studio-node.component.html',
@@ -26,7 +26,7 @@ import { Observable } from 'rxjs/internal/Observable';
 export class GraphStudioNodeComponent extends DefaultNodeComponent implements OnInit {
   [x: string]: any;
 
-  vocabularyList :any= [
+  vocabularyList :any[]= [
     // {name:'test' ,value:'est' ,id:'test', type:'test'}
    ];
    actiontypelist:any=[];
@@ -60,6 +60,7 @@ export class GraphStudioNodeComponent extends DefaultNodeComponent implements On
     vocabularyService: VocabularyService,
     private httpClient: HttpClient,
     private service:CBApiService,
+    private componentService:ComponentsService
     
     ) {
     super(model, engine, diagram, iterableDiffers);
@@ -344,13 +345,29 @@ this.service.getActionTypeList().subscribe(data=>{this.actiontypelist=data});
   }
 vocabulary:any;
   getVocabularies() {
-this.fields.forEach((field: any) => {
-  let vocab = {name : "",value:"",id:'',type:""};
-  vocab.name  = field.en.display;
-  vocab.value = field.en.display;
+
+this.componentService.onChangeComponents.subscribe(data=>{
+  console.log(data)
+  this.vocabularyList=[]
+  data.forEach((element:any)=>{
+      let vocab = {name : "",value:"",id:'',type:""};
+      
+  vocab.name  = element.en.display;
+  vocab.value = element.en.display;
   this.vocabularyList.push(vocab);
-});
-    }
+  })
+})
+// this.fields.forEach((field: any) => {
+//   let vocab = {name : "",value:"",id:'',type:""};
+//   vocab.name  = field.en.display;
+//   vocab.value = field.en.display;
+//   this.vocabularyList.push(vocab);
+// });
+ }
+
+ getAction(event:any){
+  console.log(event)
+ }
     
 }
 
