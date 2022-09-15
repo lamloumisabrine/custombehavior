@@ -30,7 +30,7 @@ export class GraphStudioNodeComponent extends DefaultNodeComponent implements On
     // {name:'test' ,value:'est' ,id:'test', type:'test'}
    ];
    actiontypelist:any=[];
-   
+   alert: boolean=false;
 
 
   @Input() selectedRule = new Rule();
@@ -367,7 +367,9 @@ this.componentService.onChangeComponents.subscribe(data=>{
 
  getAction(event:any){
   console.log(event)
+  this.componentService.getAction(event.label)
  }
+
     
 }
 

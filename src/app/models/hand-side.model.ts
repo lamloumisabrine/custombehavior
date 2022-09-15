@@ -1,25 +1,29 @@
 export class HandSide {
-
-    /**
+ /**
      * Vocabulary indentifier
      */
-    id?: string;
-    /**
-     * Vocabulary value
-     */
-    value?: string;
-    /**
-     * Vocabulary value
-     */
-    source?: string;
-    
+  id?: string;
+  /**
+   * Vocabulary value
+   */
+  value?: string;
+  /**
+   * Vocabulary value
+   */
+  source?: string;
 
-    type?: 'text' | 'number' | 'boolean' | 'range' | 'table' | 'date';
+  /**
+   * icon not to save 
+   * for display only
+   */
+  icon?:string;
 
-    constructor(handSide?:any){
-        {
-            this.id=handSide?.id
-            this.value=handSide?.value
-        }
-    }
+  /**
+   * Handside type 
+   * for frontend only
+   */
+   type!: 'text' | 'number' | 'boolean' | 'range' | 'table' | 'date';
+
+  constructor(){
+  }
 }

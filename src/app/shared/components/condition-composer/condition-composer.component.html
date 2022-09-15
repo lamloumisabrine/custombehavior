@@ -2,7 +2,7 @@
 <ng-template #conditionContainer>
     <acp-logical-operator-interval *ngIf="selectedRule?.when?.logicalOperator"
         (selectedAction)="getSelectedIntervalAction($event,selectedRule.when!)" [isCheckedAndOr]="getLogicialOperator()"
-        [logicialOperator]="selectedRule?.when?.logicalOperator!" [actionList]="intervalActions"
+        [logicialOperator]="selectedRule.when?.logicalOperator!" [actionList]="intervalActions"
         (isCheckedAndOrChange)="setLogicialOperator($event)"
  >
         <div *ngFor="let compare of selectedRule?.when?.compares; let compareIndex = index" >

@@ -1,7 +1,10 @@
 import { staticValues } from "src/app/shared/constants/static-values.constants";
+import { BaseEntity } from "../base-entity.model";
+import { DataType } from "../data-type.enum";
+
 import { GridVocabulary } from "./grid-vocabulary.model";
 
-export class Vocabulary  {
+export class Vocabulary extends BaseEntity {
 
     /**
      * Vocabulary index
@@ -14,7 +17,7 @@ export class Vocabulary  {
     /**
      * Vocabulary type
      */
-    type?: 'text' | 'number' | 'boolean' | 'range' | 'table' | 'date';
+    type!: 'text' | 'number' | 'boolean' | 'range' | 'table' | 'date';
     /**
      * Vocabulary source
      */
@@ -34,9 +37,17 @@ export class Vocabulary  {
 
     /* `grid` is a property of Vocabulary class. It is used to store the grid information. */
     grid: GridVocabulary | undefined;
-  id: string | undefined;
 
+    /**
+     * name or title
+     */
+    // override name?: string;
     constructor() {
-      
+        super();
+        this.name = "";
+        this.description = "";
+        this.type = DataType.TEXT
+        this.source = staticValues.INPUT;
+        this.rangeValues = [];
     }
 }

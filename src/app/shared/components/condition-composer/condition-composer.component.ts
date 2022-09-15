@@ -9,6 +9,7 @@ import { HandSide } from 'src/app/models/hand-side.model';
 import { STRING_OPERATORS } from 'src/app/shared/constants/operators.constant';
 import { staticValues, positions, ACTIONS_INTERVAL } from 'src/app/shared/constants/static-values.constants';
 import { Rule } from 'src/app/models/ruleset/rule.model';
+import { CustomBehaviorService } from 'src/app/core/services/custom-behavior.service';
 
 @Component({
   selector: 'app-condition-composer',
@@ -35,6 +36,7 @@ export class ConditionComposerComponent implements OnInit,DoCheck {
     private vocabularyService: VocabularyService,
     private rulesetUtilsService: RulesetUtilsService,
     private utilsService: UtilsService,
+    private customService:CustomBehaviorService
   ) { }
   ngDoCheck(): void {
     this.selectedRuleChange.emit(this.selectedRule);
@@ -114,7 +116,7 @@ export class ConditionComposerComponent implements OnInit,DoCheck {
         this.selectedRule.when.compares[compareIndex].leftHandSide = new HandSide();
         this.selectedRule.when.compares[compareIndex].leftHandSide = {
           id: object.id,
-          source: object.source,
+          source:object.source,
           value: object.value,
           type: object.type
         }
@@ -125,7 +127,7 @@ export class ConditionComposerComponent implements OnInit,DoCheck {
         this.selectedRule.when.compares[compareIndex].rightHandSide = {
           id: object.id,
           source: object.source,
-           value: object.value,
+          value: object.value,
           type: object.type
         }
        
@@ -292,7 +294,11 @@ export class ConditionComposerComponent implements OnInit,DoCheck {
    
   }
   getvalues(){
-    console.log(this.selectedRule)
+    console.log(this.selectedRule.when)
+    this.customService.addNode(this.selectedRule.when).then(()=>{
+      console.log("success")
+    })
+    
   }
   
 }

@@ -141,35 +141,31 @@ export class VocabularyService {
     }
     return filtredVocabularyList;
   }
+
   field :any
-  screenJson : any
+  screens:any=[];
     ngOnInit(){}
   
-    get fields() : any{
-      return this._fields
-    }
-    set fields(fields :any){
-      this._fields = fields;
-    }
-    _fields :any;
+    // get fields() : any{
+    //   return this._fields
+    // }
+    // set fields(fields :any){
+    //   this._fields = fields;
+    // }
+    // _fields :any;
   
     private getScreen() {
-      this.httpClient.get("/assets/data.json").subscribe((screen: any) => {
-        this.screenJson = screen;
-        this.fields = this.screenJson.field;
-        
+      this.httpClient.get("/assets/screen.json").subscribe((screen:any) => {
+    
+        this.screens = screen
+
       });
     }
-  getSideItemValue(selectedItem: any, vocabularyList: any[]) {
-    if(selectedItem){
-      if (selectedItem.source === staticValues.INPUT || selectedItem.source === staticValues.OUTPUT || staticValues.LOCAL) {
-        let vocabulary = this._fields.getSelectedItem(selectedItem, vocabularyList);
-        return `${vocabulary.name} = ${selectedItem.value}`
-      } else {
-        return null;
-      }
-
-    }else {
+ getSideItemValue(selectedItem: any, vocabularyList: Vocabulary[]) {
+    if (selectedItem.source === staticValues.INPUT || selectedItem.source === staticValues.OUTPUT ||selectedItem.source === staticValues.LOCAL) {
+      let vocabulary = this.rulesetUtilsService.getSelectedItem(selectedItem, vocabularyList);
+      return `${vocabulary.name} = ${selectedItem.value}`
+    } else {
       return null;
     }
   }

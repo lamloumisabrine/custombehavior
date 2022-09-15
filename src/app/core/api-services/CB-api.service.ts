@@ -51,7 +51,7 @@ getActionTypeList(): Observable<any[]> {
   }
 
   addcompare (data:any){
-  return this.http.post(this.CustombehaviorUrl +"/api/Compare/AddCompare" , data)
+  return this.http.post(this.CustombehaviorUrl +"api/Compare/AddCompare" , data)
   }
 
   addLHS (data:any) {
@@ -62,16 +62,16 @@ getActionTypeList(): Observable<any[]> {
   return this.http.post (this.CustombehaviorUrl +"api/RHS/AddRHS" , data)
   }
   addActionType(data:any){
-    return this.http.post(this.CustombehaviorUrl +"/api/ActionType/AddActionType",data)
+    return this.http.post(this.CustombehaviorUrl +"api/ActionType/AddActionType",data)
   }
   addComponent(data:any){
-    return this.http.post(this.CustombehaviorUrl+"/api/Component/AddComponent",data)
+    return this.http.post(this.CustombehaviorUrl+"api/Component/AddComponent",data)
   }
   addCustomBehavior (data:any){
-    return this.http.post(this.CustombehaviorUrl+"/api/CustomBehavior/AddCustomBehavior",data)
+    return this.http.post(this.CustombehaviorUrl+"api/CustomBehavior/AddCustomBehavior?CustomBehaviorID="+data.CustomBehaviorID+"&CustomBehaviorShortName="+data.CustomBehaviorShortName,data)
   }
   addScreen(data:any){
-    return this.http.post(this.CustombehaviorUrl+"/api/CustomBehavior/AddScreen",data)
+    return this.http.post(this.CustombehaviorUrl+"api/CustomBehavior/AddScreen",data)
   }
 
 }

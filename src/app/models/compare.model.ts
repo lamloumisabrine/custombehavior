@@ -21,6 +21,8 @@ export class Compare {
     rhs : RightHandSide[];
 
     constructor(){
+        this.leftHandSide=new HandSide()
+        this.rightHandSide=new HandSide()
         this.lhs = [];
         this.rhs = [];
     }

@@ -63,12 +63,12 @@ export class ConditionComponent implements OnInit, DoCheck {
     if (actionObject.action === staticActions.ADD_CONDITION) {
       let newCondition = new Condition();
       let newCompare = new Compare();
-      newCondition.compares?.push(newCompare);
+      newCondition.compares.push(newCompare);
       condition.conditions.push(newCondition)
     }
     else if (actionObject.action === staticActions.ADD_PREDICATE) {
       let newCompare = new Compare();
-      condition.compares?.push(newCompare)
+      condition.compares.push(newCompare)
     }
   }
 
@@ -84,20 +84,20 @@ export class ConditionComponent implements OnInit, DoCheck {
     if (position === positions.LEFT) {
       this.condition.conditions[conditionIndex].compares[compareIndex].leftHandSide = new HandSide()
       this.condition.conditions[conditionIndex].compares[compareIndex].leftHandSide = {
-        id: object.id,
-        icon: object.icon,
+        id: object.uk_id,
+        icon: object.icon||"",
         source: object.source,
         value: object.value
       }
       console.log(this.condition)
     }
     else if (position === positions.RIGHT) {
-      this.condition.conditions[conditionIndex].compares[compareIndex].rightHandSide = new HandSide()
+     this.condition.conditions[conditionIndex].compares[compareIndex].rightHandSide = new HandSide()
       this.condition.conditions[conditionIndex].compares[compareIndex].rightHandSide = {
-        id: object.id,
-        icon: object.icon,
+        id: object.uk_id,
+        icon: object.icon||"",
         source: object.source,
-        value: object.id
+        value: object.value
       }
       console.log(this.condition)
     } else if (position === positions.MIDDLE) {
@@ -111,7 +111,7 @@ export class ConditionComponent implements OnInit, DoCheck {
    * MUST RETURN VALUE
    * @param selectedItem 
    */
-  getSelectedItem(selectedItem: any): Object {
+  getSelectedItem(selectedItem: any) {
     return this.rulesetUtilsService.getSelectedItem(selectedItem, this.vocabularyList)
   }
 
